@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
             title: const Text('イベント一覧画面'),
             bottom: const TabBar(
               tabs: <Widget>[
-                Tab(text: '野球'),
+                Tab(text: '野球cds'),
                 Tab(text: 'サッカー'),
                 Tab(text: 'テニス'),
               ],
@@ -29,8 +29,8 @@ class _HomeState extends State<Home> {
           ),
           body: TabBarView(
             children: <Widget>[
-            _TabPage(key: PageStorageKey(0), tab: 0),
-            _TabPage(key: PageStorageKey(1), tab: 1),
+              _TabPage(key: PageStorageKey(0), tab: 0),
+              _TabPage(key: PageStorageKey(1), tab: 1),
             ],
           ),
           // appBar: AppBar(
@@ -82,18 +82,6 @@ class _HomeState extends State<Home> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 class _TabPage extends StatefulWidget {
   _TabPage({Key key, this.tab}) : super(key: key);
 
@@ -110,8 +98,7 @@ class _TabPageState extends State<_TabPage> {
       itemCount: 100,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          title:
-            Text('${widget.tab}: Item $index'),
+          title: Text('${widget.tab}: Item $index'),
         );
       },
     );
