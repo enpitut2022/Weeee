@@ -1,12 +1,14 @@
+import 'package:enpit_weee/chat.dart';
+import 'package:enpit_weee/home.dart';
+import 'package:enpit_weee/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
-
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -20,94 +22,49 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> todoList = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: ListView.builder(
-          itemCount: todoList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                title: Text(todoList[index]),
-              ),
-            );
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.fourteen_mp_rounded),
-          onPressed: () async {
-            final newListText = await Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) {
-              return eventAddPage();
-            }));
-            setState(() {
-              todoList.add(newListText);
-            });
-          },
-        ));
+  static const _screens = [
+    Home(),
+    Chat(),
+    Setting(),
+  ];
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
-}
 
-class eventAddPage extends StatefulWidget {
+  List<List<String>> todoList = [];
+
   @override
-  _eventAddPageState createState() => _eventAddPageState();
-}
-
-class _eventAddPageState extends State<eventAddPage> {
-  //入力されたデータを保存
-  String _text = "";
-
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("イベント入力"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _text,
-            style: TextStyle(color: Colors.blue),
-          ),
-          TextField(
-            onChanged: (String value) {
-              setState(() {
-                _text = value;
-              });
-            },
-          ),
-          const SizedBox(height: 8),
-          Container(
-            width: double.infinity,
-            child: ElevatedButton(
-              child: Text("リスト追加"),
-              onPressed: () {
-                Navigator.of(context).pop(_text);
-              },
-            ),
-          ),
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'チャット'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
         ],
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
 }
+
+
+
+
