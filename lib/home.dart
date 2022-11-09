@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
                   //データの表示
                   //11/9時点では、データを2つ以上を表示する方法は、streamBuilderのみ
                   //課題点：listviewの中でしか表示できない。コンストラクタを使っていない。
-                  //streambuilderを使わなくてもいい方法
+                  //これから：streambuilderを使わなくてもいい方法
                   child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('event')
