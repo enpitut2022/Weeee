@@ -19,21 +19,8 @@ class _HomeState extends State<Home> {
       child: Scaffold(
           appBar: AppBar(
             title: const Text('イベント一覧画面'),
-            bottom: const TabBar(
-              tabs: <Widget>[
-                Tab(text: '野球cds'),
-                Tab(text: 'サッカー'),
-                Tab(text: 'テニス'),
-              ],
-            ),
           ),
-          body: const TabBarView(
-            children: <Widget>[
-              Center(child: Text('くもり', style: TextStyle(fontSize: 50))),
-              Center(child: Text('雨', style: TextStyle(fontSize: 50))),
-              Center(child: Text('晴れ', style: TextStyle(fontSize: 50))),
-            ],
-          ),
+          body: Container(),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () async {
