@@ -69,7 +69,7 @@ class _eventAddPageState extends State<eventAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("イベント入力"),
+        title: Text("イベント入力!"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
