@@ -27,43 +27,13 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          body: TabBarView(
+          body: const TabBarView(
             children: <Widget>[
-              _TabPage(key: PageStorageKey(0), tab: 0),
-              _TabPage(key: PageStorageKey(1), tab: 1),
+              Center(child: Text('くもり', style: TextStyle(fontSize: 50))),
+              Center(child: Text('雨', style: TextStyle(fontSize: 50))),
+              Center(child: Text('晴れ', style: TextStyle(fontSize: 50))),
             ],
           ),
-          // appBar: AppBar(
-          //   title: Text('イベント一覧画面'),
-          // ),
-          // body: ListView.builder(
-          //   itemCount: todoList.length,
-          //   itemBuilder: (context, index) {
-          //     return GestureDetector(
-          //       onTap: () {
-          //         Navigator.of(context).push(
-          //           MaterialPageRoute(
-          //             builder: (context) {
-          //               return EventDetail();
-          //             },
-          //           ),
-          //         );
-          //       },
-          //       child: Card(
-          //         child: Column(
-          //           children: <Widget>[
-          //             Text(todoList[index][0]),
-          //             Text(todoList[index][1]),
-          //             Text(todoList[index][2]),
-          //             Text(todoList[index][3]),
-          //             Text(todoList[index][4]),
-          //             Text(todoList[index][5]),
-          //           ],
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // ),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () async {
@@ -78,29 +48,6 @@ class _HomeState extends State<Home> {
               }
             },
           )),
-    );
-  }
-}
-
-class _TabPage extends StatefulWidget {
-  _TabPage({Key key, this.tab}) : super(key: key);
-
-  final int tab;
-
-  @override
-  _TabPageState createState() => _TabPageState();
-}
-
-class _TabPageState extends State<_TabPage> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 100,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Text('${widget.tab}: Item $index'),
-        );
-      },
     );
   }
 }
