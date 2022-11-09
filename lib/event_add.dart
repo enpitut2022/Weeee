@@ -34,15 +34,24 @@ class _eventAddPageState extends State<eventAddPage> {
         body: Column(
           //イベントを入力するフォーム -> TextField()
           children: [
-            TextField(
+            Padding(padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
               controller: _eventName,
               autofocus: true,
               decoration: const InputDecoration(hintText: "イベント名"),
-            ),
-            TextField(
+            ),),
+            Padding(padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
               controller: _eventPlace,
               decoration: const InputDecoration(hintText: "イベント場所"),
-            ),
+            ),),
+            Padding(padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+              controller: _gender,
+              decoration: const InputDecoration(hintText: "同行者性別"),
+            ),),
+            
+            //型がstring以外の時のデータの受け渡しを勉強する
             // TextField(
             //   controller: _eventDate,
             //   autofocus: true,
@@ -52,10 +61,6 @@ class _eventAddPageState extends State<eventAddPage> {
             //   controller: _memberNum,
             //   decoration: const InputDecoration(hintText: "同行者人数"),
             // ),
-            TextField(
-              controller: _gender,
-              decoration: const InputDecoration(hintText: "同行者性別"),
-            ),
             //ボタンを押して追加
             ElevatedButton(
               onPressed: () {
