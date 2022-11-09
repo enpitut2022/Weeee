@@ -28,9 +28,14 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
   flutter:
     sdk: flutter
+  settings_ui:
+    git:
+      url: https://github.com/yako-dev/flutter-settings-ui.git
+      ref: master
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -38,6 +43,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.1.1
   cloud_firestore: ^4.0.4
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
