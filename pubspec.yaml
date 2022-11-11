@@ -34,6 +34,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/eat.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

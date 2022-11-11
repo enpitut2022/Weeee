@@ -11,54 +11,76 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => EventDetail(event: event),
-            ),
-          );
-        },
-        child: Container(
-          height: 250,
-          child: Column(
-            children: <Widget>[
-              //写真の下
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Row(
-                      //名前
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            event.name,
-                          ),
-                        ),
-                        //場所
-                        Expanded(
-                          child: Text(
-                            event.place,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            event.people.toString(),
-                          ),
-                        ),
-                      ],
+        child: InkWell(
+            onTap: () {},
+            child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/eat.png'))),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const SizedBox(height: 30),
+                  Expanded(
+                    child: Text(
+                      event.name,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 100),
+                  Text(
+                    '場所 :' + event.place,
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '日時 :' + event.date,
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    event.gender + '性' + event.age.toString() + '歳',
+                    style: TextStyle(fontSize: 30),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            )
+
+            // child: InkWell(
+            //   onTap: () {},
+            //   child: Column(
+            //     mainAxisSize: MainAxisSize.max,
+            //     children: <Widget>[
+            //       //名前
+            //       Text(
+            //         event.name,
+            //       ),
+            //       //場所
+            //       Expanded(
+            //         child: Text(
+            //           event.place,
+            //         ),
+            //       ),
+            //       Expanded(
+            //         child: Text(
+            //           event.date,
+            //         ),
+            //       ),
+            //       Expanded(
+            //         child: Text(
+            //           event.gender,
+            //         ),
+            //       ),
+            //       Expanded(
+            //         child: Text(
+            //           event.age.toString(),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            ));
   }
 }

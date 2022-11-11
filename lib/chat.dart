@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Chat extends StatelessWidget{
+class Chat extends StatelessWidget {
   const Chat({Key? key}) : super(key: key);
 
   @override
@@ -9,8 +9,11 @@ class Chat extends StatelessWidget{
       appBar: AppBar(
         title: const Text('チャット'),
       ),
-      body: const Center(
-          child: Text('チャット画面', style: TextStyle(fontSize: 32.0))),
+      body: Column(
+        children: [
+          Center(child: Text('チャット画面', style: TextStyle(fontSize: 32.0))),
+        ],
+      ),
     );
   }
 }

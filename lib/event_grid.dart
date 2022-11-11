@@ -8,8 +8,6 @@ class EventGrid extends StatelessWidget {
     required List<Event> events,
   }) : _events = events;
 
-  
-
   @override
   Widget build(BuildContext context) {
     return GridView.count(
