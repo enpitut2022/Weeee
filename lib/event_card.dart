@@ -12,7 +12,13 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EventDetail(event: event),
+                ),
+              );
+            },
             child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(image: AssetImage('assets/eat.png'))),
