@@ -70,7 +70,8 @@ class _EventIndexState extends State<EventIndex> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => eventAddPage(),
+                builder: (context) => EventAddPage(),
+                fullscreenDialog: true,
               ),
             );
           },
