@@ -1,3 +1,4 @@
+import 'package:enpit_weee/event_detail.dart';
 import 'package:enpit_weee/model/event_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,13 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => EventDetail(event: event),
+            ),
+          );
+        },
         child: Container(
           height: 250,
           child: Column(

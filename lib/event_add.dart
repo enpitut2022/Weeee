@@ -1,93 +1,137 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/event_index.dart';
+import 'package:enpit_weee/provider/event_add_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 //イベントの入力画面
 //firebaseのeventという名前のcollectionにデータを追加
-class eventAddPage extends StatefulWidget {
+class EventAddPage extends StatefulWidget {
+  const EventAddPage({super.key});
+
   @override
-  _eventAddPageState createState() => _eventAddPageState();
+  State<EventAddPage> createState() => _EventAddPageState();
 }
 
-class _eventAddPageState extends State<eventAddPage> {
-  final TextEditingController _eventName = TextEditingController();
-  final TextEditingController _eventDate = TextEditingController();
-  final TextEditingController _eventPlace = TextEditingController();
-  final TextEditingController _memberNum = TextEditingController();
-  final TextEditingController _gender = TextEditingController();
+class _EventAddPageState extends State<EventAddPage> {
 
   @override
-  void dispose() {
-    _eventName.dispose();
-    _eventDate.dispose();
-    _eventPlace.dispose();
-    _memberNum.dispose();
-    _gender.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<AddEventProvider>(
+      create: (_) => AddEventProvider(),
+      child: Scaffold(
         appBar: AppBar(
           title: const Text("イベント入力"),
         ),
-        body: Column(
-          //イベントを入力するフォーム -> TextField()
-          children: [
-            Padding(padding: const EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: _eventName,
-              autofocus: true,
-              decoration: const InputDecoration(hintText: "イベント名"),
-            ),),
-            Padding(padding: const EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: _eventPlace,
-              decoration: const InputDecoration(hintText: "イベント場所"),
-            ),),
-            Padding(padding: const EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: _gender,
-              decoration: const InputDecoration(hintText: "同行者性別"),
-            ),),
-            
-            //型がstring以外の時のデータの受け渡しを勉強する
-            // TextField(
-            //   controller: _eventDate,
-            //   autofocus: true,
-            //   decoration: const InputDecoration(hintText: "イベント日時"),
-            // ),
-            // TextField(
-            //   controller: _memberNum,
-            //   decoration: const InputDecoration(hintText: "同行者人数"),
-            // ),
-            //ボタンを押して追加
-            ElevatedButton(
-              onPressed: () {
-                //firestoreの'name'に右辺の値を代入する
-                final document = <String, dynamic>{
-                  'name': _eventName.text,
-                  "place": _eventPlace.text,
-                  "gender": _gender.text,
-                  // "str_date": _eventDate,
-                  // "num":_memberNum,
-                  'createdAt': Timestamp.fromDate(DateTime.now()),
-                };
-                FirebaseFirestore.instance
-                    .collection('event')
-                    .doc()
-                    .set(document);
-                setState(_eventName.clear);
-                setState(_eventPlace.clear);
-                setState(_gender.clear);
-                // setState(_eventDate.clear);
-                // setState(_memberNum.clear);
-
-                Navigator.pop(context);
-              },
-              child: const Text('送信'),
-            )
-          ],
-        ));
+        body: Center(
+          child: Consumer<AddEventProvider>(
+            builder: (context, model, child) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: const InputDecoration(hintText: "イベント名"),
+                      onChanged: (text) {
+                        model.name = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "時間"),
+                      onChanged: (text) {
+                        model.date = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "場所"),
+                      onChanged: (text) {
+                        model.place = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "あなたの性別"),
+                      onChanged: (text) {
+                        model.gender = text; 
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "あなたの年齢"),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      onChanged: (text) {
+                        model.age = int.parse(text); //stringをintへ
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "およそ何人で行きたいですか？"),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      onChanged: (text) {
+                        model.people = int.parse(text); 
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "どのような雰囲気で楽しみたいですか？"),
+                      onChanged: (text) {
+                        model.atmosphere = text; 
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "参加者へ一言！"),
+                      onChanged: (text) {
+                        model.greeting = text; 
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        try {
+                          await model.addEvent();
+                          Navigator.of(context).pop(true);
+                        } catch (e) {
+                          final snackBar = SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text(e.toString()),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                      child: const Text("追加する"),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 }
