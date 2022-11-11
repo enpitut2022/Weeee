@@ -1,5 +1,5 @@
 import 'package:enpit_weee/chat.dart';
-import 'package:enpit_weee/home.dart';
+import 'package:enpit_weee/event_index.dart';
 import 'package:enpit_weee/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static const _screens = [
-    Home(),
+    EventIndex(),
     Chat(),
     Setting(),
   ];

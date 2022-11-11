@@ -1,16 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/event_add.dart';
+import 'package:enpit_weee/event_grid.dart';
+import 'package:enpit_weee/model/event_model.dart';
+import 'package:enpit_weee/provider/event_provider.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class EventIndex extends StatefulWidget {
+  const EventIndex({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<EventIndex> createState() => _EventIndexState();
 }
 
-class _HomeState extends State<Home> {
-  List<List<String>> todoList = [];
+class _EventIndexState extends State<EventIndex> {
+  EventProvider _eventProvider = EventProvider();
+
+  @override
+  void initState() {
+    _eventProvider.loadAllEvents();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -32,33 +42,23 @@ class _HomeState extends State<Home> {
                   //11/9時点では、データを2つ以上を表示する方法は、streamBuilderのみ
                   //課題点：listviewの中でしか表示できない。コンストラクタを使っていない。
                   //これから：streambuilderを使わなくてもいい方法
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('event')
-                        .snapshots(),
-                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasError) {
-                        return const Text('エラーが発生しました');
-                      }
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-
-                      return ListView(
-                        children: snapshot.data!.docs
-                            .map((DocumentSnapshot document) {
-                          final data = document.data()! as Map<String, dynamic>;
-                          return Card(
-                            child: ListTile(
-                              leading: const Icon(Icons.badge),
-                              title: Text("${data["name"]}"),
-                              subtitle: Text("${data["palce"]}"),
-                            ),
-                          );
-                        }).toList(),
-                      );
-                    },
-                  ),
+                  child: StreamBuilder<List<Event>>(
+                      stream: _eventProvider.allEvents,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<Event>> snapshot) {
+                        final _events = snapshot.data!;
+                        return Scaffold(
+                          body: Column(
+                            children: [
+                              Expanded(
+                                child: EventGrid(
+                                  events: _events,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
                 ),
               ),
             ],

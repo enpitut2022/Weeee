@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/home.dart';
+import 'package:enpit_weee/event_index.dart';
 import 'package:flutter/material.dart';
 
 //イベントの入力画面
