@@ -1,3 +1,4 @@
+import 'package:enpit_weee/event_detail.dart';
 import 'package:enpit_weee/model/event_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
