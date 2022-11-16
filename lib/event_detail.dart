@@ -3,19 +3,19 @@ import 'package:enpit_weee/model/event_model.dart';
 import 'package:flutter/material.dart';
 
 class EventDetail extends StatelessWidget {
-  EventDetail({required this.event});
+  EventDetail({required this.event, super.key});
   Event event;
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('イベント詳細'),
       ),
       body: Container(
-        height: _screenSize.height * 0.99,
+        height: screenSize.height * 0.99,
         color: const Color.fromARGB(255, 214, 214, 214),
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
@@ -48,28 +48,28 @@ class EventDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: _screenSize.height * 0.01,
+                  height: screenSize.height * 0.01,
                 ),
                 Text(
                   "場所　： ${event.place}",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
-                  height: _screenSize.height * 0.01,
+                  height: screenSize.height * 0.01,
                 ),
                 Text(
                   "日時　： ${event.date}",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
-                  height: _screenSize.height * 0.01,
+                  height: screenSize.height * 0.01,
                 ),
                 Text(
                   "人数　： ${event.people.toString()} 人",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
-                  height: _screenSize.height * 0.1,
+                  height: screenSize.height * 0.1,
                 ),
                 Row(
                   children: [
@@ -98,7 +98,7 @@ class EventDetail extends StatelessWidget {
                       ],
                     ),
                     Bubble(
-                      margin: BubbleEdges.only(top: 10),
+                      margin: const BubbleEdges.only(top: 10),
                       nip: BubbleNip.leftTop,
                       child: Text(
                         event.atmosphere,
@@ -114,6 +114,7 @@ class EventDetail extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
+        // ここを押すと、チャットができるようになる？
         onPressed: (){},
         icon: const Icon(Icons.add),
         label: const Text("一緒に行きたい！"),

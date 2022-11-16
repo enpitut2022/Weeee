@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/event_add.dart';
 import 'package:enpit_weee/event_grid.dart';
 import 'package:enpit_weee/model/event_model.dart';
@@ -52,13 +51,13 @@ class _EventIndexState extends State<EventIndex> {
                         if (!snapshot.hasData) {
                           return const CircularProgressIndicator();
                         }
-                        final _events = snapshot.data!;
+                        final events = snapshot.data!;
                         return Scaffold(
                           body: Column(
                             children: [
                               Expanded(
                                 child: EventGrid(
-                                  events: _events,
+                                  events: events,
                                 ),
                               ),
                             ],

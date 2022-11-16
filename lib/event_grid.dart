@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class EventGrid extends StatelessWidget {
   final List<Event> _events;
   EventGrid({
-    required List<Event> events,
+    required List<Event> events, 
   }) : _events = events;
 
   @override
