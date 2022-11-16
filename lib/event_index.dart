@@ -46,6 +46,12 @@ class _EventIndexState extends State<EventIndex> {
                       stream: _eventProvider.allEvents,
                       builder: (BuildContext context,
                           AsyncSnapshot<List<Event>> snapshot) {
+                        if (snapshot.hasError) {
+                          return const Text("エラーが発生しました");
+                        }
+                        if (!snapshot.hasData) {
+                          return const CircularProgressIndicator();
+                        }
                         final _events = snapshot.data!;
                         return Scaffold(
                           body: Column(
@@ -70,7 +76,7 @@ class _EventIndexState extends State<EventIndex> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EventAddPage(),
+                builder: (context) => const EventAddPage(),
                 fullscreenDialog: true,
               ),
             );
