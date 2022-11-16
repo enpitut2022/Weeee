@@ -8,6 +8,8 @@ class EventDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('イベント詳細'),
@@ -15,14 +17,15 @@ class EventDetail extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            //color: const Color.fromARGB(255, 201, 198, 243),
             alignment: Alignment(0.0, 0),
             //color: Colors.blue,
             height: 80,
             width: 500,
-            margin: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              border: const Border(
-                bottom: const BorderSide(
+            margin: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
                   color: Colors.black,
                   width: 5,
                 ),
@@ -30,55 +33,85 @@ class EventDetail extends StatelessWidget {
             ),
             child: Text(
               event.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 50,
               ),
             ),
           ),
-          Text(
-            event.place,
-          ),
-          Text(
-            event.date,
-          ),
-          Text(
-            event.gender,
-          ),
-          Text(
-            event.age.toString(),
-          ),
-          Text(
-            event.people.toString(),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 50),
-                SpeechBalloon(
-                  nipLocation: NipLocation.left,
-                  color: Colors.green,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        event.greeting,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: _screenSize.height * 0.01,
+              ),
+              Text(
+                "場所　： " + event.place,
+                style: const TextStyle(
+                  fontSize: 30
                 ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: _screenSize.height * 0.01,
+              ),
+              Text(
+                "日時　：" + event.date,
+                style: const TextStyle(
+                  fontSize: 30
+                ),
+              ),
+              // SizedBox(
+              //   height: _screenSize.height * 0.1,
+              // ),
+              Row(
+                children: [
+                  Text(
+                    event.gender,
+                  ),
+                  SizedBox(
+                    width: _screenSize.width * 0.01,
+                  ),
+                  Text(
+                    event.age.toString(),
+                  ),
+                  // SizedBox(
+                  //   width: _screenSize.width * 0.01,
+                  // ),
+                  Text(
+                    event.people.toString(),
+                  ),
+                ],
+              ),
+            ],
           ),
-          Text(
-            event.atmosphere,
-          ),
+          // Center(
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       const SizedBox(height: 50),
+          //       SpeechBalloon(
+          //         nipLocation: NipLocation.left,
+          //         color: Colors.green,
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           children: [
+          //             const Icon(
+          //               Icons.people,
+          //               color: Colors.white,
+          //             ),
+          //             Text(
+          //               event.greeting,
+          //               style: TextStyle(color: Colors.white),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Text(
+          //   event.atmosphere,
+          // ),
         ],
       ),
     );
