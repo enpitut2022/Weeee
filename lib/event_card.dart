@@ -10,7 +10,7 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    // var _screenSize = MediaQuery.of(context).size;
 
     return Card(
       child: InkWell(
@@ -21,50 +21,48 @@ class EventCard extends StatelessWidget {
             ),
           );
         },
-        child: Expanded(
-          child: Container(
-            height: _screenSize.height * 0.3,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/eat.png'),
+        child: Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+          child: Row(
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                child: imageWidget(),
               ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                //const SizedBox(height: 30),
-                Text(
-                  event.name,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'NotoSansJP',
+              Expanded(
+                child: Container(
+                  child: Column(
+                    children: [
+                      Text(
+                        event.name,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'NotoSansJP',
+                        ),
+                      )
+                    ],
                   ),
-                  overflow: TextOverflow.fade,
                 ),
-                //const SizedBox(height: 100),
-                Text(
-                  '場所 :' + event.place,
-                  style: TextStyle(fontSize: 30),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                //const SizedBox(height: 4),
-                Text(
-                  '日時 :' + event.date,
-                  style: TextStyle(fontSize: 30),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                //const SizedBox(height: 4),
-                Text(
-                  event.gender + '性' + event.age.toString() + '歳',
-                  style: TextStyle(fontSize: 30),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
     );
+  }
+
+  Widget imageWidget() {
+    return ClipRect(
+        child: FittedBox(
+      child: Image.asset('assets/eat.png'),
+      fit: BoxFit.cover,
+    ));
   }
 }

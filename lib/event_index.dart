@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/event_card.dart';
 import 'package:enpit_weee/event_add.dart';
 import 'package:enpit_weee/event_grid.dart';
 import 'package:enpit_weee/model/event_model.dart';
@@ -54,14 +55,13 @@ class _EventIndexState extends State<EventIndex> {
                         }
                         final _events = snapshot.data!;
                         return Scaffold(
-                          body: Column(
-                            children: [
-                              Expanded(
-                                child: EventGrid(
-                                  events: _events,
-                                ),
-                              ),
-                            ],
+                          body: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                for (final event in _events)
+                                  EventCard(event: event),
+                              ],
+                            ),
                           ),
                         );
                       }),
