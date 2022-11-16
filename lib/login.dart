@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController? _passwordController;
   TextEditingController? _usernameController;
 
+// インスタンスの作成
   @override
   void initState() {
     super.initState();
@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     _usernameController = TextEditingController(text: '');
   }
 
+// インスタンスの破棄
   @override
   void dispose() {
     _focusNode?.dispose();
@@ -37,13 +38,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          title: const Text('Login'),
+          title: const Text('ログイン'),
         ),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(top: 80, left: 24, right: 24),
             child: Column(
               children: [
+                // メールアドレスを入力する欄
                 TextField(
                   autocorrect: false,
                   autofillHints: _loggingIn ? null : [AutofillHints.email],
@@ -55,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                         Radius.circular(8),
                       ),
                     ),
-                    labelText: 'Email',
+                    labelText: 'メールアドレス',
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.cancel),
                       onPressed: () => _usernameController?.clear(),
@@ -69,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                   textCapitalization: TextCapitalization.none,
                   textInputAction: TextInputAction.next,
                 ),
+                // パスワードを入力する欄
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   child: TextField(
@@ -81,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                           Radius.circular(8),
                         ),
                       ),
-                      labelText: 'Password',
+                      labelText: 'パスワード',
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.cancel),
                         onPressed: () => _passwordController?.clear(),
@@ -97,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextButton(
                   onPressed: _loggingIn ? null : _login,
-                  child: const Text('Login'),
+                  child: const Text('ログイン'),
                 ),
                 TextButton(
                   onPressed: _loggingIn
@@ -109,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           );
                         },
-                  child: const Text('Register'),
+                  child: const Text('登録はここを押して'),
                 ),
               ],
             ),
