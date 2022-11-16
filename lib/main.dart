@@ -1,4 +1,4 @@
-import 'package:enpit_weee/chat.dart';
+import 'package:enpit_weee/rooms.dart';
 import 'package:enpit_weee/event_index.dart';
 import 'package:enpit_weee/setting.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const _screens = [
     EventIndex(),
-    Chat(),
+    RoomsPage(),
     Setting(),
   ];
   int _selectedIndex = 0;
