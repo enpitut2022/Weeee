@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:enpit_weee/chat.dart';
-import 'package:enpit_weee/event_detail.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -13,23 +11,23 @@ class _Setting extends State<Setting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('設定'),
+        title: const Text('設定'),
       ),
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: Text('Common'),
+            title: const Text('Common'),
             tiles: <SettingsTile>[
               SettingsTile.navigation(
-                leading: Icon(Icons.language),
-                title: Text('Language'),
-                value: Text('English'),
+                leading: const Icon(Icons.language),
+                title: const Text('Language'),
+                value: const Text('English'),
               ),
               SettingsTile.switchTile(
                 onToggle: (value) {},
                 initialValue: true,
-                leading: Icon(Icons.format_paint),
-                title: Text('Enable custom theme'),
+                leading: const Icon(Icons.format_paint),
+                title: const Text('Enable custom theme'),
               ),
             ],
           ),

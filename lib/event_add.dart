@@ -13,11 +13,12 @@ class EventAddPage extends StatefulWidget {
 }
 
 class _EventAddPageState extends State<EventAddPage> {
-
   @override
   void initState() {
     super.initState();
   }
+
+  String? genderDefo = '男性';
 
   @override
   Widget build(BuildContext context) {
@@ -61,15 +62,15 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      decoration: const InputDecoration(hintText: "あなたの性別"),
-                      onChanged: (text) {
-                        model.gender = text; 
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    // TextField(
+                    //   decoration: const InputDecoration(hintText: "あなたの性別"),
+                    //   onChanged: (text) {
+                    //     model.gender = text;
+                    //   },
+                    // ),
+                    // const SizedBox(
+                    //   height: 16,
+                    // ),
                     TextField(
                       decoration: const InputDecoration(hintText: "あなたの年齢"),
                       keyboardType: TextInputType.number,
@@ -82,20 +83,22 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
-                      decoration: const InputDecoration(hintText: "およそ何人で行きたいですか？"),
+                      decoration:
+                          const InputDecoration(hintText: "およそ何人で行きたいですか？"),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (text) {
-                        model.people = int.parse(text); 
+                        model.people = int.parse(text);
                       },
                     ),
                     const SizedBox(
                       height: 16,
                     ),
                     TextField(
-                      decoration: const InputDecoration(hintText: "どのような雰囲気で楽しみたいですか？"),
+                      decoration:
+                          const InputDecoration(hintText: "どのような雰囲気で楽しみたいですか？"),
                       onChanged: (text) {
-                        model.atmosphere = text; 
+                        model.atmosphere = text;
                       },
                     ),
                     const SizedBox(
@@ -104,11 +107,33 @@ class _EventAddPageState extends State<EventAddPage> {
                     TextField(
                       decoration: const InputDecoration(hintText: "参加者へ一言！"),
                       onChanged: (text) {
-                        model.greeting = text; 
+                        model.greeting = text;
                       },
                     ),
                     const SizedBox(
                       height: 16,
+                    ),
+                    DropdownButton(
+                      value: genderDefo,
+                      onChanged: (String? value) {
+                        setState(() {
+                          model.gender = value;
+                        });
+                      },
+                      items: const [
+                        DropdownMenuItem(
+                          value: '男性',
+                          child: Text('男性'),
+                        ),
+                        DropdownMenuItem(
+                          value: '女性',
+                          child: Text('女性'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'その他',
+                          child: Text('その他'),
+                        ),
+                      ],
                     ),
                     ElevatedButton(
                       onPressed: () async {
