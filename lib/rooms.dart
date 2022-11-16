@@ -61,7 +61,7 @@ class _RoomsPageState extends State<RoomsPage> {
           onPressed: _user == null ? null : logout,
         ),
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        title: const Text('Rooms'),
+        title: const Text('トークルーム一覧'),
       ),
       body: _user == null
           ? Container(
@@ -72,7 +72,7 @@ class _RoomsPageState extends State<RoomsPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Not authenticated'),
+                  const Text('ログインしていません'),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -82,7 +82,7 @@ class _RoomsPageState extends State<RoomsPage> {
                         ),
                       );
                     },
-                    child: const Text('Login'),
+                    child: const Text('ログインする'),
                   ),
                 ],
               ),
@@ -97,7 +97,7 @@ class _RoomsPageState extends State<RoomsPage> {
                     margin: const EdgeInsets.only(
                       bottom: 200,
                     ),
-                    child: const Text('No rooms'),
+                    child: const Text('まだトークルームがありません'),
                   );
                 }
 

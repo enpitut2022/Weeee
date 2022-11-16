@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'dart:ui' show Color;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 const colors = [
