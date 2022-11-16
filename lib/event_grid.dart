@@ -11,7 +11,7 @@ class EventGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 2,
+      crossAxisCount: 1,
       crossAxisSpacing: 5.0,
       children: _events
           .map(
