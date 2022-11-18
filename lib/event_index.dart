@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/event_card.dart';
 import 'package:enpit_weee/event_add.dart';
@@ -53,8 +54,9 @@ class _EventIndexState extends State<EventIndex> {
                         if (!snapshot.hasData) {
                           return const CircularProgressIndicator();
                         }
-                        final _events = snapshot.data!;
+                        final events = snapshot.data!;
                         return Scaffold(
+
                           body: SingleChildScrollView(
                             child: Column(
                               children: [
@@ -62,6 +64,7 @@ class _EventIndexState extends State<EventIndex> {
                                   EventCard(event: event),
                               ],
                             ),
+
                           ),
                         );
                       }),

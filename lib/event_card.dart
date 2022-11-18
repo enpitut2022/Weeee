@@ -1,16 +1,14 @@
 import 'package:enpit_weee/event_detail.dart';
 import 'package:enpit_weee/model/event_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
-  EventCard({required this.event});
+  EventCard({required this.event, super.key});
 
   Event event;
 
   @override
   Widget build(BuildContext context) {
-    // var _screenSize = MediaQuery.of(context).size;
 
     return Card(
       child: InkWell(
@@ -74,6 +72,7 @@ class EventCard extends StatelessWidget {
                       ),
                     ],
                   ),
+
                 ),
               )
             ],
