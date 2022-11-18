@@ -44,9 +44,34 @@ class EventCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'NotoSansJP',
+                          // fontFamily: 'NotoSansJP',
                         ),
-                      )
+                      ),
+                      Row(
+                        children: [
+                          Spacer(
+                            flex: 1,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              event.date,
+                              style: TextStyle(
+                                fontSize: 25,
+                              ),
+                            ),
+                          ),
+                          // Text(
+                          //   event.place,
+                          //   style: TextStyle(
+                          //     fontSize: 25,
+                          //   ),
+                          // ),
+                          Spacer(
+                            flex: 1,
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
