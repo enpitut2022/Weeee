@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 //firebaseのeventという名前のcollectionにデータを追加
 class EventAddPage extends StatefulWidget {
   const EventAddPage({super.key});
-
   @override
   State<EventAddPage> createState() => _EventAddPageState();
 }
@@ -33,7 +32,7 @@ class _EventAddPageState extends State<EventAddPage> {
             builder: (context, model, child) {
               return Padding(
                 padding: const EdgeInsets.all(10),
-                child: Column(
+                child: ListView(
                   children: [
                     TextField(
                       decoration: const InputDecoration(hintText: "イベント名"),
@@ -45,7 +44,17 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
-                      decoration: const InputDecoration(hintText: "時間"),
+                      decoration:
+                          const InputDecoration(hintText: "ジャンルを選択(記入)してください"),
+                      onChanged: (text) {
+                        model.genre = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(hintText: "何月何日ですか？"),
                       onChanged: (text) {
                         model.date = text;
                       },
@@ -62,17 +71,8 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    // TextField(
-                    //   decoration: const InputDecoration(hintText: "あなたの性別"),
-                    //   onChanged: (text) {
-                    //     model.gender = text;
-                    //   },
-                    // ),
-                    // const SizedBox(
-                    //   height: 16,
-                    // ),
                     TextField(
-                      decoration: const InputDecoration(hintText: "あなたの年齢"),
+                      decoration: const InputDecoration(hintText: "あなたの年齢(数字のみ）"),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (text) {
@@ -84,7 +84,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     ),
                     TextField(
                       decoration:
-                          const InputDecoration(hintText: "およそ何人で行きたいですか？"),
+                          const InputDecoration(hintText: "およそ何人で行きたいですか？（数字のみ）"),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (text) {
@@ -98,7 +98,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       decoration:
                           const InputDecoration(hintText: "どのような雰囲気で楽しみたいですか？"),
                       onChanged: (text) {
-                        model.atmosphere = text;
+                        model.background = text;
                       },
                     ),
                     const SizedBox(
@@ -108,6 +108,56 @@ class _EventAddPageState extends State<EventAddPage> {
                       decoration: const InputDecoration(hintText: "参加者へ一言！"),
                       onChanged: (text) {
                         model.greeting = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration:
+                          const InputDecoration(hintText: "募集した理由を書いてください"),
+                      onChanged: (text) {
+                        model.background = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration:
+                          const InputDecoration(hintText: "集合場所はどこですか？"),
+                      onChanged: (text) {
+                        model.startplace = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration:
+                          const InputDecoration(hintText: "集合時間を入力してください"),
+                      onChanged: (text) {
+                        model.starttime = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration:
+                          const InputDecoration(hintText: "解散場所はどこですか？"),
+                      onChanged: (text) {
+                        model.goalplace = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration:
+                          const InputDecoration(hintText: "解散時間を入力してください"),
+                      onChanged: (text) {
+                        model.goalplace = text;
                       },
                     ),
                     const SizedBox(

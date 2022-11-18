@@ -101,7 +101,7 @@ class EventDetail extends StatelessWidget {
                       margin: const BubbleEdges.only(top: 10),
                       nip: BubbleNip.leftTop,
                       child: Text(
-                        event.atmosphere,
+                        event.background,
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),
