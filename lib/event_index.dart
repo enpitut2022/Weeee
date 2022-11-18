@@ -1,8 +1,5 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/event_card.dart';
 import 'package:enpit_weee/event_add.dart';
-import 'package:enpit_weee/event_grid.dart';
 import 'package:enpit_weee/model/event_model.dart';
 import 'package:enpit_weee/provider/event_provider.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +57,7 @@ class _EventIndexState extends State<EventIndex> {
                           body: SingleChildScrollView(
                             child: Column(
                               children: [
-                                for (final event in _events)
+                                for (final event in events)
                                   EventCard(event: event),
                               ],
                             ),
