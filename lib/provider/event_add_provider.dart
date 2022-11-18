@@ -9,8 +9,13 @@ class AddEventProvider extends ChangeNotifier {
   String? gender;
   int? age;
   int? people;
-  String? atmosphere;
   String? greeting;
+  String? genre;
+  String? background; // 募集した理由
+  String? startplace;
+  String? starttime;
+  String? goalplace;
+  String? goaltime;
 
   Future addEvent() async {
     if (name == null || name == "") {
@@ -26,17 +31,29 @@ class AddEventProvider extends ChangeNotifier {
       throw "人数が入力されていません";
     }
     if (age == null || age == "") {
-      throw "名前が入力されていません";
+      throw "年齢が入力されていません";
     }
     if (people == null || people == "") {
-      throw "日にちが入力されていません";
-    }
-    if (atmosphere == null || atmosphere == "") {
-      throw "場所が入力されていません";
-    }
-    if (greeting == null || greeting == "") {
       throw "人数が入力されていません";
     }
+    if (background == null || background == "") {
+      throw "募集理由が入力されていません";
+    }
+    if (greeting == null || greeting == "") {
+      throw "一言が入力されていません";
+    }
+    // if (startplace == null || startplace == "") {
+    //   throw "集合場所が入力されていません";
+    // }
+    // if (starttime == null || starttime == "") {
+    //   throw "集合時間が入力されていません";
+    // }
+    // if (goalplace == null || goalplace == "") {
+    //   throw "解散場所が入力されていません";
+    // }
+    // if (goaltime == null || goaltime == "") {
+    //   throw "解散時間が入力されていません";
+    // }
 
     //firestoreに追加する
     await FirebaseFirestore.instance.collection("event").add({
@@ -46,8 +63,13 @@ class AddEventProvider extends ChangeNotifier {
       "gender": gender,
       "age": age,
       "num": people,
-      "atmo": atmosphere,
       "greeting": greeting,
+      "genre": genre,
+      "background": background,
+      "startPlace": startplace,
+      "startTime": starttime,
+      "goalPlace": goalplace,
+      "goalTime": goaltime
     });
   }
 }
