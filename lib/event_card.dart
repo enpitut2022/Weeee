@@ -9,7 +9,6 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Card(
       child: InkWell(
         onTap: () {
@@ -51,14 +50,34 @@ class EventCard extends StatelessWidget {
                             flex: 1,
                           ),
                           Expanded(
-                            flex: 2,
+                            flex: 7,
                             child: Text(
                               event.date,
+                              overflow: TextOverflow.visible,
                               style: TextStyle(
                                 fontSize: 25,
                               ),
                             ),
                           ),
+                          Expanded(
+                            flex: 7,
+                            child: Text(
+                              event.place,
+                              style: TextStyle(
+                                fontSize: 25,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Text(
+                              event.gender + event.age.toString() + '歳',
+                              style: TextStyle(
+                                fontSize: 25,
+                              ),
+                            ),
+                          ),
+
                           // Text(
                           //   event.place,
                           //   style: TextStyle(
@@ -72,7 +91,6 @@ class EventCard extends StatelessWidget {
                       ),
                     ],
                   ),
-
                 ),
               )
             ],
