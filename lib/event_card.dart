@@ -38,7 +38,7 @@ class EventCard extends StatelessWidget {
                     children: [
                       Text(
                         event.name,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           // fontFamily: 'NotoSansJP',
@@ -46,21 +46,19 @@ class EventCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Spacer(
+                          Spacer(
                             flex: 1,
                           ),
                           Expanded(
                             flex: 7,
                             child: Text(
-
+                              event.date,
                               overflow: TextOverflow.visible,
                               style: TextStyle(
-
                                 fontSize: 25,
                               ),
                             ),
                           ),
-
                           Expanded(
                             flex: 7,
                             child: Text(
@@ -87,7 +85,6 @@ class EventCard extends StatelessWidget {
                           //   ),
                           // ),
                           Spacer(
-
                             flex: 1,
                           ),
                         ],
