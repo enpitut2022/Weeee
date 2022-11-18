@@ -1,4 +1,4 @@
-import 'package:enpit_weee/rooms.dart';
+import 'package:enpit_weee/chat/chat_top.dart';
 import 'package:enpit_weee/event_index.dart';
 import 'package:enpit_weee/setting.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +33,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // この中に入るクラスは、コンストラクタが必要。
   static const _screens = [
     EventIndex(),
-    RoomsPage(),
+    ChatApp(),
     Setting(),
   ];
   int _selectedIndex = 0;

@@ -9,17 +9,29 @@ class Event {
   final int people;
   final String atmosphere;
   final String greeting;
+  final String genre;
+  final String background; // 募集した理由
+  final String startplace;
+  final String starttime;
+  final String goalplace;
+  final String goaltime;
 
-  Event._({
-    required this.name,
-    required this.date,
-    required this.place,
-    required this.gender,
-    required this.age,
-    required this.people,
-    required this.atmosphere,
-    required this.greeting
-  });
+  Event._(
+      {required this.name,
+      required this.date,
+      required this.place,
+      required this.gender,
+      required this.age,
+      required this.people,
+      required this.atmosphere,
+      required this.greeting,
+      required this.genre,
+      required this.background,
+      required this.startplace,
+      required this.starttime,
+      required this.goalplace,
+      required this.goaltime
+      });
 
   factory Event.fromSnapshot(DocumentSnapshot snapshot) {
     final _snapshot = snapshot.data() as Map<String, dynamic>;
@@ -31,7 +43,13 @@ class Event {
       age: _snapshot["age"],
       people: _snapshot["num"],
       atmosphere: _snapshot["atmo"],
-      greeting: _snapshot["greeting"]
+      greeting: _snapshot["greeting"],
+      genre: _snapshot["genre"],
+      background: _snapshot["background"],
+      startplace: _snapshot["startPlace"],
+      starttime: _snapshot["startTime"],
+      goalplace: _snapshot["goalPlace"],
+      goaltime: _snapshot["goalTime"],
     );
   }
 }
