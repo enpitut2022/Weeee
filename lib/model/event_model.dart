@@ -30,8 +30,7 @@ class Event {
       required this.startplace,
       required this.starttime,
       required this.goalplace,
-      required this.goaltime
-      });
+      required this.goaltime});
 
   factory Event.fromSnapshot(DocumentSnapshot snapshot) {
     final _snapshot = snapshot.data() as Map<String, dynamic>;

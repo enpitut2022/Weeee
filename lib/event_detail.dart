@@ -115,11 +115,11 @@ class EventDetail extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         // ここを押すと、チャットができるようになる？
-        onPressed: (){},
+        onPressed: () {},
         icon: const Icon(Icons.add),
         label: const Text("一緒に行きたい！"),
         backgroundColor: const Color.fromARGB(255, 255, 82, 70),
-        ),
+      ),
     );
   }
 }

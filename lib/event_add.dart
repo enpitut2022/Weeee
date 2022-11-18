@@ -16,8 +16,8 @@ class _EventAddPageState extends State<EventAddPage> {
   void initState() {
     super.initState();
   }
-
   String? genderDefo = '男性';
+  String? genreDefo = 'スポーツ';
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,8 @@ class _EventAddPageState extends State<EventAddPage> {
                 child: ListView(
                   children: [
                     TextField(
-                      decoration: const InputDecoration(hintText: "イベント名"),
+                      maxLength: 10,
+                      decoration: const InputDecoration(hintText: "イベント名",),
                       onChanged: (text) {
                         model.name = text;
                       },
@@ -43,12 +44,43 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      decoration:
-                          const InputDecoration(hintText: "ジャンルを選択(記入)してください"),
-                      onChanged: (text) {
-                        model.genre = text;
+                    DropdownButton(
+                      value: genreDefo,
+                      onChanged: (String? value) {
+                        setState(() {
+                          model.genre = value;
+                        });
                       },
+                      items: const [
+                        DropdownMenuItem(
+                          value: '音楽',
+                          child: Text('音楽'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'スポーツ',
+                          child: Text('スポーツ'),
+                        ),
+                        DropdownMenuItem(
+                          value: '映画',
+                          child: Text('映画'),
+                        ),
+                        DropdownMenuItem(
+                          value: '芸術',
+                          child: Text('芸術'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'ファッション',
+                          child: Text('ファッション'),
+                        ),
+                        DropdownMenuItem(
+                          value: '食事',
+                          child: Text('食事'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'その他',
+                          child: Text('その他'),
+                        ),
+                      ],
                     ),
                     const SizedBox(
                       height: 16,
@@ -63,6 +95,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
+                      maxLength: 10,
                       decoration: const InputDecoration(hintText: "場所"),
                       onChanged: (text) {
                         model.place = text;
@@ -124,6 +157,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
+                      maxLength: 10,
                       decoration:
                           const InputDecoration(hintText: "集合場所はどこですか？"),
                       onChanged: (text) {
@@ -144,6 +178,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
+                      maxLength: 10,
                       decoration:
                           const InputDecoration(hintText: "解散場所はどこですか？"),
                       onChanged: (text) {
