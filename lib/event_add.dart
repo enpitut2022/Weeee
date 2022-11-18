@@ -86,7 +86,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
-                      decoration: const InputDecoration(hintText: "何月何日ですか？"),
+                      decoration: const InputDecoration(hintText: "○月○日"),
                       onChanged: (text) {
                         model.date = text;
                       },
