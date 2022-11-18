@@ -3,6 +3,7 @@ import 'package:enpit_weee/event_index.dart';
 import 'package:enpit_weee/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -18,6 +19,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        // 多言語対応処理の追加
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        // 対応する言語の宣言
+        Locale('ja', ''),
+      ],
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'NotoSansJP'),
       home: MyHomePage(),

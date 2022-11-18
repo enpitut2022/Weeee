@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 
 class AddEventProvider extends ChangeNotifier {
   String? name;
-  String? date;
+  DateTime? date;
   String? place;
   String? gender;
   int? age;
   int? people;
-  String? greeting;
   String? genre;
   String? background; // 募集した理由
   String? startplace;
@@ -21,17 +20,17 @@ class AddEventProvider extends ChangeNotifier {
     if (name == null || name == "") {
       throw "名前が入力されていません";
     }
-    if (date == null || date == "") {
-      throw "日にちが入力されていません";
+    if (genre == null || genre == "-") {
+      throw "ジャンルは、-以外を選択してください";
     }
     if (place == null || place == "") {
       throw "場所が入力されていません";
     }
-    if (gender == null || gender == "") {
-      throw "人数が入力されていません";
-    }
     if (age == null || age == "") {
       throw "年齢が入力されていません";
+    }
+    if (gender == null || gender == "-") {
+      throw "性別は、-以外を選択してください";
     }
     if (people == null || people == "") {
       throw "人数が入力されていません";
@@ -39,31 +38,15 @@ class AddEventProvider extends ChangeNotifier {
     if (background == null || background == "") {
       throw "募集理由が入力されていません";
     }
-    if (greeting == null || greeting == "") {
-      throw "一言が入力されていません";
-    }
-    // if (startplace == null || startplace == "") {
-    //   throw "集合場所が入力されていません";
-    // }
-    // if (starttime == null || starttime == "") {
-    //   throw "集合時間が入力されていません";
-    // }
-    // if (goalplace == null || goalplace == "") {
-    //   throw "解散場所が入力されていません";
-    // }
-    // if (goaltime == null || goaltime == "") {
-    //   throw "解散時間が入力されていません";
-    // }
 
     //firestoreに追加する
     await FirebaseFirestore.instance.collection("event").add({
       "name": name,
-      "date": date,
+      "date": date, //datetime型は、自動でtimestamp型へ
       "place": place,
       "gender": gender,
       "age": age,
       "num": people,
-      "greeting": greeting,
       "genre": genre,
       "background": background,
       "startPlace": startplace,

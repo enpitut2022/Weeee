@@ -17,6 +17,9 @@ dependencies:
     git:
       url: https://github.com/yako-dev/flutter-settings-ui.git
       ref: master
+  flutter_localizations: # 多言語対応
+    sdk: flutter
+  intl: ^0.17.0  # 日付対応
   provider: ^6.0.4 #プロバイダーのパッケージ
   firebase_core: ^2.1.1
   cloud_firestore: ^4.0.4

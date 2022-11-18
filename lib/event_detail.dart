@@ -58,7 +58,7 @@ class EventDetail extends StatelessWidget {
                   height: screenSize.height * 0.01,
                 ),
                 Text(
-                  "日時　： ${event.date}",
+                  "日時　： ${event.date.month}月${event.date.day}日",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(

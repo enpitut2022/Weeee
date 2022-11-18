@@ -52,7 +52,7 @@ class EventCard extends StatelessWidget {
                           Expanded(
                             flex: 7,
                             child: Text(
-                              event.date,
+                              "${event.date.year}年${event.date.month}月${event.date.day}日",
                               overflow: TextOverflow.visible,
                               style: TextStyle(
                                 fontSize: 25,
