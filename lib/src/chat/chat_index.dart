@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/src/chat/chat_provider.dart';
 import 'package:enpit_weee/src/chat/chat_room.dart';
 import 'package:flutter/material.dart';
 

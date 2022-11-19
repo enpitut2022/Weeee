@@ -245,6 +245,134 @@ class _EventAddPageState extends State<EventAddPage> {
                               value: '東京都	',
                               child: Text('東京都	'),
                             ),
+                            DropdownMenuItem(
+                              value: '神奈川県',
+                              child: Text('神奈川県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '新潟県',
+                              child: Text('新潟県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '富山県',
+                              child: Text('富山県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '石川県',
+                              child: Text('石川県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '福井県',
+                              child: Text('福井県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '山梨県	',
+                              child: Text('山梨県	'),
+                            ),
+                            DropdownMenuItem(
+                              value: '長野県',
+                              child: Text('長野県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '愛知県',
+                              child: Text('愛知県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '三重県',
+                              child: Text('三重県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '滋賀県',
+                              child: Text('滋賀県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '京都府',
+                              child: Text('京都府'),
+                            ),
+                            DropdownMenuItem(
+                              value: '大阪府',
+                              child: Text('大阪府'),
+                            ),
+                            DropdownMenuItem(
+                              value: '兵庫県	',
+                              child: Text('兵庫県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '奈良県',
+                              child: Text('奈良県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '和歌山県',
+                              child: Text('和歌山県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '鳥取県',
+                              child: Text('鳥取県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '島根県	',
+                              child: Text('島根県	'),
+                            ),
+                            DropdownMenuItem(
+                              value: '岡山県',
+                              child: Text('岡山県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '広島県',
+                              child: Text('広島県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '山口県',
+                              child: Text('山口県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '徳島県',
+                              child: Text('徳島県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '香川県',
+                              child: Text('香川県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '愛媛県',
+                              child: Text('愛媛県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '高知県	',
+                              child: Text('高知県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '福岡県',
+                              child: Text('福岡県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '佐賀県',
+                              child: Text('佐賀県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '長崎県',
+                              child: Text('長崎県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '熊本県',
+                              child: Text('熊本県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '大分県',
+                              child: Text('大分県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '宮崎県',
+                              child: Text('宮崎県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '鹿児島県	',
+                              child: Text('鹿児島県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '沖縄県	',
+                              child: Text('沖縄県'),
+                            ),
                           ],
                           onChanged: (String? value) {
                             setState(() {
@@ -260,7 +388,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     TextField(
                       maxLength: 10,
                       decoration: const InputDecoration(
-                          hintText: "武道館", labelText: "場所(必須)"),
+                          hintText: "武道館", labelText: "場所(必須)",),
                       onChanged: (text) {
                         model.place = text;
                       },
@@ -402,15 +530,15 @@ class _EventAddPageState extends State<EventAddPage> {
                           model.prefec = prefecDefo;
                           await model.addEvent();
 
-                          final date =
+                          final now =
                               DateTime.now().toLocal().toIso8601String();
                           await FirebaseFirestore.instance
                               .collection('chat_room')
                               .doc(model.name)
                               .set({
                             'name': model.name,
-                            'createdAt': date,
-                          });
+                            'createdAt': now,
+                          },);
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(
