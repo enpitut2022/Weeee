@@ -1,5 +1,5 @@
-import 'package:enpit_weee/event_detail.dart';
-import 'package:enpit_weee/model/event_model.dart';
+import 'package:enpit_weee/src/event/event_detail.dart';
+import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
@@ -19,12 +19,15 @@ class EventCard extends StatelessWidget {
           );
         },
         child: Container(
-          margin: EdgeInsets.all(10),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: const [
+              BoxShadow(color: Colors.grey, blurRadius: 3),
+            ],
+          ),
           child: Row(
             children: [
               Container(
@@ -38,7 +41,7 @@ class EventCard extends StatelessWidget {
                     children: [
                       Text(
                         event.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           // fontFamily: 'NotoSansJP',
@@ -46,15 +49,15 @@ class EventCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Spacer(
+                          const Spacer(
                             flex: 1,
                           ),
                           Expanded(
                             flex: 7,
                             child: Text(
-                              "${event.date.year}年${event.date.month}月${event.date.day}日",
+                              "${event.date.month}月${event.date.day}日",
                               overflow: TextOverflow.visible,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 25,
                               ),
                             ),
@@ -63,7 +66,7 @@ class EventCard extends StatelessWidget {
                             flex: 7,
                             child: Text(
                               event.place,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 25,
                               ),
                             ),
@@ -71,20 +74,13 @@ class EventCard extends StatelessWidget {
                           Expanded(
                             flex: 4,
                             child: Text(
-                              event.gender + event.age.toString() + '歳',
-                              style: TextStyle(
+                              "${event.gender}  ${event.age.toString()} 歳",
+                              style: const TextStyle(
                                 fontSize: 25,
                               ),
                             ),
                           ),
-
-                          // Text(
-                          //   event.place,
-                          //   style: TextStyle(
-                          //     fontSize: 25,
-                          //   ),
-                          // ),
-                          Spacer(
+                          const Spacer(
                             flex: 1,
                           ),
                         ],
@@ -102,9 +98,10 @@ class EventCard extends StatelessWidget {
 
   Widget imageWidget() {
     return ClipRect(
-        child: FittedBox(
-      child: Image.asset('assets/eat.png'),
-      fit: BoxFit.cover,
-    ));
+      child: FittedBox(
+        child: Image.asset('assets/eat.png'),
+        fit: BoxFit.cover,
+      ),
+    );
   }
 }
