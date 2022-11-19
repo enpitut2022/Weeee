@@ -1,4 +1,5 @@
-import 'package:enpit_weee/provider/event_add_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/src/provider/event_add_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +136,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       ],
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 25,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -172,7 +173,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       ],
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 25,
                     ),
                     TextField(
                       maxLength: 10,
@@ -187,7 +188,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     ),
                     TextField(
                       decoration:
-                          const InputDecoration(hintText: "あなたの年齢(数字のみ、必須）"),
+                          const InputDecoration(labelText: "あなたの年齢(数字のみ、必須）", hintText: "20"),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (text) {
@@ -239,7 +240,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     ),
                     TextField(
                       decoration: const InputDecoration(
-                          hintText: "およそ何人で行きたいですか？（数字のみ、必須）"),
+                          labelText: "およそ何人で行きたいですか？（数字のみ、必須）", hintText: "3"),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (text) {
@@ -250,9 +251,11 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
                       decoration: const InputDecoration(
                           labelText: "募集する背景を書いてください(必須)",
-                          hintText: "一緒に行く人が欲しい"),
+                          hintText: "友達と○○のライブに行く予定だったんだけど、\n友達が来れなくなったからチケットが余りました。\nライブは行きたいけど、一人で行く勇気は\nありません。○○のファンの人で一緒に行きませんか？"),
                       onChanged: (text) {
                         model.background = text;
                       },
@@ -314,6 +317,16 @@ class _EventAddPageState extends State<EventAddPage> {
                           model.genre = genreDefo;
                           model.gender = genderDefo;
                           await model.addEvent();
+
+                          final date =
+                              DateTime.now().toLocal().toIso8601String();
+                          await FirebaseFirestore.instance
+                              .collection('chat_room')
+                              .doc(model.name)
+                              .set({
+                            'name': model.name,
+                            'createdAt': date,
+                          });
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(
@@ -323,7 +336,7 @@ class _EventAddPageState extends State<EventAddPage> {
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
-                      child: const Text("追加する"),
+                      child: const Text("募集する"),
                     ),
                   ],
                 ),

@@ -1,17 +1,43 @@
 // ログイン画面用Widget
-import 'package:enpit_weee/chat/chat_index.dart';
-import 'package:enpit_weee/chat/chat_provider.dart';
+import 'package:enpit_weee/src/chat/chat_provider.dart';
+import 'package:enpit_weee/src/home_page.dart';
+import 'package:enpit_weee/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ChatLoginPage extends StatefulWidget {
-  const ChatLoginPage({super.key});
+class LoginApp extends StatelessWidget {
+  const LoginApp({super.key});
+  // ユーザーの情報を管理するデータ。下のコードを書くとmainでエラー。必要性は？
+  //final UserState userState = UserState();
+
   @override
-  State<ChatLoginPage> createState() => _ChatLoginPageState();
+  Widget build(BuildContext context) {
+    // プロバイダーのステートを受け取る
+    return ChangeNotifierProvider<UserState>(
+      create: (context) => UserState(),
+      child: MaterialApp(
+        // アプリ名
+        title: 'ChatApp',
+        theme: ThemeData(
+          // テーマカラー
+          primarySwatch: Colors.blue,
+        ),
+        // ログイン画面を表示
+        home: LoginPage(),
+        debugShowCheckedModeBanner: false,
+      ),
+    );
+  }
 }
 
-class _ChatLoginPageState extends State<ChatLoginPage> {
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   // メッセージ表示用
   String infoText = '';
   // 入力したメールアドレス・パスワード
@@ -23,6 +49,41 @@ class _ChatLoginPageState extends State<ChatLoginPage> {
     // ユーザー情報をプロバイダーから受け取る
     final UserState userState = Provider.of<UserState>(context);
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('ログイン'),
+        actions: [
+          IconButton(
+            tooltip: "ゲストユーザー",
+            icon: const Icon(Icons.skip_next),
+            onPressed: () async {
+              try {
+                // メール/パスワードでログイン
+                final FirebaseAuth auth = FirebaseAuth.instance;
+                final result = await auth.signInWithEmailAndPassword(
+                  email: "test@test.com",
+                  password: "testtest",
+                );
+                // ユーザー情報を更新
+                userState.setUser(result.user!);
+                // ログインに成功した場合
+                // チャット画面に遷移＋ログイン画面を破棄
+                await Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) {
+                    return HomePage();
+                  }),
+                );
+              } catch (e) {
+                // ログインに失敗した場合
+                setState(
+                  () {
+                    infoText = "ログインに失敗しました：${e.toString()}";
+                  },
+                );
+              }
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(24),
@@ -74,7 +135,7 @@ class _ChatLoginPageState extends State<ChatLoginPage> {
                       // チャット画面に遷移＋ログイン画面を破棄
                       await Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) {
-                          return ChatIndex();
+                          return HomePage();
                         }),
                       );
                     } catch (e) {
@@ -91,7 +152,7 @@ class _ChatLoginPageState extends State<ChatLoginPage> {
                 width: double.infinity,
                 // ログイン登録ボタン
                 child: OutlinedButton(
-                  child: Text('ログイン'),
+                  child: const Text('ログイン'),
                   onPressed: () async {
                     try {
                       // メール/パスワードでログイン
@@ -106,7 +167,7 @@ class _ChatLoginPageState extends State<ChatLoginPage> {
                       // チャット画面に遷移＋ログイン画面を破棄
                       await Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) {
-                          return ChatIndex();
+                          return HomePage();
                         }),
                       );
                     } catch (e) {

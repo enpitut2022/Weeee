@@ -1,7 +1,7 @@
-import 'package:enpit_weee/event_card.dart';
-import 'package:enpit_weee/event_add.dart';
-import 'package:enpit_weee/model/event_model.dart';
-import 'package:enpit_weee/provider/event_provider.dart';
+import 'package:enpit_weee/src/event/event_card.dart';
+import 'package:enpit_weee/src/event/event_add.dart';
+import 'package:enpit_weee/src/model/event_model.dart';
+import 'package:enpit_weee/src/provider/event_provider.dart';
 import 'package:flutter/material.dart';
 
 class EventIndex extends StatefulWidget {

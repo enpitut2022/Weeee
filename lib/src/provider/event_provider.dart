@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/model/event_model.dart';
+import 'package:enpit_weee/src/model/event_model.dart';
 
 class EventProvider {
   //コンストラクター

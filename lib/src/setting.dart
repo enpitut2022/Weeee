@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-class Setting extends StatefulWidget {
-  const Setting({super.key});
-  State<Setting> createState() => _Setting();
+class  Mypage extends StatefulWidget {
+  const  Mypage({super.key});
+  @override
+  State<Mypage> createState() => _MypageState();
 }
 
-class _Setting extends State<Setting> {
+class _MypageState extends State< Mypage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('設定'),
+        title: const Text('マイページ'),
       ),
       body: SettingsList(
         sections: [

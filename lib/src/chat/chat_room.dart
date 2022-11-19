@@ -7,9 +7,8 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:uuid/uuid.dart';
 
 class ChatRoom extends StatefulWidget {
-  const ChatRoom(this.name, {Key? key}) : super(key: key);
-
-  final String name;
+  const ChatRoom(this.roomName, {Key? key}) : super(key: key);
+  final String roomName;
   @override
   State<ChatRoom> createState() => _ChatRoomState();
 }
@@ -18,7 +17,8 @@ class _ChatRoomState extends State<ChatRoom> {
   // メッセージを取得するリスト
   List<types.Message> _messages = [];
   String randomId = Uuid().v4();
-  final _user = const types.User(id: '06c33e8b-e835-4736-80f4-63f44b66666c', firstName: '名前');
+  final _user = const types.User(
+      id: '06c33e8b-e835-4736-80f4-63f44b66666c', firstName: '名前');
 
   @override
   void initState() {
@@ -29,18 +29,24 @@ class _ChatRoomState extends State<ChatRoom> {
   // firestoreからメッセージの内容をとってきて_messageにセット
   void _getMessages() async {
     final getData = await FirebaseFirestore.instance
-        .collection('practical_chat_room')
-        .doc(widget.name)
+        .collection('chat_room')
+        .doc(widget.roomName)
         .collection('contents')
+        .orderBy("createdAt", descending: true)
         .get();
 
     final message = getData.docs
-        .map((d) => types.TextMessage(
-            author:
-                types.User(id: d.data()['uid'], firstName: d.data()['name']),
+        .map(
+          (d) => types.TextMessage(
+            author: types.User(
+              id: d.data()['uid'],
+              firstName: d.data()['name'],
+            ),
             createdAt: d.data()['createdAt'],
             id: d.data()['id'],
-            text: d.data()['text']))
+            text: d.data()['text'],
+          ),
+        )
         .toList();
 
     setState(() {
@@ -54,8 +60,8 @@ class _ChatRoomState extends State<ChatRoom> {
       _messages.insert(0, message);
     });
     await FirebaseFirestore.instance
-        .collection('practical_chat_room')
-        .doc(widget.name)
+        .collection('chat_room')
+        .doc(widget.roomName)
         .collection('contents')
         .add({
       'uid': message.author.id,
@@ -72,7 +78,8 @@ class _ChatRoomState extends State<ChatRoom> {
     types.PreviewData previewData,
   ) {
     final index = _messages.indexWhere((element) => element.id == message.id);
-    final updatedMessage = (_messages[index] as types.TextMessage).copyWith(previewData: previewData);
+    final updatedMessage = (_messages[index] as types.TextMessage)
+        .copyWith(previewData: previewData);
 
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       setState(() {
@@ -84,21 +91,20 @@ class _ChatRoomState extends State<ChatRoom> {
   // メッセージ送信時の処理
   void _handleSendPressed(types.PartialText message) {
     final textMessage = types.TextMessage(
-            author: _user,
-            createdAt: DateTime.now().millisecondsSinceEpoch,
-            id: randomId,
-            text: message.text,
-          );
+      author: _user,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: randomId,
+      text: message.text,
+    );
 
     _addMessage(textMessage);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('チャット'),
+        title: const Text('チャット'),
       ),
       // flutter_chat_uiのメソッドであるChat()を使っている
       body: Chat(
@@ -120,4 +126,3 @@ class _ChatRoomState extends State<ChatRoom> {
     );
   }
 }
-
