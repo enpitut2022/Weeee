@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class AddEventProvider extends ChangeNotifier {
   String? name;
   DateTime? date;
+  String? prefec;
   String? place;
   String? gender;
   int? age;
@@ -22,6 +23,9 @@ class AddEventProvider extends ChangeNotifier {
     }
     if (genre == null || genre == "-") {
       throw "ジャンルは、-以外を選択してください";
+    }
+    if (prefec == null || prefec == "-") {
+      throw "県は、-以外を選択してください";
     }
     if (place == null || place == "") {
       throw "場所が入力されていません";
@@ -44,6 +48,7 @@ class AddEventProvider extends ChangeNotifier {
       "name": name,
       "date": date, //datetime型は、自動でtimestamp型へ
       "place": place,
+      "prefec": prefec,
       "gender": gender,
       "age": age,
       "num": people,

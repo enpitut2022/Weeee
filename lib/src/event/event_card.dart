@@ -65,7 +65,7 @@ class EventCard extends StatelessWidget {
                           Expanded(
                             flex: 7,
                             child: Text(
-                              event.place,
+                              event.prefec,
                               style: const TextStyle(
                                 fontSize: 25,
                               ),
