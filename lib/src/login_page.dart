@@ -1,7 +1,6 @@
 // ログイン画面用Widget
 import 'package:enpit_weee/src/chat/chat_provider.dart';
 import 'package:enpit_weee/src/home_page.dart';
-import 'package:enpit_weee/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,7 @@ class LoginApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         // ログイン画面を表示
-        home: LoginPage(),
+        home: const LoginPage(),
         debugShowCheckedModeBanner: false,
       ),
     );
@@ -69,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                 // チャット画面に遷移＋ログイン画面を破棄
                 await Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) {
-                    return HomePage();
+                    return const HomePage();
                   }),
                 );
               } catch (e) {
@@ -115,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text(infoText),
               ),
               // ユーザー登録の処理
-              Container(
+              SizedBox(
                 width: double.infinity,
                 // ユーザー登録ボタン
                 child: ElevatedButton(
@@ -135,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                       // チャット画面に遷移＋ログイン画面を破棄
                       await Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) {
-                          return HomePage();
+                          return const HomePage();
                         }),
                       );
                     } catch (e) {
@@ -148,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 8),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 // ログイン登録ボタン
                 child: OutlinedButton(
@@ -167,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                       // チャット画面に遷移＋ログイン画面を破棄
                       await Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) {
-                          return HomePage();
+                          return const HomePage();
                         }),
                       );
                     } catch (e) {

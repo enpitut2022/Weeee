@@ -16,7 +16,7 @@ class ChatRoom extends StatefulWidget {
 class _ChatRoomState extends State<ChatRoom> {
   // メッセージを取得するリスト
   List<types.Message> _messages = [];
-  String randomId = Uuid().v4();
+  String randomId = const Uuid().v4();
   final _user = const types.User(
       id: '06c33e8b-e835-4736-80f4-63f44b66666c', firstName: '名前');
 
@@ -81,7 +81,7 @@ class _ChatRoomState extends State<ChatRoom> {
     final updatedMessage = (_messages[index] as types.TextMessage)
         .copyWith(previewData: previewData);
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _messages[index] = updatedMessage;
       });

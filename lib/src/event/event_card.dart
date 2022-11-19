@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
   EventCard({required this.event, super.key});
-
   Event event;
 
   @override
@@ -30,65 +29,63 @@ class EventCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 width: 100,
                 height: 100,
                 child: imageWidget(),
               ),
               Expanded(
-                child: Container(
-                  child: Column(
-                    children: [
-                      Text(
-                        event.name,
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          // fontFamily: 'NotoSansJP',
+                child: Column(
+                  children: [
+                    Text(
+                      event.name,
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        // fontFamily: 'NotoSansJP',
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        const Spacer(
+                          flex: 1,
                         ),
-                      ),
-                      Row(
-                        children: [
-                          const Spacer(
-                            flex: 1,
-                          ),
-                          Expanded(
-                            flex: 7,
-                            child: Text(
-                              "${event.date.month}月${event.date.day}日",
-                              overflow: TextOverflow.visible,
-                              style: const TextStyle(
-                                fontSize: 25,
-                              ),
+                        Expanded(
+                          flex: 7,
+                          child: Text(
+                            "${event.date.month}月${event.date.day}日",
+                            overflow: TextOverflow.visible,
+                            style: const TextStyle(
+                              fontSize: 25,
                             ),
                           ),
-                          Expanded(
-                            flex: 7,
-                            child: Text(
-                              event.prefec,
-                              style: const TextStyle(
-                                fontSize: 25,
-                              ),
+                        ),
+                        Expanded(
+                          flex: 7,
+                          child: Text(
+                            event.prefec,
+                            style: const TextStyle(
+                              fontSize: 25,
                             ),
                           ),
-                          Expanded(
-                            flex: 4,
-                            child: Text(
-                              "${event.gender}  ${event.age.toString()} 歳",
-                              style: const TextStyle(
-                                fontSize: 25,
-                              ),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            "${event.gender}  ${event.age.toString()} 歳",
+                            style: const TextStyle(
+                              fontSize: 25,
                             ),
                           ),
-                          const Spacer(
-                            flex: 1,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        const Spacer(
+                          flex: 1,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -98,9 +95,9 @@ class EventCard extends StatelessWidget {
 
   Widget imageWidget() {
     return ClipRect(
-      child: FittedBox(
-        child: Image.asset('assets/eat.png'),
+      child: FittedBox(     
         fit: BoxFit.cover,
+        child: Image.asset('assets/eat.png'),
       ),
     );
   }

@@ -12,7 +12,7 @@ class EventIndex extends StatefulWidget {
 }
 
 class _EventIndexState extends State<EventIndex> {
-  EventProvider _eventProvider = EventProvider();
+  final EventProvider _eventProvider = EventProvider();
 
   @override
   void initState() {
