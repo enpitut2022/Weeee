@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Event {
   final String name;
   final DateTime date;
+  final String prefec;
   final String place;
   final String gender;
   final int age;
@@ -17,6 +18,7 @@ class Event {
   Event._(
       {required this.name,
       required this.date,
+      required this.prefec,
       required this.place,
       required this.gender,
       required this.age,
@@ -33,6 +35,7 @@ class Event {
     return Event._(
       name: _snapshot["name"],
       date: _snapshot["date"].toDate(), // timestamp型からdatetime型へ
+      prefec: _snapshot["prefec"],
       place: _snapshot["place"],
       gender: _snapshot["gender"],
       age: _snapshot["age"],

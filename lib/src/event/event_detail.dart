@@ -19,7 +19,7 @@ class EventDetail extends StatelessWidget {
         color: const Color.fromARGB(255, 214, 214, 214),
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
-        child: Column(
+        child: ListView(
           children: [
             Container(
               //color: const Color.fromARGB(255, 201, 198, 243),
@@ -48,28 +48,42 @@ class EventDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: screenSize.height * 0.01,
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "ジャンル　： ${event.genre}",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "都道府県　： ${event.prefec}",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
                 ),
                 Text(
                   "場所　： ${event.place}",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.01,
+                  height: screenSize.height * 0.03,
                 ),
                 Text(
-                  "日時　： ${event.date.month}月${event.date.day}日",
+                  "日時　：　\n ${event.date.year}年${event.date.month}月${event.date.day}日 ${event.date.hour}時${event.date.minute}分",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.01,
+                  height: screenSize.height * 0.03,
                 ),
                 Text(
                   "人数　： ${event.people.toString()} 人",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.1,
+                  height: screenSize.height * 0.03,
                 ),
                 Row(
                   children: [

@@ -20,6 +20,7 @@ class _EventAddPageState extends State<EventAddPage> {
 
   String? genderDefo = '-';
   String? genreDefo = '-';
+  String? prefecDefo = '-';
   DateTime inputDate = DateTime.now();
   TimeOfDay nowTime = TimeOfDay.now();
 
@@ -175,6 +176,87 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 25,
                     ),
+                    Row(
+                      children: [
+                        const Text(
+                          "県",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        DropdownButton(
+                          value: prefecDefo,
+                          elevation: 50,
+                          items: const [
+                            DropdownMenuItem(
+                              value: '-',
+                              child: Text('-'),
+                            ),
+                            DropdownMenuItem(
+                              value: '北海道',
+                              child: Text('北海道'),
+                            ),
+                            DropdownMenuItem(
+                              value: '青森県',
+                              child: Text('青森県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '岩手県',
+                              child: Text('岩手県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '宮城県',
+                              child: Text('宮城県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '秋田県',
+                              child: Text('秋田県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '山形県	',
+                              child: Text('山形県	'),
+                            ),
+                            DropdownMenuItem(
+                              value: '福島県',
+                              child: Text('福島県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '茨城県',
+                              child: Text('茨城県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '栃木県',
+                              child: Text('栃木県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '群馬県',
+                              child: Text('群馬県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '埼玉県',
+                              child: Text('埼玉県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '千葉県',
+                              child: Text('千葉県'),
+                            ),
+                            DropdownMenuItem(
+                              value: '東京都	',
+                              child: Text('東京都	'),
+                            ),
+                          ],
+                          onChanged: (String? value) {
+                            setState(() {
+                              prefecDefo = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
                     TextField(
                       maxLength: 10,
                       decoration: const InputDecoration(
@@ -187,8 +269,8 @@ class _EventAddPageState extends State<EventAddPage> {
                       height: 16,
                     ),
                     TextField(
-                      decoration:
-                          const InputDecoration(labelText: "あなたの年齢(数字のみ、必須）", hintText: "20"),
+                      decoration: const InputDecoration(
+                          labelText: "あなたの年齢(数字のみ、必須）", hintText: "20"),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (text) {
@@ -255,7 +337,8 @@ class _EventAddPageState extends State<EventAddPage> {
                       maxLines: null,
                       decoration: const InputDecoration(
                           labelText: "募集する背景を書いてください(必須)",
-                          hintText: "友達と○○のライブに行く予定だったんだけど、\n友達が来れなくなったからチケットが余りました。\nライブは行きたいけど、一人で行く勇気は\nありません。○○のファンの人で一緒に行きませんか？"),
+                          hintText:
+                              "友達と○○のライブに行く予定だったんだけど、\n友達が来れなくなったからチケットが余りました。\nライブは行きたいけど、一人で行く勇気は\nありません。○○のファンの人で一緒に行きませんか？"),
                       onChanged: (text) {
                         model.background = text;
                       },
@@ -316,6 +399,7 @@ class _EventAddPageState extends State<EventAddPage> {
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
                           model.genre = genreDefo;
                           model.gender = genderDefo;
+                          model.prefec = prefecDefo;
                           await model.addEvent();
 
                           final date =
