@@ -31,21 +31,21 @@ class Event {
       required this.goaltime});
 
   factory Event.fromSnapshot(DocumentSnapshot snapshot) {
-    final _snapshot = snapshot.data() as Map<String, dynamic>;
+    final data = snapshot.data() as Map<String, dynamic>;
     return Event._(
-      name: _snapshot["name"],
-      date: _snapshot["date"].toDate(), // timestamp型からdatetime型へ
-      prefec: _snapshot["prefec"],
-      place: _snapshot["place"],
-      gender: _snapshot["gender"],
-      age: _snapshot["age"],
-      people: _snapshot["num"],
-      genre: _snapshot["genre"],
-      background: _snapshot["background"],
-      startplace: _snapshot["startPlace"],
-      starttime: _snapshot["startTime"],
-      goalplace: _snapshot["goalPlace"],
-      goaltime: _snapshot["goalTime"],
+      name: data["name"],
+      date: data["date"].toDate(), // timestamp型からdatetime型へ
+      prefec: data["prefec"],
+      place: data["place"],
+      gender: data["gender"],
+      age: data["age"],
+      people: data["num"],
+      genre: data["genre"],
+      background: data["background"],
+      startplace: data["startPlace"],
+      starttime: data["startTime"],
+      goalplace: data["goalPlace"],
+      goaltime: data["goalTime"],
     );
   }
 }
