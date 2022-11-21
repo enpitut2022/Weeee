@@ -121,6 +121,7 @@ class _ChatRoomState extends State<ChatRoom> {
         messages: _messages,
         onPreviewDataFetched: _handlePreviewDataFetched,
         onSendPressed: _handleSendPressed,
+        showUserAvatars: true,
         user: _user,
       ),
     );

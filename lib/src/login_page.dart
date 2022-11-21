@@ -1,5 +1,5 @@
 // ログイン画面用Widget
-import 'package:enpit_weee/src/chat/chat_provider.dart';
+import 'package:enpit_weee/src/provider/user_provider.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -108,45 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                   });
                 },
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                // メッセージ表示
-                child: Text(infoText),
-              ),
-              // ユーザー登録の処理
-              SizedBox(
-                width: double.infinity,
-                // ユーザー登録ボタン
-                child: ElevatedButton(
-                  child: const Text('ユーザー登録'),
-                  onPressed: () async {
-                    try {
-                      // メール/パスワードでユーザー登録
-                      // ここでエラーが起こると、catchの処理へいく
-                      final FirebaseAuth auth = FirebaseAuth.instance;
-                      final result = await auth.createUserWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
-                      // ユーザー情報を更新
-                      userState.setUser(result.user!);
-                      // ユーザー登録に成功した場合
-                      // チャット画面に遷移＋ログイン画面を破棄
-                      await Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) {
-                          return const HomePage();
-                        }),
-                      );
-                    } catch (e) {
-                      // ユーザー登録に失敗した場合
-                      setState(() {
-                        infoText = "登録に失敗しました：${e.toString()}";
-                      });
-                    }
-                  },
-                ),
-              ),
               const SizedBox(height: 8),
+              // サインイン処理.
               SizedBox(
                 width: double.infinity,
                 // ログイン登録ボタン
@@ -177,6 +140,46 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                 ),
+              ),
+              const SizedBox(height: 8),
+              // ユーザー登録の処理
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: const Text('ユーザー登録'),
+                  onPressed: () async {
+                    try {
+                      // メール/パスワードでユーザー登録
+                      // ここでエラーが起こると、catchの処理へいく
+                      final FirebaseAuth auth = FirebaseAuth.instance;
+                      final result = await auth.createUserWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+                      userState.createUser(result.user!);
+                      // ユーザー情報を更新
+                      userState.setUser(result.user!);
+                      // ユーザー登録に成功した場合
+                      // チャット画面に遷移＋ログイン画面を破棄
+                      await Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) {
+                          return const HomePage();
+                        }),
+                      );
+                    } catch (e) {
+                      // ユーザー登録に失敗した場合
+                      setState(() {
+                        infoText = "登録に失敗しました：${e.toString()}";
+                      });
+                    }
+                  },
+                ),
+              ),
+              // エラー内容の表示.
+              Container(
+                padding: const EdgeInsets.all(8),
+                // メッセージ表示
+                child: Text(infoText),
               ),
             ],
           ),
