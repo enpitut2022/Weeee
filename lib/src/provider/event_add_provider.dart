@@ -10,20 +10,23 @@ class AddEventProvider extends ChangeNotifier {
   String? gender;
   int? age;
   int? people;
-  String? genre;
+  //String? genre;
   String? background; // 募集した理由
-  String? startplace;
-  String? starttime;
-  String? goalplace;
-  String? goaltime;
+  //String? startplace;
+  //String? starttime;
+  //String? goalplace;
+  //String? goaltime;
+  String? favorite;
+  String? fanhistory;
+  String? participation;
 
   Future addEvent() async {
     if (name == null || name == "") {
       throw "名前が入力されていません";
     }
-    if (genre == null || genre == "-") {
+    /*if (genre == null || genre == "-") {
       throw "ジャンルは、-以外を選択してください";
-    }
+    }*/
     if (prefec == null || prefec == "-") {
       throw "県は、-以外を選択してください";
     }
@@ -42,6 +45,15 @@ class AddEventProvider extends ChangeNotifier {
     if (background == null || background == "") {
       throw "募集理由が入力されていません";
     }
+    if (favorite == null || favorite == "") {
+      throw "推しが入力されていません";//チーム・グループ＋人名がいい？
+    }
+    if (fanhistory == null || fanhistory == "") {
+      throw "ファン歴が入力されていません";
+    }
+    if (participation == null || participation == "") {
+      throw "観戦回数/参加回数が入力されていません";
+    }
 
     //firestoreに追加する
     await FirebaseFirestore.instance.collection("event").add({
@@ -52,12 +64,15 @@ class AddEventProvider extends ChangeNotifier {
       "gender": gender,
       "age": age,
       "num": people,
-      "genre": genre,
+      //"genre": genre,
       "background": background,
-      "startPlace": startplace,
-      "startTime": starttime,
-      "goalPlace": goalplace,
-      "goalTime": goaltime
+      //"startPlace": startplace,
+      //"startTime": starttime,
+      //"goalPlace": goalplace,
+      //"goalTime": goaltime
+      "favorite": favorite,
+      "fanhistory": fanhistory,
+      "participation": participation
     });
   }
 }

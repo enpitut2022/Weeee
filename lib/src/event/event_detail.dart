@@ -47,13 +47,13 @@ class EventDetail extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                /*SizedBox(
                   height: screenSize.height * 0.03,
                 ),
                 Text(
                   "ジャンル　： ${event.genre}",
                   style: const TextStyle(fontSize: 30),
-                ),
+                ),*/
                 SizedBox(
                   height: screenSize.height * 0.03,
                 ),
@@ -80,6 +80,27 @@ class EventDetail extends StatelessWidget {
                 ),
                 Text(
                   "人数　： ${event.people.toString()} 人",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "推し　： ${event.favorite}",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "ファン歴　： ${event.fanhistory}",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "観戦(参加回数)　： ${event.participation}",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
