@@ -4,50 +4,75 @@ import 'package:flutter/material.dart';
 
 class AddEventProvider extends ChangeNotifier {
   String? name;
-  String? date;
+  DateTime? date;
+  String? prefec;
   String? place;
   String? gender;
   int? age;
   int? people;
-  String? atmosphere;
-  String? greeting;
+  //String? genre;
+  String? background; // 募集した理由
+  //String? startplace;
+  //String? starttime;
+  //String? goalplace;
+  //String? goaltime;
+  String? favorite;
+  String? fanhistory;
+  String? participation;
 
   Future addEvent() async {
     if (name == null || name == "") {
       throw "名前が入力されていません";
     }
-    if (date == null || date == "") {
-      throw "日にちが入力されていません";
+    /*if (genre == null || genre == "-") {
+      throw "ジャンルは、-以外を選択してください";
+    }*/
+    if (prefec == null || prefec == "-") {
+      throw "県は、-以外を選択してください";
     }
     if (place == null || place == "") {
       throw "場所が入力されていません";
     }
-    if (gender == null || gender == "") {
-      throw "人数が入力されていません";
-    }
     if (age == null || age == "") {
-      throw "名前が入力されていません";
+      throw "年齢が入力されていません";
+    }
+    if (gender == null || gender == "-") {
+      throw "性別は、-以外を選択してください";
     }
     if (people == null || people == "") {
-      throw "日にちが入力されていません";
-    }
-    if (atmosphere == null || atmosphere == "") {
-      throw "場所が入力されていません";
-    }
-    if (greeting == null || greeting == "") {
       throw "人数が入力されていません";
+    }
+    if (background == null || background == "") {
+      throw "募集理由が入力されていません";
+    }
+    if (favorite == null || favorite == "") {
+      throw "推しが入力されていません"; //チーム・グループ＋人名がいい？
+    }
+    if (fanhistory == null || fanhistory == "") {
+      throw "ファン歴が入力されていません";
+    }
+    if (participation == null || participation == "") {
+      throw "観戦回数/参加回数が入力されていません";
     }
 
     //firestoreに追加する
     await FirebaseFirestore.instance.collection("event").add({
       "name": name,
-      "date": date,
+      "date": date, //datetime型は、自動でtimestamp型へ
       "place": place,
+      "prefec": prefec,
       "gender": gender,
       "age": age,
       "num": people,
-      "atmo": atmosphere,
-      "greeting": greeting,
+      //"genre": genre,
+      "background": background,
+      //"startPlace": startplace,
+      //"startTime": starttime,
+      //"goalPlace": goalplace,
+      //"goalTime": goaltime
+      "favorite": favorite,
+      "fanhistory": fanhistory,
+      "participation": participation
     });
   }
 }

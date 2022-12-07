@@ -17,12 +17,28 @@ dependencies:
     git:
       url: https://github.com/yako-dev/flutter-settings-ui.git
       ref: master
+  flutter_localizations: # 多言語対応
+    sdk: flutter
+  intl: ^0.17.0  # 日付対応
   provider: ^6.0.4 #プロバイダーのパッケージ
-  cupertino_icons: ^1.0.2
   firebase_core: ^2.1.1
-  cloud_firestore: ^4.0.4
   get: ^4.6.5
-  speech_balloon: ^0.0.4 
+  bubble: ^1.2.1
+  cupertino_icons: ^1.0.5
+  faker: ^2.0.0
+  file_picker: ^5.2.2
+  firebase_auth: ^4.1.0
+  firebase_storage: ^11.0.3
+  flutter_chat_types: ^3.6.0
+  flutter_chat_ui: ^1.6.6
+  http: ^0.13.5
+  image_picker: ^0.8.6
+  mime: ^1.0.2
+  open_filex: ^4.2.2
+  path_provider: ^2.0.11
+  flutter_firebase_chat_core: ^1.6.4
+  uuid: ^3.0.7
+  cloud_firestore: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,3 +84,18 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: NotoSansJP
+      fonts:
+        - asset: assets/fonts/NotoSansJP-Black.otf
+          weight: 900
+        - asset: assets/fonts/NotoSansJP-Bold.otf
+          weight: 700
+        - asset: assets/fonts/NotoSansJP-Light.otf
+          weight: 300
+        - asset: assets/fonts/NotoSansJP-Medium.otf
+          weight: 500
+        - asset: assets/fonts/NotoSansJP-Regular.otf
+          weight: 400
+        - asset: assets/fonts/NotoSansJP-Thin.otf
+          weight: 100

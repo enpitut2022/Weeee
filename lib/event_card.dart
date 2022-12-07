@@ -42,7 +42,7 @@ class EventCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '日時 :' + event.date,
+                    '日時 :' + event.date.toString(),
                     style: TextStyle(fontSize: 30),
                   ),
                   const SizedBox(height: 4),

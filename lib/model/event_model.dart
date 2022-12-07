@@ -2,36 +2,59 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
   final String name;
-  final String date;
+  final DateTime date;
+  final String prefec;
   final String place;
   final String gender;
   final int age;
   final int people;
-  final String atmosphere;
-  final String greeting;
+  //final String genre;
+  final String background; // 募集した理由
+  /*final String? startplace;
+  final String? starttime;
+  final String? goalplace;
+  final String? goaltime;*/
+  final String favorite;
+  final String fanhistory;
+  final String participation;
 
-  Event._({
-    required this.name,
-    required this.date,
-    required this.place,
-    required this.gender,
-    required this.age,
-    required this.people,
-    required this.atmosphere,
-    required this.greeting
-  });
+  Event._(
+      {required this.name,
+      required this.date,
+      required this.prefec,
+      required this.place,
+      required this.gender,
+      required this.age,
+      required this.people,
+      //required this.genre,
+      required this.background,
+      /*required this.startplace,
+      required this.starttime,
+      required this.goalplace,
+      required this.goaltime}),*/
+      required this.favorite,
+      required this.fanhistory,
+      required this.participation});
 
   factory Event.fromSnapshot(DocumentSnapshot snapshot) {
-    final _snapshot = snapshot.data() as Map<String, dynamic>;
+    final data = snapshot.data() as Map<String, dynamic>;
     return Event._(
-      name: _snapshot["name"],
-      date: _snapshot["date"],
-      place: _snapshot["place"],
-      gender: _snapshot["gender"],
-      age: _snapshot["age"],
-      people: _snapshot["num"],
-      atmosphere: _snapshot["atmo"],
-      greeting: _snapshot["greeting"]
+      name: data["name"],
+      date: data["date"].toDate(), // timestamp型からdatetime型へ
+      prefec: data["prefec"],
+      place: data["place"],
+      gender: data["gender"],
+      age: data["age"],
+      people: data["num"],
+      //genre: data["genre"],
+      background: data["background"],
+      /*startplace: data["startPlace"],
+      starttime: data["startTime"],
+      goalplace: data["goalPlace"],
+      goaltime: data["goalTime"],*/
+      favorite: data["favorite"],
+      fanhistory: data["fanhistory"],
+      participation: data["participation"],
     );
   }
 }
