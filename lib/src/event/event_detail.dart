@@ -1,4 +1,5 @@
 import 'package:bubble/bubble.dart';
+import 'package:enpit_weee/src/event/event_question.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:flutter/material.dart';
 
@@ -131,9 +132,16 @@ class EventDetail extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         // ここを押すと、チャットができるようになる？
-        onPressed: () {},
-        icon: const Icon(Icons.add),
-        label: const Text("一緒に行きたい！"),
+        onPressed: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>  EventDetailQuestion(),
+              ),
+            );
+          },
+        icon: const Icon(Icons.send),
+        label: const Text("申し込む！"),
         backgroundColor: const Color.fromARGB(255, 255, 82, 70),
       ),
     );
