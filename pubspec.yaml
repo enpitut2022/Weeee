@@ -22,7 +22,6 @@ dependencies:
   intl: ^0.17.0  # 日付対応
   provider: ^6.0.4 #プロバイダーのパッケージ
   firebase_core: ^2.1.1
-  cloud_firestore: ^4.0.4
   get: ^4.6.5
   bubble: ^1.2.1
   cupertino_icons: ^1.0.5
@@ -39,6 +38,7 @@ dependencies:
   path_provider: ^2.0.11
   flutter_firebase_chat_core: ^1.6.4
   uuid: ^3.0.7
+  cloud_firestore: ^4.1.0
 
 dev_dependencies:
   flutter_test:

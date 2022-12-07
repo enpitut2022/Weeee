@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "670650028874",
-    "project_id": "enpit-weeee",
-    "storage_bucket": "enpit-weeee.appspot.com"
+    "project_number": "631066516008",
+    "project_id": "empit-weee",
+    "storage_bucket": "empit-weee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:670650028874:android:48819203081cd2df3267b3",
+        "mobilesdk_app_id": "1:631066516008:android:c3a993e6d8bd9496b4731d",
         "android_client_info": {
           "package_name": "com.example.enpit_weee"
         }
       },
       "oauth_client": [
         {
-          "client_id": "670650028874-p9hu80fhj95b0slib7n0oa3m5ba7vmtk.apps.googleusercontent.com",
+          "client_id": "631066516008-8k3gjhk0ua8vb1l1phtr878vffn4324s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDAWqzVblGUubRLjeFEldxhYWwlUhJxGT0"
+          "current_key": "AIzaSyBigwooTGcqn9bFKLQCCq8R8ymUDztnBOU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "670650028874-p9hu80fhj95b0slib7n0oa3m5ba7vmtk.apps.googleusercontent.com",
+              "client_id": "631066516008-8k3gjhk0ua8vb1l1phtr878vffn4324s.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "670650028874-tvh7gpfbip11bppc6oeditkspmh4ggau.apps.googleusercontent.com",
+              "client_id": "631066516008-j3166pthuvsjm880ce262shv6qk5c7e3.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.enpitWeee"
