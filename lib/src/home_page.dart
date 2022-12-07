@@ -23,6 +23,9 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'NotoSansJP'),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder> {
+        '/event_index': (BuildContext context) => const EventIndex(),
+      },
     );
   }
 }
