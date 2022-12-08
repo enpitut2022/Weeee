@@ -16,9 +16,17 @@ class _MypageState extends State<Mypage> {
     final UserState userState = Provider.of<UserState>(context);
     final User user = userState.user!;
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('マイページ'),
-        ),
-        body: Center(child: Text("ログイン情報 ${user.email}")));
+      appBar: AppBar(
+        title: const Text('マイページ'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text("ログイン情報 ${user.email}", style: const TextStyle(fontSize: 20),),
+          Text("性別：", style: const TextStyle(fontSize: 20),),
+          Text("年齢：", style: const TextStyle(fontSize: 20),),
+        ],
+      ),
+    );
   }
 }

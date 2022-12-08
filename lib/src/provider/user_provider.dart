@@ -14,6 +14,8 @@ class UserState extends ChangeNotifier {
     doc.set({
       'uid': uid,
       'email': user.email,
+      'gender': "null",
+      "old" : "null"
     });
   }
 

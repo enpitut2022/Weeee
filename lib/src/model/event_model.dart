@@ -8,12 +8,15 @@ class Event {
   final String gender;
   final int age;
   final int people;
-  final String genre;
+  //final String genre;
   final String background; // 募集した理由
-  final String? startplace;
+  /*final String? startplace;
   final String? starttime;
   final String? goalplace;
-  final String? goaltime;
+  final String? goaltime;*/
+  final String favorite;
+  final String fanhistory;
+  final String participation;
 
   Event._(
       {required this.name,
@@ -23,12 +26,15 @@ class Event {
       required this.gender,
       required this.age,
       required this.people,
-      required this.genre,
+      //required this.genre,
       required this.background,
-      required this.startplace,
+      /*required this.startplace,
       required this.starttime,
       required this.goalplace,
-      required this.goaltime});
+      required this.goaltime}),*/
+      required this.favorite,
+      required this.fanhistory,
+      required this.participation});
 
   factory Event.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
@@ -40,12 +46,15 @@ class Event {
       gender: data["gender"],
       age: data["age"],
       people: data["num"],
-      genre: data["genre"],
+      //genre: data["genre"],
       background: data["background"],
-      startplace: data["startPlace"],
+      /*startplace: data["startPlace"],
       starttime: data["startTime"],
       goalplace: data["goalPlace"],
-      goaltime: data["goalTime"],
+      goaltime: data["goalTime"],*/
+      favorite: data["favorite"],
+      fanhistory: data["fanhistory"],
+      participation: data["participation"],
     );
   }
 }

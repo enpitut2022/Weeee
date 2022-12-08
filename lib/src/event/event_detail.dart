@@ -1,5 +1,4 @@
 import 'package:bubble/bubble.dart';
-import 'package:enpit_weee/src/event/event_quetion.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:flutter/material.dart';
 
@@ -48,13 +47,13 @@ class EventDetail extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                /*SizedBox(
                   height: screenSize.height * 0.03,
                 ),
                 Text(
                   "ジャンル　： ${event.genre}",
                   style: const TextStyle(fontSize: 30),
-                ),
+                ),*/
                 SizedBox(
                   height: screenSize.height * 0.03,
                 ),
@@ -81,6 +80,27 @@ class EventDetail extends StatelessWidget {
                 ),
                 Text(
                   "人数　： ${event.people.toString()} 人",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "推し　： ${event.favorite}",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "ファン歴　： ${event.fanhistory}",
+                  style: const TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.03,
+                ),
+                Text(
+                  "観戦(参加回数)　： ${event.participation}",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(
@@ -132,16 +152,9 @@ class EventDetail extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         // ここを押すと、チャットができるようになる？
-        onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>  EventDetailQuestion(),
-              ),
-            );
-          },
-        icon: const Icon(Icons.send),
-        label: const Text("申し込む！"),
+        onPressed: () {},
+        icon: const Icon(Icons.add),
+        label: const Text("一緒に行きたい！"),
         backgroundColor: const Color.fromARGB(255, 255, 82, 70),
       ),
     );
