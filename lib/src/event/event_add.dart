@@ -70,7 +70,7 @@ class _EventAddPageState extends State<EventAddPage> {
                 child: ListView(
                   children: [
                     TextField(
-                      maxLength: 10,
+                      maxLength: 20,
                       decoration: const InputDecoration(
                         labelText: "イベント名(必須)",
                         hintText: "フェス",
@@ -82,7 +82,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Row(
+                    /*Row(
                       children: [
                         const Text(
                           "ジャンル",
@@ -135,7 +135,7 @@ class _EventAddPageState extends State<EventAddPage> {
                           },
                         ),
                       ],
-                    ),
+                    ),*/
                     const SizedBox(
                       height: 25,
                     ),
@@ -471,7 +471,7 @@ class _EventAddPageState extends State<EventAddPage> {
                         model.background = text;
                       },
                     ),
-                    const SizedBox(
+                    /*const SizedBox(
                       height: 16,
                     ),
                     TextField(
@@ -512,6 +512,39 @@ class _EventAddPageState extends State<EventAddPage> {
                       onChanged: (text) {
                         model.goaltime = text;
                       },
+                    ),*/
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      maxLength: 10,
+                      decoration: const InputDecoration(
+                          labelText: "あなたの推しは誰ですか？（必須）"),
+                      onChanged: (text) {
+                        model.favorite = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      maxLength: 10,
+                      decoration: const InputDecoration(
+                          labelText: "あなたのファン歴はどのくらいですか？（必須）", hintText: "3年半"),
+                      onChanged: (text) {
+                        model.fanhistory= text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      maxLength: 10,
+                      decoration: const InputDecoration(
+                          labelText: "今まで何回観戦(参加)したことがありますか？（必須）", hintText: "初参加/4回"),
+                      onChanged: (text) {
+                        model.participation= text;
+                      },
                     ),
                     const SizedBox(
                       height: 16,
@@ -525,7 +558,7 @@ class _EventAddPageState extends State<EventAddPage> {
                               inputDate.day,
                               nowTime.hour,
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
-                          model.genre = genreDefo;
+                          //model.genre = genreDefo;
                           model.gender = genderDefo;
                           model.prefec = prefecDefo;
                           await model.addEvent();
