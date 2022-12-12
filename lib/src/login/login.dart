@@ -160,6 +160,30 @@ class LoginState extends State<Login> {
                   ),
                 ],
               ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 40, 10, 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('デバッグ用　===>'),
+                  TextButton(
+                    onPressed: () async {
+                      await _auth
+                          .signInWithEmailAndPassword(
+                              email: "monkey@d.com", password: "monkeyd")
+                          .then((uid) => {
+                                Fluttertoast.showToast(msg: 'ログインしました！'),
+                                Navigator.pushNamed(context, "/home"),
+                              });
+                    },
+                    child: const Text(
+                      'ログインするよ',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

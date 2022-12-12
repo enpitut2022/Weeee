@@ -1,10 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/event/event_detail.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
+import 'package:enpit_weee/src/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class EventCard extends StatelessWidget {
+class EventCard extends StatefulWidget {
   EventCard({required this.event, super.key});
+  //event モデルの宣言
   Event event;
+
+  @override
+  State<EventCard> createState() => _EventCardState();
+}
+
+class _EventCardState extends State<EventCard> {
+  // user modelsの宣言
+  User? user = FirebaseAuth.instance.currentUser;
+
+  UserModals loggedUser = UserModals();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedUser = UserModals.fromMap(value.data());
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +40,7 @@ class EventCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => EventDetail(event: event),
+              builder: (context) => EventDetail(event: widget.event),
             ),
           );
         },
@@ -38,7 +65,7 @@ class EventCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      event.name,
+                      widget.event.name,
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -53,7 +80,7 @@ class EventCard extends StatelessWidget {
                         Expanded(
                           flex: 7,
                           child: Text(
-                            "${event.date.month}月${event.date.day}日",
+                            "${widget.event.date.month}月${widget.event.date.day}日",
                             overflow: TextOverflow.visible,
                             style: const TextStyle(
                               fontSize: 25,
@@ -63,7 +90,7 @@ class EventCard extends StatelessWidget {
                         Expanded(
                           flex: 7,
                           child: Text(
-                            event.prefec,
+                            widget.event.prefec,
                             style: const TextStyle(
                               fontSize: 25,
                             ),
@@ -72,7 +99,7 @@ class EventCard extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: Text(
-                            "${event.gender}  ${event.age.toString()} 歳",
+                            "${loggedUser.gender}  ${loggedUser.old.toString()} 歳",
                             style: const TextStyle(
                               fontSize: 25,
                             ),
@@ -97,7 +124,7 @@ class EventCard extends StatelessWidget {
     return ClipRect(
       child: FittedBox(     
         fit: BoxFit.cover,
-        child: Image.asset('assets/eat.png'),
+        child: Image.asset('assets/images/eat.png'),
       ),
     );
   }
