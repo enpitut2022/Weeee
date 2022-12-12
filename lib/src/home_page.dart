@@ -1,6 +1,6 @@
 import 'package:enpit_weee/src/chat/chat_index.dart';
 import 'package:enpit_weee/src/event/event_index.dart';
-import 'package:enpit_weee/src/profile.dart';
+import 'package:enpit_weee/src/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

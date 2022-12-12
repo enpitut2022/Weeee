@@ -60,9 +60,7 @@ class SignUpState extends State<SignUp> {
         validator: (value) {
           if (value!.isEmpty) {
             return ("年齢は必ず入力してください");
-          } else if (int.tryParse(value.toString()) != null) {
-            return ("数字で入力してください");
-          }
+          } 
           return null;
         },
         onSaved: (value) {
@@ -286,25 +284,25 @@ class SignUpState extends State<SignUp> {
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":
-            errorMessage = "メールアドレスが不正なようです。";
+            errorMessage = "メールアドレスが不正なようです";
             break;
           case "wrong-password":
-            errorMessage = "パスワードが間違っています。";
+            errorMessage = "パスワードが間違っています";
             break;
           case "user-not-found":
             errorMessage = "この電子メールを持つユーザーは存在しません";
             break;
           case "user-disabled":
-            errorMessage = "この電子メールを持つユーザーは無効になっています。";
+            errorMessage = "この電子メールを持つユーザーは無効になっています";
             break;
           case "too-many-requests":
-            errorMessage = "要望が多すぎる";
+            errorMessage = "要望が多すぎるようです";
             break;
           case "operation-not-allowed":
-            errorMessage = "電子メールとパスワードによるサインインが有効になっていない";
+            errorMessage = "メールとパスワードによるサインインが有効になっていません";
             break;
           default:
-            errorMessage = "未定義のエラーが発生しました。";
+            errorMessage = "不明なエラーが発生しました";
         }
         Fluttertoast.showToast(msg: errorMessage!);
       }
@@ -312,22 +310,21 @@ class SignUpState extends State<SignUp> {
   }
 
   postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
+    // firestoreを呼び出す
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
+    // user model　を呼び出す
     UserModals userModel = UserModals();
 
-    // writing all the values
+    // ユーザーモデルにデータを渡す
     userModel.email = user!.email;
     userModel.uid = user.uid;
     userModel.name = firstNameEditingController.text;
     userModel.old = int.parse(oldEditingController.text);
     userModel.gender = genderDefo;
 
+    // firebaseのuidのドキュメントにユーザーモデルの値を保存
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)

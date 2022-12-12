@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/login/login.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
+import 'package:enpit_weee/src/profile/edit_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -35,15 +36,14 @@ class ProfileState extends State<Profile> {
       backgroundColor: const Color(0xffF5F5F5),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xffF5F5F5),
-        // title: const Text('Profile'),
+        backgroundColor: Color.fromARGB(255, 19, 4, 4),
+        title: const Text('マイページ'),
         actions: [
           TextButton(
             onPressed: () {
               setState(() {
-                // signOff();
                 logout(context);
-                Navigator.pushNamed(context, "/login");
+                //Navigator.pushNamed(context, "/login");
               });
             },
             child: const Text(
@@ -66,11 +66,25 @@ class ProfileState extends State<Profile> {
               child: Column(
                 children: [
                   showData(Icons.account_circle, "${loggedUser.name}"),
-                  showData(Icons.format_list_numbered_sharp, "${loggedUser.old}"),
+                  showData(
+                      Icons.format_list_numbered_sharp, "${loggedUser.old}"),
                   showData(Icons.people, "${loggedUser.gender}"),
                 ],
               ),
             ),
+            TextButton.icon(
+              onPressed: (() {
+                // ↓これではうまくいかなかった。なぜ？
+                //Navigator.pushNamed(context, '/editProfile');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const EditProfile(),
+                  ),
+                );
+              }),
+              label: const Text("編集"),
+              icon: const Icon(Icons.edit),
+            )
           ],
         ),
       ),
@@ -129,7 +143,7 @@ class ProfileState extends State<Profile> {
     await FirebaseAuth.instance.signOut();
 
     if (!mounted) return;
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => const Login()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const Login()));
   }
 }
