@@ -39,11 +39,8 @@ dependencies:
   flutter_firebase_chat_core: ^1.6.4
   uuid: ^3.0.7
   cloud_firestore: ^4.1.0
-<<<<<<< HEAD
-=======
   google_sign_in: ^5.4.2
   fluttertoast: ^8.1.1
->>>>>>> 6d3c3bc2765c18d7c464a4466a048b65b1af585a
 
 dev_dependencies:
   flutter_test:
