@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/src/login/login_page.dart';
+import 'package:enpit_weee/src/login/login.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +27,6 @@ class ProfileState extends State<Profile> {
     });
   }
 
-  // String name = "{$loggedUser.name}";
-  String urn = '190280118';
-  String branch = 'CSE';
-  String batch = '2019';
   static const TextStyle optionStyle =
       TextStyle(fontSize: 15, fontWeight: FontWeight.normal);
   @override
@@ -131,7 +127,9 @@ class ProfileState extends State<Profile> {
 
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
+
+    if (!mounted) return;
     Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+        .pushReplacement(MaterialPageRoute(builder: (context) => const Login()));
   }
 }

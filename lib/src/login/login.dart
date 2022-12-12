@@ -13,32 +13,12 @@ class Login extends StatefulWidget {
 class LoginState extends State<Login> {
   final _formKeyEmail = GlobalKey<FormState>();
   final _formKeyPass = GlobalKey<FormState>();
-
-  //key for form
   final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passController = TextEditingController();
-
-    // サインインボタン
-    final signUpButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.blueAccent,
-      child: MaterialButton(
-        padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-        onPressed: () async {
-          await signIn(emailController.text, passController.text);
-        },
-        child: const Text(
-          "ログイン",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -56,7 +36,6 @@ class LoginState extends State<Login> {
                 radius: 60,
               ),
             ),
-
             Container(
               margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: const Text(
@@ -67,13 +46,12 @@ class LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: _formKeyEmail,
                 child: TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
                     labelText: 'Eメールアドレス',
-                    prefixIcon: const Icon(Icons.account_circle),
+                    prefixIcon: const Icon(Icons.mail),
                     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -81,7 +59,6 @@ class LoginState extends State<Login> {
                   ),
                   autofocus: false,
                   keyboardType: TextInputType.emailAddress,
-                  //autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Emailアドレスを入力してください";
@@ -146,25 +123,26 @@ class LoginState extends State<Login> {
               ),
             ),
             Center(
-              child: signUpButton,
+              child: Material(
+                elevation: 5,
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.blueAccent,
+                child: MaterialButton(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                  onPressed: () async {
+                    await signIn(emailController.text, passController.text);
+                  },
+                  child: const Text(
+                    "ログイン",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
             ),
-            // Container(
-            //   alignment: Alignment.center,
-            //   child: GestureDetector(
-            //     onTap: () {
-            //       setState(() async {
-            //         await signIn(emailController.text, passController.text);
-            //       });
-            //     },
-            //     child: const Padding(
-            //       padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-            //       child: Text(
-            //         'Sign In',
-            //       ),
-            //     ),
-            //   ),
-            // ),
-
             Container(
               margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: Row(
@@ -197,16 +175,15 @@ class LoginState extends State<Login> {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
-                  Fluttertoast.showToast(msg: 'Login Successful'),
+                  Fluttertoast.showToast(msg: 'ログインしました！'),
                   Navigator.pushNamed(context, "/home"),
                 });
       }
     } on FirebaseAuthException catch (error) {
-      Fluttertoast.showToast(msg: 'Failed With Error Code: ${error.code}');
-      Fluttertoast.showToast(
-          msg: "${email.toString()}  ${password.toString()}");
-      Fluttertoast.showToast(msg: error.toString());
-      print(error.toString());
+      Fluttertoast.showToast(msg: 'ログイン失敗: ${error.code}');
+      // Fluttertoast.showToast(
+      //     msg: "${email.toString()}  ${password.toString()}");
+      // Fluttertoast.showToast(msg: error.toString());
     }
   }
 }

@@ -1,14 +1,15 @@
+import 'package:enpit_weee/src/login/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
 
   @override
-  _ForgotPasswordState createState() => _ForgotPasswordState();
+  ForgotPasswordState createState() => ForgotPasswordState();
 }
 
-class _ForgotPasswordState extends State<ForgotPassword> {
+class ForgotPasswordState extends State<ForgotPassword> {
+  final AuthService auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   @override
@@ -18,7 +19,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           child: Form(
             key: _formKey,
             child: TextFormField(
-              obscureText: true,
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Eメールアドレス',
                 prefixIcon: const Icon(Icons.mail),
@@ -27,6 +28,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              autofocus: false,
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.done,
               validator: (value) {
                 if (value!.isEmpty) {
                   return "Eメールアドレスを入力してください";
@@ -40,27 +44,30 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               onSaved: (value) {
                 emailController.text = value!;
               },
-              autofocus: false,
-              textInputAction: TextInputAction.done,
             ),
           ),
         );
 
-    final signUpButton = Material(
+    final forgotPasswordbutton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
       color: Colors.blueAccent,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-        onPressed: () {},
+        onPressed: () async {
+            await auth.sendPasswordResetEmail(emailController.text);
+            if (!mounted) return;
+            Navigator.pop(context);
+        },
         child: const Text(
-          "確認",
+          "メール送信",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
     );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -94,14 +101,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
             ),
             buildForm(),
-            Center(child: signUpButton),
-            // InkWell(
-            //   splashColor: Colors.pink,
-            //   child: ElevatedButton(
-            //     onPressed: () {},
-            //     child: Icon(FontAwesomeIcons.arrowRight),
-            //   ),
-            // ),
+            Center(child: forgotPasswordbutton),
           ],
         ),
       ),
