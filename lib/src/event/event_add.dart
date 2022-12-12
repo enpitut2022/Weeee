@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/provider/event_add_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -15,19 +13,9 @@ class EventAddPage extends StatefulWidget {
 }
 
 class _EventAddPageState extends State<EventAddPage> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModals loggedUser = UserModals();
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   String? genderDefo = '-';
@@ -94,7 +82,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    /*Row(
+                    Row(
                       children: [
                         const Text(
                           "ジャンル",
@@ -112,32 +100,12 @@ class _EventAddPageState extends State<EventAddPage> {
                               child: Text('-'),
                             ),
                             DropdownMenuItem(
-                              value: '音楽',
-                              child: Text('音楽'),
-                            ),
-                            DropdownMenuItem(
                               value: 'スポーツ',
                               child: Text('スポーツ'),
                             ),
                             DropdownMenuItem(
-                              value: '映画',
-                              child: Text('映画'),
-                            ),
-                            DropdownMenuItem(
-                              value: '芸術',
-                              child: Text('芸術'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'ファッション',
-                              child: Text('ファッション'),
-                            ),
-                            DropdownMenuItem(
-                              value: '食事',
-                              child: Text('食事'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'その他',
-                              child: Text('その他'),
+                              value: 'ライブ/フェス',
+                              child: Text('ライブ/フェス'),
                             ),
                           ],
                           onChanged: (String? value) {
@@ -147,7 +115,7 @@ class _EventAddPageState extends State<EventAddPage> {
                           },
                         ),
                       ],
-                    ),*/
+                    ),
                     const SizedBox(
                       height: 25,
                     ),
@@ -410,6 +378,55 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
+                    TextField(
+                      decoration: const InputDecoration(
+                          labelText: "あなたの年齢(数字のみ、必須）", hintText: "20"),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      onChanged: (text) {
+                        model.age = int.parse(text); //stringをintへ
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          "性別",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        DropdownButton(
+                          value: genderDefo,
+                          onChanged: (String? value) {
+                            setState(() {
+                              genderDefo = value;
+                            });
+                          },
+                          items: const [
+                            DropdownMenuItem(
+                              value: '-',
+                              child: Text('-'),
+                            ),
+                            DropdownMenuItem(
+                              value: '男性',
+                              child: Text('男性'),
+                            ),
+                            DropdownMenuItem(
+                              value: '女性',
+                              child: Text('女性'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'その他',
+                              child: Text('その他'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                     const SizedBox(
                       height: 16,
                     ),
@@ -515,6 +532,42 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
+                    TextField(
+                      maxLength: 30,
+                      decoration: const InputDecoration(
+                          labelText: "参加希望者に任意の質問ができます(最大3問)",
+                          hintText: "あなたの推しの推しポイントをおしえてください"),
+                      onChanged: (text) {
+                        model.question1 = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      maxLength: 30,
+                      decoration: const InputDecoration(
+                          labelText: "参加希望者に任意の質問ができます(最大3問)",
+                          hintText: "あなたの推しの推しポイントをおしえてください"),
+                      onChanged: (text) {
+                        model.question2 = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      maxLength: 30,
+                      decoration: const InputDecoration(
+                          labelText: "参加希望者に任意の質問ができます(最大3問)",
+                          hintText: "あなたの推しの推しポイントをおしえてください"),
+                      onChanged: (text) {
+                        model.question3 = text;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     ElevatedButton(
                       onPressed: () async {
                         try {
@@ -525,9 +578,8 @@ class _EventAddPageState extends State<EventAddPage> {
                               nowTime.hour,
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
                           //model.genre = genreDefo;
-                          model.gender = loggedUser.gender;
+                          model.gender = genderDefo;
                           model.prefec = prefecDefo;
-                          model.age = loggedUser.old;
                           await model.addEvent();
 
                           final now =
@@ -541,8 +593,6 @@ class _EventAddPageState extends State<EventAddPage> {
                               'createdAt': now,
                             },
                           );
-
-                          if (!mounted) return;
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(

@@ -10,7 +10,7 @@ class AddEventProvider extends ChangeNotifier {
   String? gender;
   int? age;
   int? people;
-  //String? genre;
+  String? genre;
   String? background; // 募集した理由
   //String? startplace;
   //String? starttime;
@@ -19,14 +19,17 @@ class AddEventProvider extends ChangeNotifier {
   String? favorite;
   String? fanhistory;
   String? participation;
+  String? question1;
+  String? question2;
+  String? question3;
 
   Future addEvent() async {
     if (name == null || name == "") {
       throw "名前が入力されていません";
     }
-    /*if (genre == null || genre == "-") {
+    if (genre == null || genre == "-") {
       throw "ジャンルは、-以外を選択してください";
-    }*/
+    }
     if (prefec == null || prefec == "-") {
       throw "県は、-以外を選択してください";
     }
@@ -42,9 +45,9 @@ class AddEventProvider extends ChangeNotifier {
     if (background == null || background == "") {
       throw "募集理由が入力されていません";
     }
-    if (favorite == null || favorite == "") {
+    /*if (favorite == null || favorite == "") {
       throw "推しが入力されていません";//チーム・グループ＋人名がいい？
-    }
+    }*/
     if (fanhistory == null || fanhistory == "") {
       throw "ファン歴が入力されていません";
     }
@@ -61,7 +64,7 @@ class AddEventProvider extends ChangeNotifier {
       "gender": gender,
       "age": age,
       "num": people,
-      //"genre": genre,
+      "genre": genre,
       "background": background,
       //"startPlace": startplace,
       //"startTime": starttime,
@@ -69,7 +72,10 @@ class AddEventProvider extends ChangeNotifier {
       //"goalTime": goaltime
       "favorite": favorite,
       "fanhistory": fanhistory,
-      "participation": participation
+      "participation": participation,
+      "question1": question1,
+      "question2": question2,
+      "question3": question3
     });
   }
 }
