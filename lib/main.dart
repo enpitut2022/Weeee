@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/login/foregetpassword.dart';
-import 'package:enpit_weee/src/login/login_page.dart';
+import 'package:enpit_weee/src/login/login.dart';
 import 'package:enpit_weee/src/login/sinup.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,12 +29,12 @@ class MyApp extends StatelessWidget {
           secondary: Colors.cyanAccent.shade400,
         ),
       ),
-      home: Login(),
+      home: const Login(),
       routes: <String, WidgetBuilder>{  // 2. routesには「/」を含めない。
-        '/login': (BuildContext context) => Login(),
-        '/sinup': (BuildContext context) => SignUp(),
-        '/forgetpassword': (BuildContext context) => ForgotPassword(),
-        '/home': (BuildContext context) => HomePage(),
+        '/login': (BuildContext context) => const Login(),
+        '/sinup': (BuildContext context) => const SignUp(),
+        '/forgetpassword': (BuildContext context) => const ForgotPassword(),
+        '/home': (BuildContext context) => const HomePage(),
       },
     );
   }

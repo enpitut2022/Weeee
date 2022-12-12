@@ -33,9 +33,6 @@ class AddEventProvider extends ChangeNotifier {
     if (place == null || place == "") {
       throw "場所が入力されていません";
     }
-    if (age == null || age == "") {
-      throw "年齢が入力されていません";
-    }
     if (gender == null || gender == "-") {
       throw "性別は、-以外を選択してください";
     }

@@ -35,7 +35,7 @@ class SignUpState extends State<SignUp> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("名前は必ず入力してください");
+            return ("ニックネームは必ず入力してください");
           }
           return null;
         },
@@ -46,7 +46,7 @@ class SignUpState extends State<SignUp> {
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.account_circle),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "名前",
+          hintText: "ニックネーム",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -60,6 +60,8 @@ class SignUpState extends State<SignUp> {
         validator: (value) {
           if (value!.isEmpty) {
             return ("年齢は必ず入力してください");
+          } else if (int.tryParse(value.toString()) != null) {
+            return ("数字で入力してください");
           }
           return null;
         },
@@ -76,7 +78,7 @@ class SignUpState extends State<SignUp> {
           ),
         ));
 
-    //年齢入力
+    //性別入力
     final genderField = Row(
       children: [
         const Text(
@@ -305,7 +307,6 @@ class SignUpState extends State<SignUp> {
             errorMessage = "未定義のエラーが発生しました。";
         }
         Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
       }
     }
   }
@@ -331,7 +332,7 @@ class SignUpState extends State<SignUp> {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
+    Fluttertoast.showToast(msg: "アカウント作成しました！ :) ");
 
     Navigator.pushAndRemoveUntil(
         (context),

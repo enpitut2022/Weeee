@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/provider/event_add_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +15,19 @@ class EventAddPage extends StatefulWidget {
 }
 
 class _EventAddPageState extends State<EventAddPage> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModals loggedUser = UserModals();
   @override
   void initState() {
     super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedUser = UserModals.fromMap(value.data());
+      setState(() {});
+    });
   }
 
   String? genderDefo = '-';
@@ -388,62 +400,15 @@ class _EventAddPageState extends State<EventAddPage> {
                     TextField(
                       maxLength: 10,
                       decoration: const InputDecoration(
-                          hintText: "武道館", labelText: "場所(必須)",),
+                        hintText: "武道館",
+                        labelText: "場所(必須)",
+                      ),
                       onChanged: (text) {
                         model.place = text;
                       },
                     ),
                     const SizedBox(
                       height: 16,
-                    ),
-                    TextField(
-                      decoration: const InputDecoration(
-                          labelText: "あなたの年齢(数字のみ、必須）", hintText: "20"),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      onChanged: (text) {
-                        model.age = int.parse(text); //stringをintへ
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "性別",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        DropdownButton(
-                          value: genderDefo,
-                          onChanged: (String? value) {
-                            setState(() {
-                              genderDefo = value;
-                            });
-                          },
-                          items: const [
-                            DropdownMenuItem(
-                              value: '-',
-                              child: Text('-'),
-                            ),
-                            DropdownMenuItem(
-                              value: '男性',
-                              child: Text('男性'),
-                            ),
-                            DropdownMenuItem(
-                              value: '女性',
-                              child: Text('女性'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'その他',
-                              child: Text('その他'),
-                            ),
-                          ],
-                        ),
-                      ],
                     ),
                     const SizedBox(
                       height: 16,
@@ -518,8 +483,8 @@ class _EventAddPageState extends State<EventAddPage> {
                     ),
                     TextField(
                       maxLength: 10,
-                      decoration: const InputDecoration(
-                          labelText: "あなたの推しは誰ですか？（必須）"),
+                      decoration:
+                          const InputDecoration(labelText: "あなたの推しは誰ですか？（必須）"),
                       onChanged: (text) {
                         model.favorite = text;
                       },
@@ -532,7 +497,7 @@ class _EventAddPageState extends State<EventAddPage> {
                       decoration: const InputDecoration(
                           labelText: "あなたのファン歴はどのくらいですか？（必須）", hintText: "3年半"),
                       onChanged: (text) {
-                        model.fanhistory= text;
+                        model.fanhistory = text;
                       },
                     ),
                     const SizedBox(
@@ -541,9 +506,10 @@ class _EventAddPageState extends State<EventAddPage> {
                     TextField(
                       maxLength: 10,
                       decoration: const InputDecoration(
-                          labelText: "今まで何回観戦(参加)したことがありますか？（必須）", hintText: "初参加/4回"),
+                          labelText: "今まで何回観戦(参加)したことがありますか？（必須）",
+                          hintText: "初参加/4回"),
                       onChanged: (text) {
-                        model.participation= text;
+                        model.participation = text;
                       },
                     ),
                     const SizedBox(
@@ -559,8 +525,9 @@ class _EventAddPageState extends State<EventAddPage> {
                               nowTime.hour,
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
                           //model.genre = genreDefo;
-                          model.gender = genderDefo;
+                          model.gender = loggedUser.gender;
                           model.prefec = prefecDefo;
+                          model.age = loggedUser.old;
                           await model.addEvent();
 
                           final now =
@@ -568,10 +535,14 @@ class _EventAddPageState extends State<EventAddPage> {
                           await FirebaseFirestore.instance
                               .collection('chat_room')
                               .doc(model.name)
-                              .set({
-                            'name': model.name,
-                            'createdAt': now,
-                          },);
+                              .set(
+                            {
+                              'name': model.name,
+                              'createdAt': now,
+                            },
+                          );
+
+                          if (!mounted) return;
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(
