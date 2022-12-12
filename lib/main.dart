@@ -1,6 +1,7 @@
-import 'package:enpit_weee/chat.dart';
-import 'package:enpit_weee/event_index.dart';
-import 'package:enpit_weee/setting.dart';
+import 'package:enpit_weee/src/home_page.dart';
+import 'package:enpit_weee/src/login/foregetpassword.dart';
+import 'package:enpit_weee/src/login/login.dart';
+import 'package:enpit_weee/src/login/sinup.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -13,54 +14,29 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'latoTextTheme',
+        primaryColor: Colors.purple,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.blue,
+        ).copyWith(
+          secondary: Colors.cyanAccent.shade400,
+        ),
       ),
-      home: MyHomePage(),
+      home: const Login(),
+      routes: <String, WidgetBuilder>{  // 2. routesには「/」を含めない。
+        '/login': (BuildContext context) => const Login(),
+        '/sinup': (BuildContext context) => const SignUp(),
+        '/forgetpassword': (BuildContext context) => const ForgotPassword(),
+        '/home': (BuildContext context) => const HomePage(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  static const _screens = [
-    EventIndex(),
-    Chat(),
-    Setting(),
-  ];
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  List<List<String>> todoList = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'チャット'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
-        ],
-        type: BottomNavigationBarType.fixed,
-      ),
-    );
-  }
-}

@@ -44,39 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAmkWw2Y2vf4-6viifMz50Ctg1jh-hej9M',
-    appId: '1:670650028874:web:f5975875aae456823267b3',
-    messagingSenderId: '670650028874',
-    projectId: 'enpit-weeee',
-    authDomain: 'enpit-weeee.firebaseapp.com',
-    storageBucket: 'enpit-weeee.appspot.com',
+    apiKey: 'AIzaSyCCFcxIILDcZQ03Y5rVWaTgDmjY6icQh40',
+    appId: '1:631066516008:web:d89bed81b09df8f8b4731d',
+    messagingSenderId: '631066516008',
+    projectId: 'empit-weee',
+    authDomain: 'empit-weee.firebaseapp.com',
+    storageBucket: 'empit-weee.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDAWqzVblGUubRLjeFEldxhYWwlUhJxGT0',
-    appId: '1:670650028874:android:48819203081cd2df3267b3',
-    messagingSenderId: '670650028874',
-    projectId: 'enpit-weeee',
-    storageBucket: 'enpit-weeee.appspot.com',
+    apiKey: 'AIzaSyBigwooTGcqn9bFKLQCCq8R8ymUDztnBOU',
+    appId: '1:631066516008:android:c3a993e6d8bd9496b4731d',
+    messagingSenderId: '631066516008',
+    projectId: 'empit-weee',
+    storageBucket: 'empit-weee.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA5t5mrYm06mUMrtMN5CBRFi_mo6vcTs-M',
-    appId: '1:670650028874:ios:31f06b627285a6a03267b3',
-    messagingSenderId: '670650028874',
-    projectId: 'enpit-weeee',
-    storageBucket: 'enpit-weeee.appspot.com',
-    iosClientId: '670650028874-tvh7gpfbip11bppc6oeditkspmh4ggau.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBShfj6BsjxUo1OEf2aHxnDhgWmSy6HMy4',
+    appId: '1:631066516008:ios:ad4eb9f0d00a2b4eb4731d',
+    messagingSenderId: '631066516008',
+    projectId: 'empit-weee',
+    storageBucket: 'empit-weee.appspot.com',
+    iosClientId: '631066516008-j3166pthuvsjm880ce262shv6qk5c7e3.apps.googleusercontent.com',
     iosBundleId: 'com.example.enpitWeee',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA5t5mrYm06mUMrtMN5CBRFi_mo6vcTs-M',
-    appId: '1:670650028874:ios:31f06b627285a6a03267b3',
-    messagingSenderId: '670650028874',
-    projectId: 'enpit-weeee',
-    storageBucket: 'enpit-weeee.appspot.com',
-    iosClientId: '670650028874-tvh7gpfbip11bppc6oeditkspmh4ggau.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBShfj6BsjxUo1OEf2aHxnDhgWmSy6HMy4',
+    appId: '1:631066516008:ios:ad4eb9f0d00a2b4eb4731d',
+    messagingSenderId: '631066516008',
+    projectId: 'empit-weee',
+    storageBucket: 'empit-weee.appspot.com',
+    iosClientId: '631066516008-j3166pthuvsjm880ce262shv6qk5c7e3.apps.googleusercontent.com',
     iosBundleId: 'com.example.enpitWeee',
   );
 }
