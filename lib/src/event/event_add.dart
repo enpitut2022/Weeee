@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/provider/event_add_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:provider/provider.dart';
 
 //イベントの入力画面
@@ -13,9 +16,18 @@ class EventAddPage extends StatefulWidget {
 }
 
 class _EventAddPageState extends State<EventAddPage> {
+  UserModals loggedUser = UserModals();
   @override
   void initState() {
     super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      loggedUser = UserModals.fromMap(value.data());
+      setState(() {});
+    });
   }
 
   String? genderDefo = '-';
@@ -380,58 +392,6 @@ class _EventAddPageState extends State<EventAddPage> {
                     ),
                     TextField(
                       decoration: const InputDecoration(
-                          labelText: "あなたの年齢(数字のみ、必須）", hintText: "20"),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      onChanged: (text) {
-                        model.age = int.parse(text); //stringをintへ
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "性別",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        DropdownButton(
-                          value: genderDefo,
-                          onChanged: (String? value) {
-                            setState(() {
-                              genderDefo = value;
-                            });
-                          },
-                          items: const [
-                            DropdownMenuItem(
-                              value: '-',
-                              child: Text('-'),
-                            ),
-                            DropdownMenuItem(
-                              value: '男性',
-                              child: Text('男性'),
-                            ),
-                            DropdownMenuItem(
-                              value: '女性',
-                              child: Text('女性'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'その他',
-                              child: Text('その他'),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextField(
-                      decoration: const InputDecoration(
                           labelText: "およそ何人で行きたいですか？（数字のみ、必須）", hintText: "3"),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -453,66 +413,24 @@ class _EventAddPageState extends State<EventAddPage> {
                         model.background = text;
                       },
                     ),
-                    /*const SizedBox(
-                      height: 16,
-                    ),
-                    TextField(
-                      maxLength: 10,
-                      decoration: const InputDecoration(
-                          labelText: "集合場所(必須でない)", hintText: "○○駅前"),
-                      onChanged: (text) {
-                        model.startplace = text;
-                      },
-                    ),
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      decoration: const InputDecoration(
-                          labelText: "集合時間(必須でない)", hintText: "**時"),
-                      onChanged: (text) {
-                        model.starttime = text;
-                      },
-                    ),
+                    // TextField(
+                    //   maxLength: 10,
+                    //   decoration:
+                    //       const InputDecoration(labelText: "（必須）"),
+                    //   onChanged: (text) {
+                    //     model.favorite = text;
+                    //   },
+                    // ),
                     const SizedBox(
                       height: 16,
                     ),
                     TextField(
                       maxLength: 10,
                       decoration: const InputDecoration(
-                          labelText: "解散場所(必須でない)", hintText: "○○駅前"),
-                      onChanged: (text) {
-                        model.goalplace = text;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextField(
-                      decoration: const InputDecoration(
-                          labelText: "集合時間(必須でない)", hintText: "**時"),
-                      onChanged: (text) {
-                        model.goaltime = text;
-                      },
-                    ),*/
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextField(
-                      maxLength: 10,
-                      decoration:
-                          const InputDecoration(labelText: "あなたの推しは誰ですか？（必須）"),
-                      onChanged: (text) {
-                        model.favorite = text;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextField(
-                      maxLength: 10,
-                      decoration: const InputDecoration(
-                          labelText: "あなたのファン歴はどのくらいですか？（必須）", hintText: "3年半"),
+                          labelText: "どのくらい前から聴いていますか？（必須）", hintText: "3年半"),
                       onChanged: (text) {
                         model.fanhistory = text;
                       },
@@ -523,8 +441,8 @@ class _EventAddPageState extends State<EventAddPage> {
                     TextField(
                       maxLength: 10,
                       decoration: const InputDecoration(
-                          labelText: "今まで何回観戦(参加)したことがありますか？（必須）",
-                          hintText: "初参加/4回"),
+                          labelText: "これまでライブに何回参加したことがありますか？（必須）",
+                          hintText: "３回"),
                       onChanged: (text) {
                         model.participation = text;
                       },
@@ -532,38 +450,46 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      maxLength: 30,
-                      decoration: const InputDecoration(
-                          labelText: "参加希望者に任意の質問ができます(最大3問)",
-                          hintText: "あなたの推しの推しポイントをおしえてください"),
-                      onChanged: (text) {
-                        model.question1 = text;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextField(
-                      maxLength: 30,
-                      decoration: const InputDecoration(
-                          labelText: "参加希望者に任意の質問ができます(最大3問)",
-                          hintText: "あなたの推しの推しポイントをおしえてください"),
-                      onChanged: (text) {
-                        model.question2 = text;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextField(
-                      maxLength: 30,
-                      decoration: const InputDecoration(
-                          labelText: "参加希望者に任意の質問ができます(最大3問)",
-                          hintText: "あなたの推しの推しポイントをおしえてください"),
-                      onChanged: (text) {
-                        model.question3 = text;
-                      },
+                    Container(
+                      color: Color.fromARGB(255, 163, 178, 234),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          TextField(
+                            maxLength: 30,
+                            decoration: const InputDecoration(
+                                labelText: "参加希望者に任意の質問ができます",
+                                hintText: "何の曲が好きですか？"),
+                            onChanged: (text) {
+                              model.question1 = text;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          TextField(
+                            maxLength: 30,
+                            decoration: const InputDecoration(
+                                labelText: "参加希望者に任意の質問ができます",
+                                hintText: "聴き始めたきっかけは何ですか？"),
+                            onChanged: (text) {
+                              model.question2 = text;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          TextField(
+                            maxLength: 30,
+                            decoration: const InputDecoration(
+                                labelText: "参加希望者に任意の質問ができます",
+                                hintText: "ライブ何回行ったことありますか？"),
+                            onChanged: (text) {
+                              model.question3 = text;
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
@@ -578,12 +504,16 @@ class _EventAddPageState extends State<EventAddPage> {
                               nowTime.hour,
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
                           //model.genre = genreDefo;
-                          model.gender = genderDefo;
+                          model.gender = loggedUser.gender;
+                          model.age = loggedUser.old;
                           model.prefec = prefecDefo;
+                          model.genre = genreDefo;
+                          model.favorite = " "; // 12/14 推しの欄について、　個人のアーティストはどうするか考える必要がある
                           await model.addEvent();
 
                           final now =
                               DateTime.now().toLocal().toIso8601String();
+                          // イベント名でチャットルームの作成
                           await FirebaseFirestore.instance
                               .collection('chat_room')
                               .doc(model.name)

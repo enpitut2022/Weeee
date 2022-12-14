@@ -1,3 +1,4 @@
+import 'package:enpit_weee/src/event/event_quetion.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/login/foregetpassword.dart';
 import 'package:enpit_weee/src/login/login.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         '/forgetpassword': (BuildContext context) => const ForgotPassword(),
         '/home': (BuildContext context) => const HomePage(),
         '/editProfile': (BuildContext context) => const EditProfile(),
+        //'/question' :(BuildContext context) =>  EventDetailQuestion(), できなかった12/14
       },
     );
   }

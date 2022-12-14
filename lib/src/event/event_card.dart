@@ -99,7 +99,7 @@ class _EventCardState extends State<EventCard> {
                         Expanded(
                           flex: 4,
                           child: Text(
-                            "${loggedUser.gender}  ${loggedUser.old.toString()} 歳",
+                            "${widget.event.gender}  ${widget.event.age} 歳",
                             style: const TextStyle(
                               fontSize: 25,
                             ),

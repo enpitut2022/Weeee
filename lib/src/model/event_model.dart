@@ -10,10 +10,6 @@ class Event {
   final int people;
   final String genre;
   final String background; // 募集した理由
-  /*final String? startplace;
-  final String? starttime;
-  final String? goalplace;
-  final String? goaltime;*/
   final String favorite;
   final String fanhistory;
   final String participation;
@@ -31,10 +27,6 @@ class Event {
       required this.people,
       required this.genre,
       required this.background,
-      /*required this.startplace,
-      required this.starttime,
-      required this.goalplace,
-      required this.goaltime}),*/
       required this.favorite,
       required this.fanhistory,
       required this.participation,
@@ -54,10 +46,6 @@ class Event {
         people: data["num"],
         genre: data["genre"],
         background: data["background"],
-        /*startplace: data["startPlace"],
-      starttime: data["startTime"],
-      goalplace: data["goalPlace"],
-      goaltime: data["goalTime"],*/
         favorite: data["favorite"],
         fanhistory: data["fanhistory"],
         participation: data["participation"],
