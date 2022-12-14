@@ -28,7 +28,7 @@ class AddEventProvider extends ChangeNotifier {
       throw "名前が入力されていません";
     }
     if (genre == null || genre == "-") {
-      throw "ジャンルは、-以外を選択してください";
+      throw "ジャンルは -以外を選択してください";
     }
     if (prefec == null || prefec == "-") {
       throw "県は、-以外を選択してください";
@@ -54,6 +54,15 @@ class AddEventProvider extends ChangeNotifier {
     if (participation == null || participation == "") {
       throw "観戦回数/参加回数が入力されていません";
     }
+    if (question1 == null || question1 == "") {
+      throw "質問1が入力されていません";
+    }
+    if (question2 == null || question2 == "") {
+      throw "質問2が入力されていません";
+    }
+    if (question3 == null || question3 == "") {
+      throw "質問3が入力されていません";
+    }
 
     //firestoreに追加する
     await FirebaseFirestore.instance.collection("event").add({
@@ -66,10 +75,6 @@ class AddEventProvider extends ChangeNotifier {
       "num": people,
       "genre": genre,
       "background": background,
-      //"startPlace": startplace,
-      //"startTime": starttime,
-      //"goalPlace": goalplace,
-      //"goalTime": goaltime
       "favorite": favorite,
       "fanhistory": fanhistory,
       "participation": participation,

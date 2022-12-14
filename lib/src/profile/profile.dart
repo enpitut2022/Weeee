@@ -13,14 +13,13 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> {
-  User? user = FirebaseAuth.instance.currentUser;
   UserModals loggedUser = UserModals();
   @override
   void initState() {
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
-        .doc(user!.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
       loggedUser = UserModals.fromMap(value.data());

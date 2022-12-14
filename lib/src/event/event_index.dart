@@ -49,11 +49,11 @@ class _EventIndexState extends State<EventIndex> {
                           return const Text("エラーが発生しました");
                         }
                         if (!snapshot.hasData) {
+                          // データを取得できていない時
                           return const CircularProgressIndicator();
                         }
                         final events = snapshot.data!;
                         return Scaffold(
-
                           body: SingleChildScrollView(
                             child: Column(
                               children: [
@@ -61,7 +61,6 @@ class _EventIndexState extends State<EventIndex> {
                                   EventCard(event: event),
                               ],
                             ),
-
                           ),
                         );
                       }),

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/src/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // flutter_chat_uiを使うためのパッケージをインポート
@@ -14,17 +16,30 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
+
+  // 12/14
+  // UserModals loggedUser = UserModals();
+  // @override
+  // void initState() {
+  //   _getMessages();
+  //   super.initState();
+  //   FirebaseFirestore.instance
+  //       .collection("users")
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .get()
+  //       .then((value) {
+  //     loggedUser = UserModals.fromMap(value.data());
+  //     setState(() {});
+  //   });
+  // }
+
   // メッセージを取得するリスト
   List<types.Message> _messages = [];
   String randomId = const Uuid().v4();
   final _user = const types.User(
       id: '06c33e8b-e835-4736-80f4-63f44b66666c', firstName: '名前');
-
-  @override
-  void initState() {
-    _getMessages();
-    super.initState();
-  }
+  // final _user =
+  //     const types.User(id: uid, firstName: name);
 
   // firestoreからメッセージの内容をとってきて_messageにセット
   void _getMessages() async {
