@@ -88,7 +88,7 @@ class ForgotPasswordState extends State<ForgotPassword> {
           children: [
             SizedBox(
               height: 250,
-              child: Image.asset('images/forget.png'),
+              child: Image.asset('assets/images/forget.png'),
             ),
             Container(
               alignment: Alignment.centerLeft,

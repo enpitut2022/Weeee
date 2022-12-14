@@ -32,7 +32,7 @@ class LoginState extends State<Login> {
             Container(
               margin: const EdgeInsets.all(10),
               child: const CircleAvatar(
-                foregroundImage: AssetImage('images/weeee_logo.png'),
+                foregroundImage: AssetImage('assets/images/weeee_logo.png'),
                 radius: 60,
               ),
             ),

@@ -181,7 +181,7 @@ class EditProfileState extends State<EditProfile> {
                     SizedBox(
                         height: 180,
                         child: Image.asset(
-                          "images/signup.png",
+                          "assets/images/signup.png",
                           fit: BoxFit.contain,
                         )),
                     const SizedBox(height: 45),

@@ -103,7 +103,7 @@ class ProfileState extends State<Profile> {
             ),
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage('images/weeee_logo.png'),
+              backgroundImage: AssetImage('assets/images/weeee_logo.png'),
             ),
             SizedBox(
               height: 10,
