@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      # Flutterのインストール
       - name: Install Flutter
         run: git clone https://github.com/flutter/flutter.git
 
