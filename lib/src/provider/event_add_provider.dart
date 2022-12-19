@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 
 class AddEventProvider extends ChangeNotifier {
   String? name;
+  String? createUserId;
+  String? eventID;
   DateTime? date;
   String? prefec;
   String? place;
@@ -12,16 +15,14 @@ class AddEventProvider extends ChangeNotifier {
   int? people;
   String? genre;
   String? background; // 募集した理由
-  //String? startplace;
-  //String? starttime;
-  //String? goalplace;
-  //String? goaltime;
-  String? favorite;
   String? fanhistory;
   String? participation;
   String? question1;
   String? question2;
   String? question3;
+  String? ans1; // 12/19 参加者の回答分。イベント作成時にはnullの状態。
+  String? ans2;
+  String? ans3;
 
   Future addEvent() async {
     if (name == null || name == "") {
@@ -64,8 +65,11 @@ class AddEventProvider extends ChangeNotifier {
       throw "質問3が入力されていません";
     }
 
+    final eventID = FirebaseFirestore.instance.collection("event").doc();
     //firestoreに追加する
-    await FirebaseFirestore.instance.collection("event").add({
+    await eventID.set({
+      "documentID": eventID.id, // イベントのドキュメントID
+      "createUserId": createUserId,
       "name": name,
       "date": date, //datetime型は、自動でtimestamp型へ
       "place": place,
@@ -75,12 +79,14 @@ class AddEventProvider extends ChangeNotifier {
       "num": people,
       "genre": genre,
       "background": background,
-      "favorite": favorite,
       "fanhistory": fanhistory,
       "participation": participation,
       "question1": question1,
       "question2": question2,
-      "question3": question3
+      "question3": question3,
+      "ans1": ans1,
+      "ans2": ans2,
+      "ans3": ans3,
     });
   }
 }

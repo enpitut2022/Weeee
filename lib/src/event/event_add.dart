@@ -503,12 +503,16 @@ class _EventAddPageState extends State<EventAddPage> {
                               inputDate.day,
                               nowTime.hour,
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
-                          //model.genre = genreDefo;
+                          model.createUserId = loggedUser.uid;
                           model.gender = loggedUser.gender;
                           model.age = loggedUser.old;
                           model.prefec = prefecDefo;
                           model.genre = genreDefo;
-                          model.favorite = " "; // 12/14 推しの欄について、　個人のアーティストはどうするか考える必要がある
+                          // model.favorite =
+                          //     " "; // 12/14 推しの欄について、　個人のアーティストはどうするか考える必要がある
+                          model.ans1 = "";
+                          model.ans2 = "";
+                          model.ans3 = "";
                           await model.addEvent();
 
                           final now =
@@ -517,12 +521,10 @@ class _EventAddPageState extends State<EventAddPage> {
                           await FirebaseFirestore.instance
                               .collection('chat_room')
                               .doc(model.name)
-                              .set(
-                            {
-                              'name': model.name,
-                              'createdAt': now,
-                            },
-                          );
+                              .set({
+                            'name': model.name,
+                            'createdAt': now,
+                          });
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(
