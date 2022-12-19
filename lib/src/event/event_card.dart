@@ -121,11 +121,20 @@ class _EventCardState extends State<EventCard> {
   }
 
   Widget imageWidget() {
-    return ClipRect(
-      child: FittedBox(     
-        fit: BoxFit.cover,
-        child: Image.asset('assets/images/eat.png'),
-      ),
-    );
+    if (widget.event.genre.toString() == 'スポーツ') {
+      return ClipRect(
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Image.asset('assets/images/sport.png'),
+        ),
+      );
+    } else {
+      return ClipRect(
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Image.asset('assets/images/festival.png'),
+        ),
+      );
+    }
   }
 }
