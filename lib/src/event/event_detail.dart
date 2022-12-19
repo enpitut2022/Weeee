@@ -48,13 +48,13 @@ class EventDetail extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /*SizedBox(
+                SizedBox(
                   height: screenSize.height * 0.03,
                 ),
                 Text(
                   "ジャンル　： ${event.genre}",
                   style: const TextStyle(fontSize: 30),
-                ),*/
+                ),
                 SizedBox(
                   height: screenSize.height * 0.03,
                 ),
@@ -154,14 +154,14 @@ class EventDetail extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         // ここを押すと、チャットができるようになる？
         onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>  EventDetailQuestion(event: event),
-                // fullscreenDialog: true,
-              ),
-            );
-          },
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EventDetailQuestion(event: event),
+              // fullscreenDialog: true,
+            ),
+          );
+        },
         icon: const Icon(Icons.add),
         label: const Text("一緒に行きたい！"),
         backgroundColor: const Color.fromARGB(255, 255, 82, 70),

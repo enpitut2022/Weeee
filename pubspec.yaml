@@ -59,6 +59,8 @@ flutter:
     - assets/images/signup.png
     - assets/images/travel.png
     - assets/images/weeee_logo.png
+    - assets/images/festival.png
+    - assets/images/sport.png
 
 
   # To add assets to your application, add an assets section, like this:
