@@ -2,32 +2,70 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
-'on':
+# 'on':
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build_and_deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       # Flutterのインストール
+#       - name: Install Flutter
+#         run: git clone https://github.com/flutter/flutter.git
+
+#       # PATH を通す
+#       - name: Add path
+#         run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
+
+#       # パッケージのダウンロード
+#       - name: Download Flutter packages
+#         run: flutter pub get
+
+#       - run: flutter build web
+#       - uses: FirebaseExtended/action-hosting-deploy@v0
+#         with:
+#           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMPIT_WEEE }}'
+#           channelId: live
+#           projectId: empit-weee
+          
+
+
+
+on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+
+  workflow_dispatch:
+
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v3
-      # Flutterのインストール
-      - name: Install Flutter
-        run: git clone https://github.com/flutter/flutter.git
-
-      # PATH を通す
-      - name: Add path
-        run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
-
-      # パッケージのダウンロード
-      - name: Download Flutter packages
-        run: flutter pub get
-
-      - run: flutter build web
-      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMPIT_WEEE }}'
-          channelId: live
-          projectId: empit-weee
-          
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Repository
+        id: version
+        run: |
+          REPOSITORY=$(echo ${{ github.repository }} | sed -e "s#.*/##")
+          echo ::set-output name=repository::$REPOSITORY
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.10'
+          channel: 'stable'
+          cache: true
+      - run: flutter --version
+      - run: flutter pub get
+      - run: flutter build web --web-renderer html --base-href /${{ steps.version.outputs.repository }}/
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
