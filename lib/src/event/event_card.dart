@@ -125,7 +125,7 @@ class _EventCardState extends State<EventCard> {
     return ClipRect(
       child: FittedBox(
         fit: BoxFit.fill,
-        child: Image.asset('assets/images/eat.png'),
+        child: Image.asset('assets/images/sport.png'),
       ),
     );
     // } else {
