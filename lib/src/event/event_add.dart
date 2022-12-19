@@ -75,6 +75,9 @@ class _EventAddPageState extends State<EventAddPage> {
         body: Center(
           child: Consumer<AddEventProvider>(
             builder: (context, model, child) {
+              model.question1 = "なし";
+              model.question2 = "なし";
+              model.question3 = "なし";
               return Container(
                 color: const Color.fromARGB(0, 113, 182, 238),
                 margin: const EdgeInsets.all(20),
@@ -461,7 +464,10 @@ class _EventAddPageState extends State<EventAddPage> {
                                 labelText: "参加希望者に任意の質問ができます",
                                 hintText: "何の曲が好きですか？"),
                             onChanged: (text) {
-                              model.question1 = text;
+                              if (text == "") 
+                                model.question1 = "なし";
+                              if (text != "") 
+                                model.question1 = text;
                             },
                           ),
                           const SizedBox(
@@ -473,7 +479,10 @@ class _EventAddPageState extends State<EventAddPage> {
                                 labelText: "参加希望者に任意の質問ができます",
                                 hintText: "聴き始めたきっかけは何ですか？"),
                             onChanged: (text) {
-                              model.question2 = text;
+                              if (text == "") 
+                                model.question2 = "なし";
+                              if (text != "") 
+                                model.question2 = text;
                             },
                           ),
                           const SizedBox(
@@ -485,7 +494,10 @@ class _EventAddPageState extends State<EventAddPage> {
                                 labelText: "参加希望者に任意の質問ができます",
                                 hintText: "ライブ何回行ったことありますか？"),
                             onChanged: (text) {
-                              model.question3 = text;
+                              if (text == "") 
+                                model.question3 = "なし";
+                              if (text != "") 
+                                model.question3 = text;
                             },
                           ),
                         ],

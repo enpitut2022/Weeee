@@ -28,6 +28,7 @@ class EventDetailQuestion extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
+            if(event.question1 != "なし")
             TextField(
               maxLength: 10,
               decoration: InputDecoration(labelText: "${event.question1}"),
@@ -38,6 +39,7 @@ class EventDetailQuestion extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
+            if(event.question2 != "なし")
             TextField(
               maxLength: 10,
               decoration: InputDecoration(labelText: "${event.question2}"),
@@ -48,6 +50,7 @@ class EventDetailQuestion extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
+            if(event.question3 != "なし")
             TextField(
               maxLength: 10,
               decoration: InputDecoration(labelText: "${event.question3}"),

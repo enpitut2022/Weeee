@@ -55,7 +55,7 @@ class AddEventProvider extends ChangeNotifier {
     if (participation == null || participation == "") {
       throw "観戦回数/参加回数が入力されていません";
     }
-    if (question1 == null || question1 == "") {
+    /*if (question1 == null || question1 == "") {
       throw "質問1が入力されていません";
     }
     if (question2 == null || question2 == "") {
@@ -63,7 +63,7 @@ class AddEventProvider extends ChangeNotifier {
     }
     if (question3 == null || question3 == "") {
       throw "質問3が入力されていません";
-    }
+    }*/
 
     final eventID = FirebaseFirestore.instance.collection("event").doc();
     //firestoreに追加する
