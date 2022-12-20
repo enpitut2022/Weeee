@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/event/event_index.dart';
+import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:flutter/material.dart';
 
@@ -64,17 +65,13 @@ class EventDetailQuestion extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          FirebaseFirestore.instance.collection("event").doc(event.documentID).update({
-      "ans1": ans1,
-      "ans2": ans2,
-      "ans3": ans3
-    });
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const EventIndex(),
-            ),
-          );
+          FirebaseFirestore.instance
+              .collection("event")
+              .doc(event.documentID)
+              .update({"ans1": ans1, "ans2": ans2, "ans3": ans3});
+          await Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
         },
         icon: const Icon(Icons.send),
         label: const Text("解答を送信"),
