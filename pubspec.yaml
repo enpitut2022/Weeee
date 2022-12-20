@@ -41,7 +41,6 @@ dependencies:
   cloud_firestore: ^4.2.0
   google_sign_in: ^5.4.2
   fluttertoast: ^8.1.1
-  cloud_firestore_platform_interface: ^5.9.1
 
 dev_dependencies:
   flutter_test:
