@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/login/login.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
@@ -35,7 +37,7 @@ class ProfileState extends State<Profile> {
       backgroundColor: const Color(0xffF5F5F5),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 19, 4, 4),
+        backgroundColor: const Color.fromARGB(255, 19, 4, 4),
         title: const Text('マイページ'),
         actions: [
           TextButton(

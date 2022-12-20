@@ -16,30 +16,29 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
+  @override
+  void initState() {
+    _getMessages();
+    _getUser();
+    super.initState();
+  }
 
-  // 12/14
-  // UserModals loggedUser = UserModals();
-  // @override
-  // void initState() {
-  //   _getMessages();
-  //   super.initState();
-  //   FirebaseFirestore.instance
-  //       .collection("users")
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .get()
-  //       .then((value) {
-  //     loggedUser = UserModals.fromMap(value.data());
-  //     setState(() {});
-  //   });
-  // }
-
+  // ユーザーを取得する変数
+  UserModals loggedUser = UserModals();
   // メッセージを取得するリスト
   List<types.Message> _messages = [];
   String randomId = const Uuid().v4();
-  final _user = const types.User(
-      id: '06c33e8b-e835-4736-80f4-63f44b66666c', firstName: '名前');
-  // final _user =
-  //     const types.User(id: uid, firstName: name);
+
+  void _getUser() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      loggedUser = UserModals.fromMap(value.data());
+      setState(() {});
+    });
+  }
 
   // firestoreからメッセージの内容をとってきて_messageにセット
   void _getMessages() async {
@@ -106,7 +105,8 @@ class _ChatRoomState extends State<ChatRoom> {
   // メッセージ送信時の処理
   void _handleSendPressed(types.PartialText message) {
     final textMessage = types.TextMessage(
-      author: _user,
+      author:
+          types.User(id: "${loggedUser.uid}", firstName: "${loggedUser.name}"),
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: randomId,
       text: message.text,
@@ -137,7 +137,8 @@ class _ChatRoomState extends State<ChatRoom> {
         onPreviewDataFetched: _handlePreviewDataFetched,
         onSendPressed: _handleSendPressed,
         showUserAvatars: true,
-        user: _user,
+        user: types.User(
+            id: "${loggedUser.uid}", firstName: "${loggedUser.name}"),
       ),
     );
   }
