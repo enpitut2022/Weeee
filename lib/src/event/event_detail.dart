@@ -101,7 +101,7 @@ class EventDetail extends StatelessWidget {
                   height: screenSize.height * 0.03,
                 ),
                 Text(
-                  "観戦(参加回数)　： ${event.participation}",
+                  "参加回数　： ${event.participation}",
                   style: const TextStyle(fontSize: 30),
                 ),
                 SizedBox(

@@ -1,9 +1,9 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/login/login.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/profile/edit_profile.dart';
+import 'package:enpit_weee/src/profile/my_create_event.dart';
+import 'package:enpit_weee/src/profile/my_join_event.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -85,7 +85,41 @@ class ProfileState extends State<Profile> {
               }),
               label: const Text("編集"),
               icon: const Icon(Icons.edit),
-            )
+            ),
+            const SizedBox(height: 30),
+            TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                  )),
+              onPressed: (() {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const MyCreateEvent()));
+              }),
+              child: const Text("作成したイベント",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ),
+            const SizedBox(height: 30),
+            TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                  )),
+              onPressed: (() {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) =>  MyJoinEvent()));
+              }),
+              child: const Text("参加したイベント",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ),
           ],
         ),
       ),

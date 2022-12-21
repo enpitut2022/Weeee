@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/src/event/event_index.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,6 @@ class EventDetailQuestion extends StatelessWidget {
         child: ListView(
           children: [
             TextField(
-              maxLength: 10,
               decoration: InputDecoration(labelText: "${event.question1}"),
               onChanged: (text) {
                 ans1 = text;
@@ -40,7 +38,6 @@ class EventDetailQuestion extends StatelessWidget {
               height: 16,
             ),
             TextField(
-              maxLength: 10,
               decoration: InputDecoration(labelText: "${event.question2}"),
               onChanged: (text) {
                 ans2 = text;
@@ -50,7 +47,6 @@ class EventDetailQuestion extends StatelessWidget {
               height: 16,
             ),
             TextField(
-              maxLength: 10,
               decoration: InputDecoration(labelText: "${event.question3}"),
               onChanged: (text) {
                 ans3 = text;
@@ -59,23 +55,43 @@ class EventDetailQuestion extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                      )),
+                  onPressed: (() {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const HomePage()));
+                  }),
+                  child: const Text("やめとく", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                      )),
+                  onPressed: () async {
+                    FirebaseFirestore.instance
+                        .collection("event")
+                        .doc(event.documentID)
+                        .update({"ans1": ans1, "ans2": ans2, "ans3": ans3});
+                    await Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ));
+                  },
+                  child: const Text("回答を送信", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
+                ),
+              ],
+            )
           ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          FirebaseFirestore.instance
-              .collection("event")
-              .doc(event.documentID)
-              .update({"ans1": ans1, "ans2": ans2, "ans3": ans3});
-          await Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ));
-        },
-        icon: const Icon(Icons.send),
-        label: const Text("解答を送信"),
-        backgroundColor: const Color.fromARGB(255, 255, 82, 70),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class EventProvider {
   //コンストラクター
@@ -17,6 +18,22 @@ class EventProvider {
   void loadAllEvents() {
     final querySnapshot =
         FirebaseFirestore.instance.collection('event').snapshots();
+
+    querySnapshot.listen(
+      (event) {
+        final events = event.docs.map((DocumentSnapshot doc) {
+          //イベントの情報をここでfirebaseから取得している。
+          return Event.fromSnapshot(doc);
+        }).toList();
+
+        _allEventsController.add(events);
+      },
+    );
+  }
+
+  void loadMyEvents() {
+    final querySnapshot =
+        FirebaseFirestore.instance.collection('event').where('createUserId', isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
 
     querySnapshot.listen(
       (event) {
