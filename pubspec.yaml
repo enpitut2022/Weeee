@@ -54,12 +54,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/eat.png
-    - assets/images/forget.png
-    - assets/images/signup.png
-    - assets/images/travel.png
-    - assets/images/weeee_logo.png
-
+    - assets/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
