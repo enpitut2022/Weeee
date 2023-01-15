@@ -1,4 +1,3 @@
-import 'package:enpit_weee/src/event/event_quetion.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/login/foregetpassword.dart';
 import 'package:enpit_weee/src/login/login.dart';

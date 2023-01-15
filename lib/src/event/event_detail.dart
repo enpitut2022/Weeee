@@ -178,6 +178,7 @@ class _EventDetailState extends State<EventDetail> {
       floatingActionButton: FloatingActionButton.extended(
         // ここを押すと、チャットができるようになる？
         onPressed: () async {
+          // このボタンを押すと、participantコレクションに名前が追加される
           await FirebaseFirestore.instance
               .collection("event")
               .doc(widget.event.documentID)

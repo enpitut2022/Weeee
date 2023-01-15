@@ -88,5 +88,9 @@ class AddEventProvider extends ChangeNotifier {
       "ans2": ans2,
       "ans3": ans3,
     });
+    // イベントの参加者に自分を追加
+    await eventID.update({
+      "participant": FieldValue.arrayUnion([createUserId])
+    });
   }
 }

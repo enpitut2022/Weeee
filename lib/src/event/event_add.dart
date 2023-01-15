@@ -525,6 +525,8 @@ class _EventAddPageState extends State<EventAddPage> {
                             'name': model.name,
                             'createdAt': now,
                           });
+
+                  
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(

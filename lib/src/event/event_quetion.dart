@@ -1,19 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
+import 'package:enpit_weee/src/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class EventDetailQuestion extends StatelessWidget {
+class EventDetailQuestion extends StatefulWidget {
   //eventモデルを使用するときに使う　12/7
   // EventDetailQuestion({required this.event, super.key});
   // Event event;
   EventDetailQuestion({required this.event, super.key});
   Event event;
+
+  @override
+  State<EventDetailQuestion> createState() => _EventDetailQuestionState();
+}
+
+class _EventDetailQuestionState extends State<EventDetailQuestion> {
+  UserModals loggedUser = UserModals(); // ログインしているユーザーの情報
+
   String ans1 = "";
+
   String ans2 = "";
+
   String ans3 = "";
 
   @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      loggedUser = UserModals.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
@@ -29,7 +53,8 @@ class EventDetailQuestion extends StatelessWidget {
         child: ListView(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: "${event.question1}"),
+              decoration:
+                  InputDecoration(labelText: "${widget.event.question1}"),
               onChanged: (text) {
                 ans1 = text;
               },
@@ -38,7 +63,8 @@ class EventDetailQuestion extends StatelessWidget {
               height: 16,
             ),
             TextField(
-              decoration: InputDecoration(labelText: "${event.question2}"),
+              decoration:
+                  InputDecoration(labelText: "${widget.event.question2}"),
               onChanged: (text) {
                 ans2 = text;
               },
@@ -47,7 +73,8 @@ class EventDetailQuestion extends StatelessWidget {
               height: 16,
             ),
             TextField(
-              decoration: InputDecoration(labelText: "${event.question3}"),
+              decoration:
+                  InputDecoration(labelText: "${widget.event.question3}"),
               onChanged: (text) {
                 ans3 = text;
               },
@@ -68,7 +95,11 @@ class EventDetailQuestion extends StatelessWidget {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const HomePage()));
                   }),
-                  child: const Text("やめとく", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                  child: const Text("やめとく",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
@@ -77,16 +108,41 @@ class EventDetailQuestion extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                       )),
                   onPressed: () async {
-                    FirebaseFirestore.instance
+                    // このボタンを押すと、answersコレクションに名前と回答が追加される
+                    await FirebaseFirestore.instance
                         .collection("event")
-                        .doc(event.documentID)
-                        .update({"ans1": ans1, "ans2": ans2, "ans3": ans3});
+                        .doc(widget.event.documentID)
+                        .collection("answers")
+                        .add({
+                      'uid': loggedUser.uid,
+                      'name': loggedUser.name,
+                      'old': loggedUser.old,
+                      'gender' : loggedUser.gender,
+                      'ans1': ans1,
+                      'ans2': ans2,
+                      'ans3': ans3,
+                    });
+
+                    // 1/15
+                    // eventコレクションのans1,2,3ドキュメントは常にnullにする
+                    // 質問の回答は、event > answers > ans1,2,3 に保存する
+
+                    // await FirebaseFirestore.instance
+                    //     .collection("event")
+                    //     .doc(widget.event.documentID)
+                    //     .update({"ans1": ans1, "ans2": ans2, "ans3": ans3});
                     await Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(
                       builder: (context) => const HomePage(),
                     ));
                   },
-                  child: const Text("回答を送信", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
+                  child: const Text(
+                    "回答を送信",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             )
