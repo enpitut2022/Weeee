@@ -4,19 +4,19 @@ import 'package:enpit_weee/src/profile/my_event_card.dart';
 import 'package:enpit_weee/src/provider/event_provider.dart';
 import 'package:flutter/material.dart';
 
-class MyCreateEvent extends StatefulWidget {
-  const MyCreateEvent({super.key});
+class MyJoinEvent extends StatefulWidget {
+  const MyJoinEvent({super.key});
 
   @override
-  State<MyCreateEvent> createState() => _MyCreateEventState();
+  State<MyJoinEvent> createState() => _MyJoinEventState();
 }
 
-class _MyCreateEventState extends State<MyCreateEvent> {
+class _MyJoinEventState extends State<MyJoinEvent> {
   final EventProvider _eventProvider = EventProvider();
 
   @override
   void initState() {
-    _eventProvider.loadMyEvents();
+    _eventProvider.loadJoinEvents();
     super.initState();
   }
 
@@ -27,7 +27,7 @@ class _MyCreateEventState extends State<MyCreateEvent> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('イベント一覧画面'),
+          title: const Text('参加するイベント'),
         ),
         body: SafeArea(
           child: Column(

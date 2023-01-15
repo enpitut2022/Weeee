@@ -1,5 +1,6 @@
 import 'package:enpit_weee/src/chat/chat_index.dart';
 import 'package:enpit_weee/src/event/event_index.dart';
+import 'package:enpit_weee/src/myEvent/my_event_home.dart';
 import 'package:enpit_weee/src/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // この中に入るクラスは、コンストラクタが必要。
   static const _screens = [
     EventIndex(),
-    ChatIndex(),
+    MyEventHome(),
     Profile(),
   ];
   int _selectedIndex = 0;
@@ -56,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.event), label: 'イベント'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'チャット'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: '探す'),
+          BottomNavigationBarItem(icon: Icon(Icons.event), label: 'マイイベント'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'マイページ'),
         ],
         type: BottomNavigationBarType.fixed,

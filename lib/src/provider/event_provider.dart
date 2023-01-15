@@ -31,9 +31,32 @@ class EventProvider {
     );
   }
 
+  // 自分が作ったイベント(参加することは確定)
   void loadMyEvents() {
-    final querySnapshot =
-        FirebaseFirestore.instance.collection('event').where('createUserId', isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('event')
+        .where('createUserId',
+            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
+
+    querySnapshot.listen(
+      (event) {
+        final events = event.docs.map((DocumentSnapshot doc) {
+          //イベントの情報をここでfirebaseから取得している。
+          return Event.fromSnapshot(doc);
+        }).toList();
+
+        _allEventsController.add(events);
+      },
+    );
+  }
+
+  // 参加するイベント（募集・応募関係ない）
+  void loadJoinEvents() {
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('event')
+        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
 
     querySnapshot.listen(
       (event) {

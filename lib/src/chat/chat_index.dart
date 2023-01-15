@@ -15,46 +15,47 @@ class ChatIndex extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-              // Stream 非同期処理の結果を元にWidgetを作る
-              child: StreamBuilder<QuerySnapshot>(
-            // 投稿メッセージ一覧の取得
-            stream: FirebaseFirestore.instance
-                .collection('chat_room')
-                .orderBy('createdAt')
-                .snapshots(),
-            builder: (context, snapshot) {
-              // データが取得できた場合
-              if (snapshot.hasData) {
-                final List<DocumentSnapshot> documents = snapshot.data!.docs;
-                return ListView(
-                  children: documents.map((document) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(document['name']),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.input),
-                          onPressed: () async {
-                            // チャットページへ画面遷移
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return ChatRoom(document['name']);
-                                },
-                              ),
-                            );
-                          },
+            // Stream 非同期処理の結果を元にWidgetを作る
+            child: StreamBuilder<QuerySnapshot>(
+              // 投稿メッセージ一覧の取得
+              stream: FirebaseFirestore.instance
+                  .collection('chat_room')
+                  .orderBy('createdAt')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                // データが取得できた場合
+                if (snapshot.hasData) {
+                  final List<DocumentSnapshot> documents = snapshot.data!.docs;
+                  return ListView(
+                    children: documents.map((document) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(document['name']),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.input),
+                            onPressed: () async {
+                              // チャットページへ画面遷移
+                              await Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return ChatRoom(document['name']);
+                                  },
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    );
-                  }).toList(),
+                      );
+                    }).toList(),
+                  );
+                }
+                // データが読込中の場合
+                return const Center(
+                  child: Text('読込中……'),
                 );
-              }
-              // データが読込中の場合
-              return const Center(
-                child: Text('読込中……'),
-              );
-            },
-          )),
+              },
+            ),
+          ),
         ],
       ),
     );
