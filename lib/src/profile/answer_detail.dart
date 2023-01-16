@@ -1,11 +1,8 @@
-import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/src/event/event_quetion.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class AnswerDetail extends StatefulWidget {

@@ -4,7 +4,6 @@ import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/myEvent/my_join_event.dart';
 import 'package:enpit_weee/src/profile/edit_profile.dart';
 import 'package:enpit_weee/src/profile/my_create_event.dart';
-import 'package:enpit_weee/src/profile/my_join_event.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

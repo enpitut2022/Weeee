@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
@@ -20,6 +21,7 @@ class Event {
   final String ans1;
   final String ans2;
   final String ans3;
+  final List participant;
 
   Event._({
     required this.documentID,
@@ -41,11 +43,13 @@ class Event {
     required this.ans1,
     required this.ans2,
     required this.ans3,
+    required this.participant,
   });
 
   factory Event.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
-    return Event._( //19ko
+    return Event._(
+      //19ko
       documentID: data["documentID"],
       createUserID: data["createUserId"],
       name: data["name"],
@@ -65,6 +69,7 @@ class Event {
       ans1: data["ans1"],
       ans2: data["ans2"],
       ans3: data["ans3"],
+      participant: data["participant"]
     );
   }
 }

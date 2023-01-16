@@ -92,5 +92,15 @@ class AddEventProvider extends ChangeNotifier {
     await eventID.update({
       "participant": FieldValue.arrayUnion([createUserId])
     });
+    final now = DateTime.now().toLocal().toIso8601String();
+    // イベント名でチャットルームの作成
+    await FirebaseFirestore.instance
+        .collection('chat_room')
+        .doc(name)
+        .set({
+      'name': name,
+      'createdAt': now,
+      'eventID': eventID.id,
+    });
   }
 }

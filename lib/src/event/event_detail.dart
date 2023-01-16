@@ -176,16 +176,7 @@ class _EventDetailState extends State<EventDetail> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-        // ここを押すと、チャットができるようになる？
         onPressed: () async {
-          // このボタンを押すと、participantコレクションに名前が追加される
-          await FirebaseFirestore.instance
-              .collection("event")
-              .doc(widget.event.documentID)
-              .collection("participant")
-              .add({'uid': loggedUser.uid,
-              'name':loggedUser.name});
-
           await Navigator.push(
             context,
             MaterialPageRoute(
@@ -194,7 +185,7 @@ class _EventDetailState extends State<EventDetail> {
             ),
           );
         },
-        label: const Text("参加したい！"),
+        label: const Text("応募してみる！"),
         backgroundColor: const Color.fromARGB(255, 255, 82, 70),
       ),
     );

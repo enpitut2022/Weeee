@@ -1,5 +1,4 @@
 import 'package:enpit_weee/src/myEvent/my_join_event.dart';
-import 'package:enpit_weee/src/profile/my_join_event.dart';
 import 'package:flutter/material.dart';
 
 class MyEventHome extends StatelessWidget {

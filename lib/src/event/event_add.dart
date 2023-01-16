@@ -509,23 +509,11 @@ class _EventAddPageState extends State<EventAddPage> {
                           model.prefec = prefecDefo;
                           model.genre = genreDefo;
                           // model.favorite =
-                          //     " "; // 12/14 推しの欄について、　個人のアーティストはどうするか考える必要がある
+                          // 12/14 推しの欄について、　個人のアーティストはどうするか考える必要がある
                           model.ans1 = "";
                           model.ans2 = "";
                           model.ans3 = "";
-                          await model.addEvent();
-
-                          final now =
-                              DateTime.now().toLocal().toIso8601String();
-                          // イベント名でチャットルームの作成
-                          await FirebaseFirestore.instance
-                              .collection('chat_room')
-                              .doc(model.name)
-                              .set({
-                            'name': model.name,
-                            'createdAt': now,
-                          });
-
+                          await model.addEvent(); 
                   
                           Navigator.of(context).pop(true);
                         } catch (e) {
