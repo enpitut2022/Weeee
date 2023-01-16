@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/src/event/event_detail.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
-import 'package:enpit_weee/src/profile/answer_my_event.dart';
+import 'package:enpit_weee/src/myEvent/my_event_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +41,7 @@ class _MyEventCardState extends State<MyEventCard> {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => AnswerMyEvent(event: widget.event),
+              builder: (context) => MyEventMenu(event: widget.event),
             ),
           );
         },
