@@ -51,11 +51,75 @@ class EventProvider {
     );
   }
 
-  // 参加するイベント（募集・応募関係ない）
+  // イベント（募集応募不問・日時不問）
   void loadJoinEvents() {
     final querySnapshot = FirebaseFirestore.instance
         .collection('event')
         .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
+
+    querySnapshot.listen(
+      (event) {
+        final events = event.docs.map((DocumentSnapshot doc) {
+          //イベントの情報をここでfirebaseから取得している。
+          return Event.fromSnapshot(doc);
+        }).toList();
+
+        _allEventsController.add(events);
+      },
+    );
+  }
+
+  // イベント（募集応募不問・未来）
+  void loadJoinFutureEvents() {
+    final now = DateTime.now().toLocal().toIso8601String();
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('event')
+        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .where('date', isGreaterThanOrEqualTo: now)
+        .snapshots();
+
+    querySnapshot.listen(
+      (event) {
+        final events = event.docs.map((DocumentSnapshot doc) {
+          //イベントの情報をここでfirebaseから取得している。
+          return Event.fromSnapshot(doc);
+        }).toList();
+
+        _allEventsController.add(events);
+      },
+    );
+  }
+
+  // イベント（募集・日時不問）
+  void loadHostEvents() {
+    final now = DateTime.now().toLocal().toIso8601String();
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('event')
+        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .where('createUserId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
+
+    querySnapshot.listen(
+      (event) {
+        final events = event.docs.map((DocumentSnapshot doc) {
+          //イベントの情報をここでfirebaseから取得している。
+          return Event.fromSnapshot(doc);
+        }).toList();
+
+        _allEventsController.add(events);
+      },
+    );
+  }
+
+  // イベント（募集・未来）
+  void loadHostFurureEvents() {
+    final now = DateTime.now().toLocal().toIso8601String();
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('event')
+        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .where('createUserId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('date', isGreaterThanOrEqualTo: now)
         .snapshots();
 
     querySnapshot.listen(

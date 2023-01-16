@@ -13,10 +13,16 @@ class MyJoinEvent extends StatefulWidget {
 
 class _MyJoinEventState extends State<MyJoinEvent> {
   final EventProvider _eventProvider = EventProvider();
+  bool btn1 = false;
+  bool btn2 = false;
 
   @override
   void initState() {
-    _eventProvider.loadJoinEvents();
+    // ここでどんなイベントを表示するか決めている
+    // 募集参加不問かつ終了不問、募集参加不問終了、募集かつ終了不問、募集かつ未来
+    (btn1==false) ? 
+    {(btn2==false)?_eventProvider.loadJoinEvents():_eventProvider.loadJoinFutureEvents()}:
+    {(btn2==false)?_eventProvider.loadHostEvents():_eventProvider.loadHostFurureEvents()};
     super.initState();
   }
 
@@ -33,6 +39,35 @@ class _MyJoinEventState extends State<MyJoinEvent> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Row(
+                children: [
+                  const Text("募集したイベント"),
+                  Switch(
+                    value: btn1,
+                    onChanged: (bool? value) {
+                      if (value != null) {
+                        setState(() {
+                          btn1 = value;
+                        });
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  const Text("これからのイベント"),
+                  Switch(
+                    value: btn2,
+                    onChanged: (bool? value) {
+                      if (value != null) {
+                        setState(() {
+                          btn2 = value;
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
               Expanded(
                 child: Container(
                   height: double.infinity,
