@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class EventProvider {
   //コンストラクター
@@ -55,7 +56,8 @@ class EventProvider {
   void loadJoinEvents() {
     final querySnapshot = FirebaseFirestore.instance
         .collection('event')
-        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .where('participant',
+            arrayContains: FirebaseAuth.instance.currentUser!.uid)
         .snapshots();
 
     querySnapshot.listen(
@@ -72,11 +74,15 @@ class EventProvider {
 
   // イベント（募集応募不問・未来）
   void loadJoinFutureEvents() {
-    final now = DateTime.now().toLocal().toIso8601String();
+    //final now = DateTime.now().toLocal().toIso8601String(); これは何？
+    DateTime now = DateTime.now();
+    print(now);
     final querySnapshot = FirebaseFirestore.instance
         .collection('event')
-        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
-        .where('date', isGreaterThanOrEqualTo: now)
+        .where('participant',
+            arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .orderBy('date', descending: true)
+        .endBefore([Timestamp.fromDate(now)])
         .snapshots();
 
     querySnapshot.listen(
@@ -96,8 +102,10 @@ class EventProvider {
     final now = DateTime.now().toLocal().toIso8601String();
     final querySnapshot = FirebaseFirestore.instance
         .collection('event')
-        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
-        .where('createUserId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('participant',
+            arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .where('createUserId',
+            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots();
 
     querySnapshot.listen(
@@ -114,12 +122,15 @@ class EventProvider {
 
   // イベント（募集・未来）
   void loadHostFurureEvents() {
-    final now = DateTime.now().toLocal().toIso8601String();
+    DateTime now = DateTime.now();
     final querySnapshot = FirebaseFirestore.instance
         .collection('event')
-        .where('participant', arrayContains: FirebaseAuth.instance.currentUser!.uid)
-        .where('createUserId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .where('date', isGreaterThanOrEqualTo: now)
+        .where('participant',
+            arrayContains: FirebaseAuth.instance.currentUser!.uid)
+        .where('createUserId',
+            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .orderBy('date', descending: true)
+        .endBefore([Timestamp.fromDate(now)])
         .snapshots();
 
     querySnapshot.listen(

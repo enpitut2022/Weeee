@@ -87,39 +87,6 @@ class ProfileState extends State<Profile> {
               icon: const Icon(Icons.edit),
             ),
             const SizedBox(height: 30),
-            TextButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(100)),
-                  )),
-              onPressed: (() {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const MyCreateEvent()));
-              }),
-              child: const Text("作成したイベント",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-            ),
-            const SizedBox(height: 30),
-            TextButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(100)),
-                  )),
-              onPressed: (() {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) =>  MyJoinEvent()));
-              }),
-              child: const Text("参加したイベント",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-            ),
           ],
         ),
       ),
