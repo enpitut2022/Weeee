@@ -20,9 +20,17 @@ class _MyJoinEventState extends State<MyJoinEvent> {
   void initState() {
     // ここでどんなイベントを表示するか決めている
     // 募集参加不問かつ終了不問、募集参加不問終了、募集かつ終了不問、募集かつ未来
-    (btn1==false) ? 
-    {(btn2==false)?_eventProvider.loadJoinEvents():_eventProvider.loadJoinFutureEvents()}:
-    {(btn2==false)?_eventProvider.loadHostEvents():_eventProvider.loadHostFurureEvents()};
+    (btn1 == false)
+        ? {
+            (btn2 == false)
+                ? _eventProvider.loadJoinEvents()
+                : _eventProvider.loadJoinFutureEvents()
+          }
+        : {
+            (btn2 == false)
+                ? _eventProvider.loadHostEvents()
+                : _eventProvider.loadHostFurureEvents()
+          };
     super.initState();
   }
 
@@ -48,11 +56,23 @@ class _MyJoinEventState extends State<MyJoinEvent> {
                       if (value != null) {
                         setState(() {
                           btn1 = value;
+                          print(btn1);
+                          (btn1 == false)
+                              ? {
+                                  (btn2 == false)
+                                      ? _eventProvider.loadJoinEvents()
+                                      : _eventProvider.loadJoinFutureEvents()
+                                }
+                              : {
+                                  (btn2 == false)
+                                      ? _eventProvider.loadHostEvents()
+                                      : _eventProvider.loadHostFurureEvents()
+                                };
                         });
                       }
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   const Text("これからのイベント"),
@@ -62,6 +82,18 @@ class _MyJoinEventState extends State<MyJoinEvent> {
                       if (value != null) {
                         setState(() {
                           btn2 = value;
+                          print(btn2);
+                          (btn1 == false)
+                              ? {
+                                  (btn2 == false)
+                                      ? _eventProvider.loadJoinEvents()
+                                      : _eventProvider.loadJoinFutureEvents()
+                                }
+                              : {
+                                  (btn2 == false)
+                                      ? _eventProvider.loadHostEvents()
+                                      : _eventProvider.loadHostFurureEvents()
+                                };
                         });
                       }
                     },
@@ -77,28 +109,29 @@ class _MyJoinEventState extends State<MyJoinEvent> {
                   //課題点：listviewの中でしか表示できない。コンストラクタを使っていない。
                   //これから：streambuilderを使わなくてもいい方法
                   child: StreamBuilder<List<Event>>(
-                      stream: _eventProvider.allEvents,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<Event>> snapshot) {
-                        if (snapshot.hasError) {
-                          return const Text("エラーが発生しました");
-                        }
-                        if (!snapshot.hasData) {
-                          // データを取得できていない時
-                          return const CircularProgressIndicator();
-                        }
-                        final events = snapshot.data!;
-                        return Scaffold(
-                          body: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                for (final event in events)
-                                  MyEventCard(event: event),
-                              ],
-                            ),
+                    stream: _eventProvider.allEvents,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Event>> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text("エラーが発生しました");
+                      }
+                      if (!snapshot.hasData) {
+                        // データを取得できていない時
+                        return const CircularProgressIndicator();
+                      }
+                      final events = snapshot.data!;
+                      return Scaffold(
+                        body: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              for (final event in events)
+                                MyEventCard(event: event),
+                            ],
                           ),
-                        );
-                      }),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
