@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
@@ -11,7 +10,7 @@ class Event {
   final String gender;
   final int age;
   final int people;
-  final String genre;
+  // final String genre;
   final String background; // 募集した理由
   final String fanhistory;
   final String participation;
@@ -33,7 +32,7 @@ class Event {
     required this.gender,
     required this.age,
     required this.people,
-    required this.genre,
+    // required this.genre,
     required this.background,
     required this.fanhistory,
     required this.participation,
@@ -49,27 +48,26 @@ class Event {
   factory Event.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
     return Event._(
-      //19ko
-      documentID: data["documentID"],
-      createUserID: data["createUserId"],
-      name: data["name"],
-      date: data["date"].toDate(), // timestamp型からdatetime型へ
-      prefec: data["prefec"],
-      place: data["place"],
-      gender: data["gender"],
-      age: data["age"],
-      people: data["num"],
-      genre: data["genre"],
-      background: data["background"],
-      fanhistory: data["fanhistory"],
-      participation: data["participation"],
-      question1: data["question1"],
-      question2: data["question2"],
-      question3: data["question3"],
-      ans1: data["ans1"],
-      ans2: data["ans2"],
-      ans3: data["ans3"],
-      participant: data["participant"]
-    );
+        //19ko
+        documentID: data["documentID"],
+        createUserID: data["createUserId"],
+        name: data["name"],
+        date: data["date"].toDate(), // timestamp型からdatetime型へ
+        prefec: data["prefec"],
+        place: data["place"],
+        gender: data["gender"],
+        age: data["age"],
+        people: data["num"],
+        // genre: data["genre"],
+        background: data["background"],
+        fanhistory: data["fanhistory"],
+        participation: data["participation"],
+        question1: data["question1"],
+        question2: data["question2"],
+        question3: data["question3"],
+        ans1: data["ans1"],
+        ans2: data["ans2"],
+        ans3: data["ans3"],
+        participant: data["participant"]);
   }
 }

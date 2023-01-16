@@ -94,40 +94,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Row(
-                      children: [
-                        const Text(
-                          "ジャンル",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        DropdownButton(
-                          value: genreDefo,
-                          elevation: 50,
-                          items: const [
-                            DropdownMenuItem(
-                              value: '-',
-                              child: Text('-'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'スポーツ',
-                              child: Text('スポーツ'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'ライブ/フェス',
-                              child: Text('ライブ/フェス'),
-                            ),
-                          ],
-                          onChanged: (String? value) {
-                            setState(() {
-                              genreDefo = value;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
+
                     const SizedBox(
                       height: 25,
                     ),
@@ -513,8 +480,8 @@ class _EventAddPageState extends State<EventAddPage> {
                           model.ans1 = "";
                           model.ans2 = "";
                           model.ans3 = "";
-                          await model.addEvent(); 
-                  
+                          await model.addEvent();
+
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(

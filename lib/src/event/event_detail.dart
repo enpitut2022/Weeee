@@ -75,10 +75,6 @@ class _EventDetailState extends State<EventDetail> {
                 SizedBox(
                   height: screenSize.height * 0.03,
                 ),
-                Text(
-                  "ジャンル　： ${widget.event.genre}",
-                  style: const TextStyle(fontSize: 30),
-                ),
                 SizedBox(
                   height: screenSize.height * 0.03,
                 ),
