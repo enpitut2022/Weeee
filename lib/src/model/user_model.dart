@@ -1,11 +1,11 @@
-class UserModals {
+class UserModels {
   String? name;
   String? email;
   String? uid;
   int? old;
   String? gender;
 
-  UserModals({
+  UserModels({
     this.name,
     this.uid,
     this.email,
@@ -14,8 +14,8 @@ class UserModals {
   });
 
   //firestoreから
-  factory UserModals.fromMap(map) {
-    return UserModals(
+  factory UserModels.fromMap(map) {
+    return UserModels(
       name: map['name'],
       uid: map['uid'],
       email: map['email'],

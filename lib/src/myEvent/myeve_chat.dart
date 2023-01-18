@@ -24,7 +24,7 @@ class _ChatRoomState extends State<ChatRoom> {
   }
 
   // ユーザーを取得する変数
-  UserModals loggedUser = UserModals();
+  UserModels loggedUser = UserModels();
   // メッセージを取得するリスト
   List<types.Message> _messages = [];
   String randomId = const Uuid().v4();
@@ -35,7 +35,7 @@ class _ChatRoomState extends State<ChatRoom> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }

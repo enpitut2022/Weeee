@@ -16,7 +16,7 @@ class EventAddPage extends StatefulWidget {
 }
 
 class _EventAddPageState extends State<EventAddPage> {
-  UserModals loggedUser = UserModals();
+  UserModels loggedUser = UserModels();
   @override
   void initState() {
     super.initState();
@@ -25,7 +25,7 @@ class _EventAddPageState extends State<EventAddPage> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }
@@ -504,6 +504,7 @@ class _EventAddPageState extends State<EventAddPage> {
                               nowTime.hour,
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
                           model.createUserId = loggedUser.uid;
+                          model.createUserName = loggedUser.name;
                           model.gender = loggedUser.gender;
                           model.age = loggedUser.old;
                           model.prefec = prefecDefo;
@@ -513,8 +514,8 @@ class _EventAddPageState extends State<EventAddPage> {
                           model.ans1 = "";
                           model.ans2 = "";
                           model.ans3 = "";
-                          await model.addEvent(); 
-                  
+                          await model.addEvent();
+
                           Navigator.of(context).pop(true);
                         } catch (e) {
                           final snackBar = SnackBar(

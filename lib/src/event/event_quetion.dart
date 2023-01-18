@@ -17,7 +17,7 @@ class EventDetailQuestion extends StatefulWidget {
 }
 
 class _EventDetailQuestionState extends State<EventDetailQuestion> {
-  UserModals loggedUser = UserModals(); // ログインしているユーザーの情報
+  UserModels loggedUser = UserModels(); // ログインしているユーザーの情報
 
   String ans1 = "";
 
@@ -33,7 +33,7 @@ class _EventDetailQuestionState extends State<EventDetailQuestion> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }
@@ -117,7 +117,7 @@ class _EventDetailQuestionState extends State<EventDetailQuestion> {
                       'uid': loggedUser.uid,
                       'name': loggedUser.name,
                       'old': loggedUser.old,
-                      'gender' : loggedUser.gender,
+                      'gender': loggedUser.gender,
                       'ans1': ans1,
                       'ans2': ans2,
                       'ans3': ans3,

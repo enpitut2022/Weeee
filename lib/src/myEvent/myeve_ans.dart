@@ -1,11 +1,8 @@
-import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enpit_weee/src/event/event_quetion.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
-import 'package:enpit_weee/src/profile/answer_detail.dart';
+import 'package:enpit_weee/src/myEvent/myeve_ans_detail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class AnswerMyEvent extends StatefulWidget {
@@ -17,7 +14,7 @@ class AnswerMyEvent extends StatefulWidget {
 }
 
 class _AnswerMyEventState extends State<AnswerMyEvent> {
-  UserModals loggedUser = UserModals();
+  UserModels loggedUser = UserModels();
 
   @override
   void initState() {
@@ -27,7 +24,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }
@@ -81,9 +78,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
             );
           }
           // データが読込中の場合
-          return const Center(
-            child: Text('読込中……'),
-          );
+          return const CircularProgressIndicator();
         }),
       ),
     );
@@ -111,7 +106,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
 // }
 
 // class _AnswerMyEventState extends State<AnswerMyEvent> {
-//   UserModals loggedUser = UserModals();
+//   UserModels loggedUser = UserModels();
 
 //   @override
 //   void initState() {
@@ -121,7 +116,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
 //         .doc(FirebaseAuth.instance.currentUser!.uid)
 //         .get()
 //         .then((value) {
-//       loggedUser = UserModals.fromMap(value.data());
+//       loggedUser = UserModels.fromMap(value.data());
 //       setState(() {});
 //     });
 //   }

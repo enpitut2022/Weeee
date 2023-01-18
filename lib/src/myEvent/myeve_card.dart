@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
-import 'package:enpit_weee/src/myEvent/my_event_menu.dart';
+import 'package:enpit_weee/src/myEvent/myeve_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class _MyEventCardState extends State<MyEventCard> {
   // user modelsの宣言
   User? user = FirebaseAuth.instance.currentUser;
 
-  UserModals loggedUser = UserModals();
+  UserModels loggedUser = UserModels();
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _MyEventCardState extends State<MyEventCard> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }

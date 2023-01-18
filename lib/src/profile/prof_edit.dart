@@ -13,7 +13,7 @@ class EditProfile extends StatefulWidget {
 class EditProfileState extends State<EditProfile> {
   // 現在のユーザーの取得
   User? user = FirebaseAuth.instance.currentUser;
-  UserModals loggedUser = UserModals();
+  UserModels loggedUser = UserModels();
   @override
   void initState() {
     super.initState();
@@ -22,16 +22,13 @@ class EditProfileState extends State<EditProfile> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }
 
   String? errorMessage;
-  final _auth = FirebaseAuth.instance;
-  //our form key
   final _formKey = GlobalKey<FormState>();
-  // editing Controller
   final firstNameEditingController = TextEditingController();
   final oldEditingController = TextEditingController();
   final emailEditingController = TextEditingController();
@@ -41,7 +38,6 @@ class EditProfileState extends State<EditProfile> {
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 15, fontWeight: FontWeight.normal);
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +74,7 @@ class EditProfileState extends State<EditProfile> {
         validator: (value) {
           if (value!.isEmpty) {
             return ("年齢は必ず入力してください");
-          } 
+          }
           return null;
         },
         onSaved: (value) {
@@ -141,8 +137,7 @@ class EditProfileState extends State<EditProfile> {
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         // minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
-        },
+        onPressed: () {},
         child: const Text(
           "編集を確定する",
           textAlign: TextAlign.center,
@@ -152,7 +147,7 @@ class EditProfileState extends State<EditProfile> {
       ),
     );
 
-  return Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
