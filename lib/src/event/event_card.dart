@@ -18,7 +18,7 @@ class _EventCardState extends State<EventCard> {
   // user modelsの宣言
   User? user = FirebaseAuth.instance.currentUser;
 
-  UserModals loggedUser = UserModals();
+  UserModels loggedUser = UserModels();
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _EventCardState extends State<EventCard> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }

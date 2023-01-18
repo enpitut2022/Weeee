@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
 
 class EventProvider {
   //コンストラクター
@@ -76,7 +75,6 @@ class EventProvider {
   void loadJoinFutureEvents() {
     //final now = DateTime.now().toLocal().toIso8601String(); これは何？
     DateTime now = DateTime.now();
-    print(now);
     final querySnapshot = FirebaseFirestore.instance
         .collection('event')
         .where('participant',
@@ -99,7 +97,6 @@ class EventProvider {
 
   // イベント（募集・日時不問）
   void loadHostEvents() {
-    final now = DateTime.now().toLocal().toIso8601String();
     final querySnapshot = FirebaseFirestore.instance
         .collection('event')
         .where('participant',

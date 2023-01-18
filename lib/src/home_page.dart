@@ -1,8 +1,6 @@
-import 'package:enpit_weee/src/chat/chat_index.dart';
 import 'package:enpit_weee/src/event/event_index.dart';
-import 'package:enpit_weee/src/myEvent/my_event_home.dart';
-import 'package:enpit_weee/src/myEvent/my_join_event.dart';
-import 'package:enpit_weee/src/profile/profile.dart';
+import 'package:enpit_weee/src/myEvent/myeve_index.dart';
+import 'package:enpit_weee/src/profile/prof_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -38,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // この中に入るクラスは、コンストラクタが必要。
   static const _screens = [
     EventIndex(),
-    MyJoinEvent(),
+    MyEventIndex(),
     Profile(),
   ];
   int _selectedIndex = 0;

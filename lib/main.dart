@@ -2,7 +2,7 @@ import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/login/foregetpassword.dart';
 import 'package:enpit_weee/src/login/login.dart';
 import 'package:enpit_weee/src/login/sinup.dart';
-import 'package:enpit_weee/src/profile/edit_profile.dart';
+import 'package:enpit_weee/src/profile/prof_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

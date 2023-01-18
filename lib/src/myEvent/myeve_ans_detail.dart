@@ -31,7 +31,7 @@ class AnswerDetail extends StatefulWidget {
 }
 
 class _AnswerDetailState extends State<AnswerDetail> {
-  UserModals loggedUser = UserModals();
+  UserModels loggedUser = UserModels();
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      loggedUser = UserModals.fromMap(value.data());
+      loggedUser = UserModels.fromMap(value.data());
       setState(() {});
     });
   }
@@ -205,20 +205,22 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   children: [
                     TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100)))),
+                        backgroundColor: Colors.blue,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                        ),
+                      ),
                       onPressed: (() async {
-                        await FirebaseFirestore.instance
-                            .collection("event")
-                            .doc(widget.event.documentID)
-                            .collection("participant")
-                            .add({
-                          'uid': widget.uid,
-                          'name': widget.name,
-                          'judge': 'rejected'
-                        });
+                        // 同行者に追加されないことを通知する機能を作ろうとしたが後回し
+                        // await FirebaseFirestore.instance
+                        //     .collection("event")
+                        //     .doc(widget.event.documentID)
+                        //     .collection("participant")
+                        //     .add({
+                        //   'uid': widget.uid,
+                        //   'name': widget.name,
+                        //   'judge': 'rejected'
+                        // });
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => const HomePage()));
                       }),
@@ -244,7 +246,8 @@ class _AnswerDetailState extends State<AnswerDetail> {
                             .add({
                           'uid': widget.uid,
                           'name': widget.name,
-                          'judge': 'permit'
+                          'gender': widget.gender,
+                          'old':widget.old,
                         });
 
                         // eventコレクション直下の配列に追加する処理

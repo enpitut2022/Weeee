@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class AddEventProvider extends ChangeNotifier {
   String? name;
+  String? createUserName;
   String? createUserId;
   String? eventID;
   DateTime? date;
@@ -70,6 +71,7 @@ class AddEventProvider extends ChangeNotifier {
     await eventID.set({
       "documentID": eventID.id, // イベントのドキュメントID
       "createUserId": createUserId,
+      "createUserName": createUserName,
       "name": name,
       "date": date, //datetime型は、自動でtimestamp型へ
       "place": place,
@@ -94,13 +96,20 @@ class AddEventProvider extends ChangeNotifier {
     });
     final now = DateTime.now().toLocal().toIso8601String();
     // イベント名でチャットルームの作成
-    await FirebaseFirestore.instance
-        .collection('chat_room')
-        .doc(name)
-        .set({
+    await FirebaseFirestore.instance.collection('chat_room').doc(name).set({
       'name': name,
       'createdAt': now,
       'eventID': eventID.id,
+    });
+    await FirebaseFirestore.instance
+        .collection("event")
+        .doc(eventID.id)
+        .collection("participant")
+        .add({
+      'uid': createUserId,
+      'name': createUserName,
+      'gender': gender,
+      'old': age,
     });
   }
 }

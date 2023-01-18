@@ -1,17 +1,16 @@
-import 'package:enpit_weee/src/event/event_card.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
-import 'package:enpit_weee/src/myEvent/my_event_card.dart';
+import 'package:enpit_weee/src/myEvent/myeve_card.dart';
 import 'package:enpit_weee/src/provider/event_provider.dart';
 import 'package:flutter/material.dart';
 
-class MyJoinEvent extends StatefulWidget {
-  const MyJoinEvent({super.key});
+class MyEventIndex extends StatefulWidget {
+  const MyEventIndex({super.key});
 
   @override
-  State<MyJoinEvent> createState() => _MyJoinEventState();
+  State<MyEventIndex> createState() => _MyEventIndexState();
 }
 
-class _MyJoinEventState extends State<MyJoinEvent> {
+class _MyEventIndexState extends State<MyEventIndex> {
   final EventProvider _eventProvider = EventProvider();
   bool btn1 = false;
   bool btn2 = false;
@@ -56,7 +55,6 @@ class _MyJoinEventState extends State<MyJoinEvent> {
                       if (value != null) {
                         setState(() {
                           btn1 = value;
-                          print(btn1);
                           (btn1 == false)
                               ? {
                                   (btn2 == false)
@@ -66,7 +64,7 @@ class _MyJoinEventState extends State<MyJoinEvent> {
                               : {
                                   (btn2 == false)
                                       ? _eventProvider.loadHostEvents()
-                                      : _eventProvider.loadHostFurureEvents()
+                                      : btn2=false/*_eventProvider.loadHostFurureEvents()*/
                                 };
                         });
                       }
@@ -82,7 +80,6 @@ class _MyJoinEventState extends State<MyJoinEvent> {
                       if (value != null) {
                         setState(() {
                           btn2 = value;
-                          print(btn2);
                           (btn1 == false)
                               ? {
                                   (btn2 == false)
@@ -92,7 +89,7 @@ class _MyJoinEventState extends State<MyJoinEvent> {
                               : {
                                   (btn2 == false)
                                       ? _eventProvider.loadHostEvents()
-                                      : _eventProvider.loadHostFurureEvents()
+                                      : btn1=false/* _eventProvider.loadHostFurureEvents()*/
                                 };
                         });
                       }

@@ -60,7 +60,7 @@ class SignUpState extends State<SignUp> {
         validator: (value) {
           if (value!.isEmpty) {
             return ("年齢は必ず入力してください");
-          } 
+          }
           return null;
         },
         onSaved: (value) {
@@ -315,7 +315,7 @@ class SignUpState extends State<SignUp> {
     User? user = _auth.currentUser;
 
     // user model　を呼び出す
-    UserModals userModel = UserModals();
+    UserModels userModel = UserModels();
 
     // ユーザーモデルにデータを渡す
     userModel.email = user!.email;
