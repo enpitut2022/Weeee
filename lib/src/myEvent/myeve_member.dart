@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,9 +36,7 @@ class _MyEventMemberState extends State<MyEventMember> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('同行者'),
-      ),
+      appBar: myAppBar('同行者'),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("event").doc(widget.event.documentID).collection("participant").snapshots(),
         builder: ( (context, snapshot) {

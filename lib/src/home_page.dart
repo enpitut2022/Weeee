@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static const _screens = [
     EventIndex(),
     MyEventIndex(),
-    Profile(),
+    //Profile(),
   ];
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.search), label: '探す'),
           BottomNavigationBarItem(icon: Icon(Icons.event), label: 'マイイベント'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'マイページ'),
+          //BottomNavigationBarItem(icon: Icon(Icons.person), label: 'マイページ'),
         ],
         type: BottomNavigationBarType.fixed,
       ),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/myEvent/myeve_chat.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
@@ -37,9 +38,7 @@ class _MyEventMenuState extends State<MyEventMenu> {
     var yoko = screenSize.width * 0.7;
     var tate = screenSize.height * 0.15;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('イベント情報'),
-      ),
+      appBar: myAppBar('イベント情報'),
       body: Container(
         height: screenSize.height * 0.99,
         color: const Color.fromARGB(255, 214, 214, 214),

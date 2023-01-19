@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/home_page.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
@@ -42,9 +43,7 @@ class _EventDetailQuestionState extends State<EventDetailQuestion> {
     var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('募集者の質問'),
-      ),
+      appBar: myAppBar('募集者の質問'),
       body: Container(
         height: screenSize.height * 0.99,
         color: const Color.fromARGB(255, 214, 214, 214),

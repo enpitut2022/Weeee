@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/myEvent/myeve_ans_detail.dart';
@@ -34,9 +35,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
     var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('質問回答者一覧'),
-      ),
+      appBar: myAppBar('質問回答者一覧'),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection("event")

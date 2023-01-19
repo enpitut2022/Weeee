@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -41,31 +42,63 @@ class _ChatRoomState extends State<ChatRoom> {
   }
 
   // firestoreからメッセージの内容をとってきて_messageにセット
+  // getメソッドを使った方法
+  // void _getMessages() async {
+  //   final getData = await FirebaseFirestore.instance
+  //       .collection('chat_room')
+  //       .doc(widget.roomName)
+  //       .collection('contents')
+  //       .orderBy("createdAt", descending: true)
+  //       .get();
+
+  //   final message = getData.docs
+  //       .map(
+  //         (d) => types.TextMessage(
+  //           author: types.User(
+  //             id: d.data()['uid'],
+  //             firstName: d.data()['name'],
+  //           ),
+  //           createdAt: d.data()['createdAt'],
+  //           id: d.data()['id'],
+  //           text: d.data()['text'],
+  //         ),
+  //       )
+  //       .toList();
+
+  //   setState(() {
+  //     _messages = [...message];
+  //   });
+  // }
+
+  // snapshot()を使った方法
   void _getMessages() async {
     final getData = await FirebaseFirestore.instance
         .collection('chat_room')
         .doc(widget.roomName)
         .collection('contents')
         .orderBy("createdAt", descending: true)
-        .get();
+        .snapshots();
 
-    final message = getData.docs
-        .map(
-          (d) => types.TextMessage(
+    getData.listen(
+      (event) {
+        final message = event.docs.map((DocumentSnapshot doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          return types.TextMessage(
             author: types.User(
-              id: d.data()['uid'],
-              firstName: d.data()['name'],
+              id: data['uid'],
+              firstName: data['name'],
             ),
-            createdAt: d.data()['createdAt'],
-            id: d.data()['id'],
-            text: d.data()['text'],
-          ),
-        )
-        .toList();
+            createdAt: data['createdAt'],
+            id: data['id'],
+            text: data['text'],
+          );
+        }).toList();
 
-    setState(() {
-      _messages = [...message];
-    });
+        setState(() {
+          _messages = [...message];
+        });
+      },
+    );
   }
 
   // メッセージ内容をfirestoreにセット
@@ -118,9 +151,8 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('チャット'),
-      ),
+      appBar: myAppBar('チャット'),
+
       // flutter_chat_uiのメソッドであるChat()を使っている
       body: Chat(
         theme: const DefaultChatTheme(
