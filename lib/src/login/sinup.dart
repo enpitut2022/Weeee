@@ -23,7 +23,7 @@ class SignUpState extends State<SignUp> {
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final confirmPasswordEditingController = TextEditingController();
-  String? genderDefo = '-';
+  String? genderDefo = '性別';
 
   @override
   Widget build(BuildContext context) {
@@ -77,16 +77,22 @@ class SignUpState extends State<SignUp> {
         ));
 
     //性別入力
-    final genderField = Row(
-      children: [
-        const Text(
-          "性別",
-          style: TextStyle(fontSize: 20),
-        ),
-        const SizedBox(
-          width: 30,
-        ),
-        DropdownButton(
+    // final genderField = Row(
+    //   children: [
+    //     const Text(
+    //       "性別",
+    //       style: TextStyle(fontSize: 20),
+    //     ),
+    //     const SizedBox(
+    //       width: 30,
+    //     ),
+        final genderField =DropdownButtonFormField(
+          validator: (value) {
+            if (value == '性別') {
+              return ("性別を選択してください");
+            }
+            return null;
+          },
           value: genderDefo,
           onChanged: (String? value) {
             setState(() {
@@ -95,8 +101,8 @@ class SignUpState extends State<SignUp> {
           },
           items: const [
             DropdownMenuItem(
-              value: '-',
-              child: Text('-'),
+              value: '性別',
+              child: Text('性別'),
             ),
             DropdownMenuItem(
               value: '男性',
@@ -111,8 +117,8 @@ class SignUpState extends State<SignUp> {
               child: Text('その他'),
             ),
           ],
-        ),
-      ],
+        // ),
+      // ],
     );
 
     //eメール入力

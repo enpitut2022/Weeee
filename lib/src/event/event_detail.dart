@@ -1,5 +1,6 @@
 import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/event/event_quetion.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
@@ -36,9 +37,7 @@ class _EventDetailState extends State<EventDetail> {
     var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('イベント詳細'),
-      ),
+      appBar: myAppBar('イベント詳細'),
       body: loggedUser.name == null
           ? const Center(
               // データを取得できていない時

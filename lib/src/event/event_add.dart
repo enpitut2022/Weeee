@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/provider/event_add_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -69,9 +70,7 @@ class _EventAddPageState extends State<EventAddPage> {
     return ChangeNotifierProvider<AddEventProvider>(
       create: (_) => AddEventProvider(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("イベント入力"),
-        ),
+        appBar: myAppBar('イベント入力'),
         body: Center(
           child: Consumer<AddEventProvider>(
             builder: (context, model, child) {

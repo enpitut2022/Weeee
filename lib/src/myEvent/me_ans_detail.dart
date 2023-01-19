@@ -126,7 +126,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                 ),
                 Container(
                   width: double.infinity,
-                  color: Color.fromARGB(255, 200, 223, 242),
+                  color: const Color.fromARGB(255, 200, 223, 242),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -151,7 +151,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                 ),
                 Container(
                   width: double.infinity,
-                  color: Color.fromARGB(255, 200, 223, 242),
+                  color: const Color.fromARGB(255, 200, 223, 242),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -176,7 +176,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                 ),
                 Container(
                   width: double.infinity,
-                  color: Color.fromARGB(255, 200, 223, 242),
+                  color: const Color.fromARGB(255, 200, 223, 242),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -204,22 +204,20 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   children: [
                     TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                        ),
-                      ),
+                          backgroundColor: Colors.blue,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100)))),
                       onPressed: (() async {
-                        // 同行者に追加されないことを通知する機能を作ろうとしたが後回し
-                        // await FirebaseFirestore.instance
-                        //     .collection("event")
-                        //     .doc(widget.event.documentID)
-                        //     .collection("participant")
-                        //     .add({
-                        //   'uid': widget.uid,
-                        //   'name': widget.name,
-                        //   'judge': 'rejected'
-                        // });
+                        await FirebaseFirestore.instance
+                            .collection("event")
+                            .doc(widget.event.documentID)
+                            .collection("participant")
+                            .add({
+                          'uid': widget.uid,
+                          'name': widget.name,
+                          'judge': 'rejected'
+                        });
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => const HomePage()));
                       }),
@@ -245,8 +243,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                             .add({
                           'uid': widget.uid,
                           'name': widget.name,
-                          'gender': widget.gender,
-                          'old':widget.old,
+                          'judge': 'permit'
                         });
 
                         // eventコレクション直下の配列に追加する処理

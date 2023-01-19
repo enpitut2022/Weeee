@@ -21,14 +21,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'latoTextTheme',
-        primaryColor: Colors.purple,
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-        ).copyWith(
-          secondary: Colors.cyanAccent.shade400,
-        ),
+      theme: ThemeData.light().copyWith(
+        appBarTheme: const AppBarTheme(color: Colors.white),
+        //fontFamily: 'latoTextTheme',
+        primaryColor: Colors.white,
+        // colorScheme: ColorScheme.fromSwatch(
+        //   primarySwatch: Colors.blue,
+        // ).copyWith(
+        //   secondary: Colors.cyanAccent.shade400,
+        // ),
       ),
       home: const Login(),
       routes: <String, WidgetBuilder>{  // 2. routesには「/」を含めない。

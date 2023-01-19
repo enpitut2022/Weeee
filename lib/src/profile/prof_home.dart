@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/login/login.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/profile/prof_edit.dart';
@@ -31,25 +32,26 @@ class ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5F5F5),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 19, 4, 4),
-        title: const Text('マイページ'),
-        // actions: [
-        //   TextButton(
-        //     onPressed: () {
-        //       setState(() {
-        //         logout(context);
-        //         //Navigator.pushNamed(context, "/login");
-        //       });
-        //     },
-        //     child: const Text(
-        //       'ログアウト',
-        //       style: TextStyle(fontSize: 20),
-        //     ),
-        //   ),
-        // ],
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: const Color.fromARGB(255, 19, 4, 4),
+      //   title: const Text('マイページ'),
+      //   // actions: [
+      //   //   TextButton(
+      //   //     onPressed: () {
+      //   //       setState(() {
+      //   //         logout(context);
+      //   //         //Navigator.pushNamed(context, "/login");
+      //   //       });
+      //   //     },
+      //   //     child: const Text(
+      //   //       'ログアウト',
+      //   //       style: TextStyle(fontSize: 20),
+      //   //     ),
+      //   //   ),
+      //   // ],
+      // ),
+      appBar: myAppBar('マイページ'),
       body: loggedUser.name == null
           ? const Center(
               // データを取得できていない時
