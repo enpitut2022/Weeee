@@ -78,7 +78,10 @@ class _EventIndexState extends State<EventIndex> {
                             child: Column(
                               children: [
                                 for (final event in events)
-                                  EventCard(event: event),
+                                  EventCard(
+                                    event: event,
+                                    loggeduser: loggedUser,
+                                  ),
                               ],
                             ),
                           ),
@@ -96,7 +99,7 @@ class _EventIndexState extends State<EventIndex> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const EventAddPage(),
+                builder: (context) => EventAddPage(loggedUser: loggedUser,),
                 fullscreenDialog: true,
               ),
             );

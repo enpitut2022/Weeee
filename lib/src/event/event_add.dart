@@ -1,34 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/provider/event_add_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:provider/provider.dart';
 
 //イベントの入力画面
 //firebaseのeventという名前のcollectionにデータを追加
 class EventAddPage extends StatefulWidget {
-  const EventAddPage({super.key});
+  EventAddPage({
+    required this.loggedUser,
+    super.key,
+  });
+  UserModels loggedUser;
   @override
   State<EventAddPage> createState() => _EventAddPageState();
 }
 
 class _EventAddPageState extends State<EventAddPage> {
-  UserModels loggedUser = UserModels();
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   String? genderDefo = '-';
@@ -502,14 +494,12 @@ class _EventAddPageState extends State<EventAddPage> {
                               inputDate.day,
                               nowTime.hour,
                               nowTime.minute); // ここでカレンダーの日付をmodel.dateに代入
-                          model.createUserId = loggedUser.uid;
-                          model.createUserName = loggedUser.name;
-                          model.gender = loggedUser.gender;
-                          model.age = loggedUser.old;
+                          model.createUserId = widget.loggedUser.uid;
+                          model.createUserName = widget.loggedUser.name;
+                          model.gender = widget.loggedUser.gender;
+                          model.age = widget.loggedUser.old;
                           model.prefec = prefecDefo;
                           model.genre = genreDefo;
-                          // model.favorite =
-                          // 12/14 推しの欄について、　個人のアーティストはどうするか考える必要がある
                           model.ans1 = "";
                           model.ans2 = "";
                           model.ans3 = "";
@@ -524,7 +514,7 @@ class _EventAddPageState extends State<EventAddPage> {
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
-                      child: const Text("募集する"),
+                      child: const Text("イベント作成"),
                     ),
                   ],
                 ),

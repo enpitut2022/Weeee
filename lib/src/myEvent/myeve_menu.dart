@@ -1,35 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/myEvent/myeve_chat.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/myEvent/myeve_member.dart';
 import 'package:enpit_weee/src/myEvent/myeve_ans.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyEventMenu extends StatefulWidget {
-  MyEventMenu({required this.event, super.key});
+  MyEventMenu({
+    required this.event,
+    required this.loggedUser,
+    super.key,
+  });
   Event event;
+  UserModels loggedUser;
 
   @override
   State<MyEventMenu> createState() => _MyEventMenuState();
 }
 
 class _MyEventMenuState extends State<MyEventMenu> {
-  UserModels loggedUser = UserModels();
-
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   @override
@@ -85,8 +78,10 @@ class _MyEventMenuState extends State<MyEventMenu> {
                                   BorderRadius.all(Radius.circular(10)))),
                       onPressed: (() async {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                MyEventMember(event: widget.event)));
+                            builder: (context) => MyEventMember(
+                                  event: widget.event,
+                                  loggedUser: widget.loggedUser,
+                                )));
                       }),
                       child: const Text("同行者確認",
                           style: TextStyle(
@@ -108,7 +103,7 @@ class _MyEventMenuState extends State<MyEventMenu> {
                         // チャットページへ画面遷移
                         await Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return ChatRoom(widget.event.documentID);
+                          return ChatRoom(widget.event.documentID, widget.loggedUser);
                         }));
                       }),
                       child: const Text("チャット",
@@ -128,13 +123,15 @@ class _MyEventMenuState extends State<MyEventMenu> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)))),
                         onPressed: (() async {
-                          if (widget.event.createUserID == loggedUser.uid) {
+                          if (widget.event.createUserID ==
+                              widget.loggedUser.uid) {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-                                    AnswerMyEvent(event: widget.event)));
+                                    AnswerMyEvent(event: widget.event, loggedUser: widget.loggedUser,)));
                           }
                         }),
-                        child: (widget.event.createUserID == loggedUser.uid)
+                        child: (widget.event.createUserID ==
+                                widget.loggedUser.uid)
                             ? const Text("質問回答",
                                 style: TextStyle(
                                     color: Colors.black,

@@ -21,18 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-        appBarTheme: const AppBarTheme(color: Colors.white),
-        //fontFamily: 'latoTextTheme',
-        primaryColor: Colors.white,
-        // colorScheme: ColorScheme.fromSwatch(
-        //   primarySwatch: Colors.blue,
-        // ).copyWith(
-        //   secondary: Colors.cyanAccent.shade400,
-        // ),
-      ),
       home: const Login(),
-      routes: <String, WidgetBuilder>{  // 2. routesには「/」を含めない。
+      routes: <String, WidgetBuilder>{
+        // 2. routesには「/」を含めない。
         '/login': (BuildContext context) => const Login(),
         '/sinup': (BuildContext context) => const SignUp(),
         '/forgetpassword': (BuildContext context) => const ForgotPassword(),
@@ -43,4 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

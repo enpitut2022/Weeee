@@ -10,33 +10,26 @@ class EventDetailQuestion extends StatefulWidget {
   //eventモデルを使用するときに使う　12/7
   // EventDetailQuestion({required this.event, super.key});
   // Event event;
-  EventDetailQuestion({required this.event, super.key});
+  EventDetailQuestion({
+    required this.event,
+    required this.loggedUser,
+    super.key,
+  });
   Event event;
+  UserModels loggedUser;
 
   @override
   State<EventDetailQuestion> createState() => _EventDetailQuestionState();
 }
 
 class _EventDetailQuestionState extends State<EventDetailQuestion> {
-  UserModels loggedUser = UserModels(); // ログインしているユーザーの情報
-
   String ans1 = "";
-
   String ans2 = "";
-
   String ans3 = "";
 
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   Widget build(BuildContext context) {
@@ -113,10 +106,10 @@ class _EventDetailQuestionState extends State<EventDetailQuestion> {
                         .doc(widget.event.documentID)
                         .collection("answers")
                         .add({
-                      'uid': loggedUser.uid,
-                      'name': loggedUser.name,
-                      'old': loggedUser.old,
-                      'gender': loggedUser.gender,
+                      'uid': widget.loggedUser.uid,
+                      'name': widget.loggedUser.name,
+                      'old': widget.loggedUser.old,
+                      'gender': widget.loggedUser.gender,
                       'ans1': ans1,
                       'ans2': ans2,
                       'ans3': ans3,

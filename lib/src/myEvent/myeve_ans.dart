@@ -3,31 +3,22 @@ import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
 import 'package:enpit_weee/src/myEvent/myeve_ans_detail.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AnswerMyEvent extends StatefulWidget {
-  AnswerMyEvent({required this.event, super.key});
+  AnswerMyEvent({required this.event, required this.loggedUser, super.key,});
   Event event;
+  UserModels loggedUser;
 
   @override
   State<AnswerMyEvent> createState() => _AnswerMyEventState();
 }
 
 class _AnswerMyEventState extends State<AnswerMyEvent> {
-  UserModels loggedUser = UserModels();
 
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   @override
@@ -59,6 +50,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
                           builder: (context) {
                             return AnswerDetail(
                               event: widget.event,
+                              loggedUser: widget.loggedUser,
                               ans1: doc['ans1'],
                               ans2: doc['ans2'],
                               ans3: doc['ans3'],

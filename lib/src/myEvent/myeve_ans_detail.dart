@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class AnswerDetail extends StatefulWidget {
   AnswerDetail({
     required this.event,
+    required this.loggedUser, 
     required this.ans1,
     required this.ans2,
     required this.ans3,
@@ -19,6 +20,7 @@ class AnswerDetail extends StatefulWidget {
     super.key,
   });
   Event event;
+  UserModels loggedUser;
   final String ans1;
   final String ans2;
   final String ans3;
@@ -32,19 +34,10 @@ class AnswerDetail extends StatefulWidget {
 }
 
 class _AnswerDetailState extends State<AnswerDetail> {
-  UserModels loggedUser = UserModels();
 
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   @override

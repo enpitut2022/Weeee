@@ -1,35 +1,28 @@
 import 'package:bubble/bubble.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/event/event_quetion.dart';
 import 'package:enpit_weee/src/model/event_model.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class EventDetail extends StatefulWidget {
-  EventDetail({required this.event, super.key});
+  EventDetail({
+    required this.event,
+    required this.loggedUser,
+    super.key,
+  });
   Event event;
+  UserModels loggedUser;
 
   @override
   State<EventDetail> createState() => _EventDetailState();
 }
 
 class _EventDetailState extends State<EventDetail> {
-  UserModels loggedUser = UserModels();
 
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   @override
@@ -38,7 +31,7 @@ class _EventDetailState extends State<EventDetail> {
 
     return Scaffold(
       appBar: myAppBar('イベント詳細'),
-      body: loggedUser.name == null
+      body: widget.loggedUser.name == null
           ? const Center(
               // データを取得できていない時
               child: CircularProgressIndicator(),
@@ -51,9 +44,7 @@ class _EventDetailState extends State<EventDetail> {
               child: ListView(
                 children: [
                   Container(
-                    //color: const Color.fromARGB(255, 201, 198, 243),
                     alignment: const Alignment(0.0, 0),
-                    //color: Colors.blue,
                     height: 80,
                     width: 500,
                     margin: const EdgeInsets.all(5),
@@ -111,13 +102,6 @@ class _EventDetailState extends State<EventDetail> {
                         "人数　： ${widget.event.people.toString()} 人",
                         style: const TextStyle(fontSize: 30),
                       ),
-                      // SizedBox(
-                      //   height: screenSize.height * 0.03,
-                      // ),
-                      // Text(
-                      //   "推し　： ${event.favorite}",
-                      //   style: const TextStyle(fontSize: 30),
-                      // ),
                       SizedBox(
                         height: screenSize.height * 0.03,
                       ),
@@ -179,15 +163,17 @@ class _EventDetailState extends State<EventDetail> {
               ),
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: (widget.event.createUserID == loggedUser.uid)
+      floatingActionButton: (widget.event.createUserID == widget.loggedUser.uid)
           ? Container()
           : FloatingActionButton.extended(
               onPressed: () async {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        EventDetailQuestion(event: widget.event),
+                    builder: (context) => EventDetailQuestion(
+                      event: widget.event,
+                      loggedUser: widget.loggedUser,
+                    ),
                     // fullscreenDialog: true,
                   ),
                 );

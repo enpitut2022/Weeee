@@ -6,15 +6,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyEventMember extends StatefulWidget {
-  MyEventMember({required this.event, super.key});
+  MyEventMember({
+    required this.event,
+    required this.loggedUser,
+    super.key,
+  });
   Event event;
+  UserModels loggedUser;
 
   @override
   State<MyEventMember> createState() => _MyEventMemberState();
 }
 
 class _MyEventMemberState extends State<MyEventMember> {
-  UserModels loggedUser = UserModels();
   String uuid = "";
   List namelist = [];
   Set member = Set();
@@ -23,14 +27,6 @@ class _MyEventMemberState extends State<MyEventMember> {
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   @override
@@ -38,26 +34,30 @@ class _MyEventMemberState extends State<MyEventMember> {
     return Scaffold(
       appBar: myAppBar('同行者'),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("event").doc(widget.event.documentID).collection("participant").snapshots(),
-        builder: ( (context, snapshot) {
-          // データが取得できた場合
-          if (snapshot.hasData) {
-            final List<DocumentSnapshot> member = snapshot.data!.docs;
-            return ListView(
-              children: member.map((doc) {
-                return Card(
-                  child: ListTile(
-                    title: Text(doc['name']),
-                    subtitle: Text("${doc['old']}歳　${doc['gender']}"),
-                    leading: const Icon(Icons.account_circle),
-                  ),
-                );
-              }).toList(),
-            );
-          }
-          // データが読込中の場合
-          return const CircularProgressIndicator();
-        })),
+          stream: FirebaseFirestore.instance
+              .collection("event")
+              .doc(widget.event.documentID)
+              .collection("participant")
+              .snapshots(),
+          builder: ((context, snapshot) {
+            // データが取得できた場合
+            if (snapshot.hasData) {
+              final List<DocumentSnapshot> member = snapshot.data!.docs;
+              return ListView(
+                children: member.map((doc) {
+                  return Card(
+                    child: ListTile(
+                      title: Text(doc['name']),
+                      subtitle: Text("${doc['old']}歳　${doc['gender']}"),
+                      leading: const Icon(Icons.account_circle),
+                    ),
+                  );
+                }).toList(),
+              );
+            }
+            // データが読込中の場合
+            return const CircularProgressIndicator();
+          })),
       // 1/18 participantコレクションを作らなくてもいいようにしたかった
       // body: ListView.builder(
       //   itemCount: widget.event.participant.length,
