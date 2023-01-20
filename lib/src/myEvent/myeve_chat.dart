@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enpit_weee/my_widgets.dart';
 import 'package:enpit_weee/src/model/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // flutter_chat_uiを使うためのパッケージをインポート
@@ -27,38 +26,6 @@ class _ChatRoomState extends State<ChatRoom> {
 
   // メッセージを取得するリスト
   List<types.Message> _messages = [];
-  String randomId = const Uuid().v4();
-
-
-
-  // firestoreからメッセージの内容をとってきて_messageにセット
-  // getメソッドを使った方法
-  // void _getMessages() async {
-  //   final getData = await FirebaseFirestore.instance
-  //       .collection('chat_room')
-  //       .doc(widget.roomName)
-  //       .collection('contents')
-  //       .orderBy("createdAt", descending: true)
-  //       .get();
-
-  //   final message = getData.docs
-  //       .map(
-  //         (d) => types.TextMessage(
-  //           author: types.User(
-  //             id: d.data()['uid'],
-  //             firstName: d.data()['name'],
-  //           ),
-  //           createdAt: d.data()['createdAt'],
-  //           id: d.data()['id'],
-  //           text: d.data()['text'],
-  //         ),
-  //       )
-  //       .toList();
-
-  //   setState(() {
-  //     _messages = [...message];
-  //   });
-  // }
 
   // snapshot()を使った方法
   void _getMessages() async {
@@ -109,32 +76,18 @@ class _ChatRoomState extends State<ChatRoom> {
     });
   }
 
-  // リンク添付時にリンクプレビューを表示する
-  void _handlePreviewDataFetched(
-    types.TextMessage message,
-    types.PreviewData previewData,
-  ) {
-    final index = _messages.indexWhere((element) => element.id == message.id);
-    final updatedMessage = (_messages[index] as types.TextMessage)
-        .copyWith(previewData: previewData);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        _messages[index] = updatedMessage;
-      });
-    });
-  }
 
   // メッセージ送信時の処理
   void _handleSendPressed(types.PartialText message) {
     final textMessage = types.TextMessage(
-      author:
-          types.User(id: "${widget.loggedUser.uid}", firstName: "${widget.loggedUser.name}"),
+      author: types.User(
+        id: "${widget.loggedUser.uid}",
+        firstName: "${widget.loggedUser.name}",
+      ),
       createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: randomId,
+      id: const Uuid().v4(),
       text: message.text,
     );
-
     _addMessage(textMessage);
   }
 
@@ -142,13 +95,9 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppBar('チャット'),
-
-      // flutter_chat_uiのメソッドであるChat()を使っている
       body: Chat(
         theme: const DefaultChatTheme(
-          // メッセージ入力欄の色
-          inputBackgroundColor: Colors.blue,
-          // 送信ボタン
+          inputBackgroundColor: Colors.lightBlue,
           sendButtonIcon: Icon(Icons.send),
           sendingIcon: Icon(Icons.update_outlined),
         ),
@@ -156,11 +105,12 @@ class _ChatRoomState extends State<ChatRoom> {
         showUserNames: true,
         // メッセージの配列
         messages: _messages,
-        onPreviewDataFetched: _handlePreviewDataFetched,
         onSendPressed: _handleSendPressed,
         showUserAvatars: true,
         user: types.User(
-            id: "${widget.loggedUser.uid}", firstName: "${widget.loggedUser.name}"),
+          id: "${widget.loggedUser.uid}",
+          firstName: "${widget.loggedUser.name}",
+        ),
       ),
     );
   }

@@ -20,13 +20,13 @@ class AddEventProvider extends ChangeNotifier {
   String? question1;
   String? question2;
   String? question3;
-  String? ans1; // 12/19 参加者の回答分。イベント作成時にはnullの状態。
-  String? ans2;
-  String? ans3;
+  // String? ans1; // 12/19 参加者の回答分。イベント作成時にはnullの状態。
+  // String? ans2;
+  // String? ans3;
 
   Future addEvent() async {
     if (name == null || name == "") {
-      throw "名前が入力されていません";
+      throw "イベント名が入力されていません";
     }
     if (genre == null || genre == "-") {
       throw "ジャンルは -以外を選択してください";
@@ -85,9 +85,9 @@ class AddEventProvider extends ChangeNotifier {
       "question1": question1,
       "question2": question2,
       "question3": question3,
-      "ans1": ans1,
-      "ans2": ans2,
-      "ans3": ans3,
+      // "ans1": ans1,
+      // "ans2": ans2,
+      // "ans3": ans3,
     });
     // イベントの参加者に自分を追加
     await eventID.update({

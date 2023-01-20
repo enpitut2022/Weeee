@@ -19,7 +19,6 @@ class EventDetail extends StatefulWidget {
 }
 
 class _EventDetailState extends State<EventDetail> {
-
   @override
   void initState() {
     super.initState();
@@ -27,141 +26,124 @@ class _EventDetailState extends State<EventDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: myAppBar('イベント詳細'),
-      body: widget.loggedUser.name == null
-          ? const Center(
-              // データを取得できていない時
-              child: CircularProgressIndicator(),
-            )
-          : Container(
-              height: screenSize.height * 0.99,
-              color: const Color.fromARGB(255, 214, 214, 214),
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(10),
-              child: ListView(
-                children: [
-                  Container(
-                    alignment: const Alignment(0.0, 0),
-                    height: 80,
-                    width: 500,
-                    margin: const EdgeInsets.all(5),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.black,
-                          width: 5,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      widget.event.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 50,
-                      ),
-                    ),
+      body: Container(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
+          children: [
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: myColor("other"),
+                    width: 1,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Text(
-                        "ジャンル　： ${widget.event.genre}",
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Text(
-                        "都道府県　： ${widget.event.prefec}",
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Text(
-                        "場所　： ${widget.event.place}",
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Text(
-                        "日時　：　\n ${widget.event.date.year}年${widget.event.date.month}月${widget.event.date.day}日 ${widget.event.date.hour}時${widget.event.date.minute}分",
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Text(
-                        "人数　： ${widget.event.people.toString()} 人",
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Text(
-                        "ファン歴　： ${widget.event.fanhistory}",
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Text(
-                        "参加回数　： ${widget.event.participation}",
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.03,
-                      ),
-                      Row(
-                        children: [
-                          Column(
-                            children: [
-                              const Icon(
-                                Icons.person,
-                                color: Color.fromARGB(255, 36, 38, 32),
-                                size: 100,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    widget.event.gender,
-                                    style: const TextStyle(fontSize: 20),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    "${widget.event.age.toString()} 歳",
-                                    style: const TextStyle(fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Bubble(
-                              margin: const BubbleEdges.only(top: 10),
-                              nip: BubbleNip.leftTop,
-                              child: Text(
-                                widget.event.background,
-                                style: const TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                ),
+              ),
+                child: Text(
+                  widget.event.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
                   ),
-                ],
+                ),
               ),
             ),
+            myBoxHeight(myHeight(context) * 0.05),
+            categoryText("イベントについて"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    infoText("都道府県"),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("場所"),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("日時"),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("同行者の希望人数"),
+                  ],
+                ),
+                myBoxWidth(myWidth(context) * 0.1),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      infoText(widget.event.prefec),
+                      myBoxHeight(myHeight(context) * 0.01),
+                      infoText(widget.event.place),
+                      myBoxHeight(myHeight(context) * 0.01),
+                      infoText(
+                          "${widget.event.date.year}年${widget.event.date.month}月${widget.event.date.day}日"),
+                      myBoxHeight(myHeight(context) * 0.01),
+                      infoText("${widget.event.people.toString()} 人"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            myBoxHeight(myHeight(context) * 0.05),
+            categoryText("募集者について"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    infoText("性別"),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("年齢"),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("聴いている期間"),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("ライブへの参加回数"),
+                  ],
+                ),
+                myBoxWidth(myWidth(context) * 0.1),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    infoText(widget.event.gender),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText(widget.event.age.toString()),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText(widget.event.fanhistory),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText(widget.event.participation),
+                  ],
+                ),
+              ],
+            ),
+            myBoxHeight(myHeight(context) * 0.01),
+            infoText("募集した理由"),
+            Row(
+              children: [
+                Icon(
+                  Icons.person,
+                  color: myColor("other"),
+                  size: 100,
+                ),
+                Expanded(
+                  child: Bubble(
+                    margin: const BubbleEdges.only(top: 10),
+                    color: myColor("main1"),
+                    nip: BubbleNip.leftCenter,
+                    child: Text(
+                      widget.event.background,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: (widget.event.createUserID == widget.loggedUser.uid)
           ? Container()
@@ -181,6 +163,20 @@ class _EventDetailState extends State<EventDetail> {
               label: const Text("応募してみる！"),
               backgroundColor: const Color.fromARGB(255, 255, 82, 70),
             ),
+    );
+  }
+
+  Widget categoryText(String txt) {
+    return Text(
+      txt,
+      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    );
+  }
+
+  Widget infoText(String txt) {
+    return Text(
+      txt,
+      style: const TextStyle(fontSize: 20),
     );
   }
 }
