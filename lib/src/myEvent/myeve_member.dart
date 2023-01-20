@@ -49,7 +49,7 @@ class _MyEventMemberState extends State<MyEventMember> {
                     child: ListTile(
                       title: Text(doc['name']),
                       subtitle: Text("${doc['old']}歳　${doc['gender']}"),
-                      leading: const Icon(Icons.account_circle),
+                      leading:  Icon(Icons.account_circle, color:  myColor("main1"),),
                     ),
                   );
                 }).toList(),

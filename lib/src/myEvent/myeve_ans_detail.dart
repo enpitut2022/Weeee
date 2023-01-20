@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class AnswerDetail extends StatefulWidget {
   AnswerDetail({
     required this.event,
-    required this.loggedUser, 
+    required this.loggedUser,
     required this.ans1,
     required this.ans2,
     required this.ans3,
@@ -34,7 +34,6 @@ class AnswerDetail extends StatefulWidget {
 }
 
 class _AnswerDetailState extends State<AnswerDetail> {
-
   @override
   void initState() {
     super.initState();
@@ -42,14 +41,10 @@ class _AnswerDetailState extends State<AnswerDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: myAppBar('回答内容'),
       body: Container(
-        height: screenSize.height * 0.99,
-        color: const Color.fromARGB(255, 214, 214, 214),
-        margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
@@ -115,7 +110,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   ],
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.03,
+                  height: myHeight(context) * 0.03,
                 ),
                 Container(
                   width: double.infinity,
@@ -130,7 +125,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                         ),
                       ),
                       SizedBox(
-                        height: screenSize.height * 0.03,
+                        height: myHeight(context) * 0.03,
                       ),
                       Text(
                         "回答1　： ${widget.ans1}",
@@ -140,7 +135,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   ),
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.03,
+                  height: myHeight(context) * 0.03,
                 ),
                 Container(
                   width: double.infinity,
@@ -155,7 +150,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                         ),
                       ),
                       SizedBox(
-                        height: screenSize.height * 0.03,
+                        height: myHeight(context) * 0.03,
                       ),
                       Text(
                         "回答2　： ${widget.ans2}",
@@ -165,7 +160,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   ),
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.03,
+                  height: myHeight(context) * 0.03,
                 ),
                 Container(
                   width: double.infinity,
@@ -180,7 +175,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                         ),
                       ),
                       SizedBox(
-                        height: screenSize.height * 0.03,
+                        height: myHeight(context) * 0.03,
                       ),
                       Text(
                         "回答3　： ${widget.ans3}",
@@ -190,14 +185,14 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   ),
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.03,
+                  height: myHeight(context) * 0.03,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor:  myColor("red"),
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                         ),
@@ -224,7 +219,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: myColor("main1"),
                           shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(100)),
@@ -239,7 +234,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                           'uid': widget.uid,
                           'name': widget.name,
                           'gender': widget.gender,
-                          'old':widget.old,
+                          'old': widget.old,
                         });
 
                         // eventコレクション直下の配列に追加する処理
@@ -266,7 +261,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   ],
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.03,
+                  height: myHeight(context) * 0.03,
                 ),
               ],
             ),

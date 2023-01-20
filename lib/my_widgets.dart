@@ -5,22 +5,23 @@ AppBar myAppBar(String mytitle) {
   return AppBar(
     title: Text(
       mytitle,
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: myColor("other")),
     ),
-    backgroundColor: Colors.white,
-    iconTheme: const IconThemeData(color: Colors.black),
+    backgroundColor: myColor("base"),
+    iconTheme: IconThemeData(color: myColor("other")),
     elevation: 5,
   );
 }
 
-AppBar myAppBarWithDrawer(String mytitle,  GlobalKey<ScaffoldState> scaffoldKey){
+AppBar myAppBarWithDrawer(
+    String mytitle, GlobalKey<ScaffoldState> scaffoldKey) {
   return AppBar(
     title: Text(
       mytitle,
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: myColor("other")),
     ),
-    backgroundColor: Colors.white,
-    iconTheme: const IconThemeData(color: Colors.black),
+    backgroundColor: myColor("base"),
+    iconTheme: IconThemeData(color: myColor("other")),
     elevation: 5,
     leading: IconButton(
       onPressed: () => scaffoldKey.currentState!.openDrawer(),
@@ -36,7 +37,7 @@ Drawer myDrawer(UserModels user) {
       children: [
         Container(
           margin: const EdgeInsets.fromLTRB(10, 20, 0, 0),
-          color: Colors.white60,
+          //color: myColor("main1"),
           child: const Text("マイデータ"),
         ),
         showData(Icons.account_circle, "${user.name}"),
@@ -61,7 +62,7 @@ Widget showData(IconData ico, String s) {
       children: [
         Icon(
           ico,
-          color: const Color(0xff1976d2),
+          color: myColor("main1"),
         ),
         const SizedBox(
           width: 50,
@@ -73,4 +74,44 @@ Widget showData(IconData ico, String s) {
       ],
     ),
   );
+}
+
+Color myColor(String color) {
+  String a = color;
+  if (a == "base") {
+    return Colors.white;
+  } else if (a == "main1") {
+    return Colors.lightBlue;
+  } else if (a == "main22") {
+    return Colors.pink.shade200;
+  } else if (a == "red") {
+    return Colors.redAccent.shade400;
+  } else {
+    return Colors.black;
+  }
+}
+
+double myWidth(BuildContext context) {
+  var screenSize = MediaQuery.of(context).size;
+  return screenSize.width;
+}
+
+double myHeight(BuildContext context) {
+  var screenSize = MediaQuery.of(context).size;
+  return screenSize.height;
+}
+
+BoxDecoration myDeco() {
+  return BoxDecoration(
+    border: Border.all(color: myColor("main1"), width: 10),
+    borderRadius: BorderRadius.circular(20),
+  );
+}
+
+Widget myBoxHeight(double size) {
+  return SizedBox(height: size);
+}
+
+Widget myBoxWidth(double size) {
+  return SizedBox(width: size);
 }

@@ -6,7 +6,11 @@ import 'package:enpit_weee/src/myEvent/myeve_ans_detail.dart';
 import 'package:flutter/material.dart';
 
 class AnswerMyEvent extends StatefulWidget {
-  AnswerMyEvent({required this.event, required this.loggedUser, super.key,});
+  AnswerMyEvent({
+    required this.event,
+    required this.loggedUser,
+    super.key,
+  });
   Event event;
   UserModels loggedUser;
 
@@ -15,7 +19,6 @@ class AnswerMyEvent extends StatefulWidget {
 }
 
 class _AnswerMyEventState extends State<AnswerMyEvent> {
-
   @override
   void initState() {
     super.initState();
@@ -23,7 +26,6 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: myAppBar('質問回答者一覧'),
@@ -43,7 +45,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
                   child: ListTile(
                     title: Text(doc['name']),
                     subtitle: Text("${doc['old']}歳　${doc['gender']}"),
-                    leading: const Icon(Icons.account_circle),
+                    leading: Icon(Icons.account_circle, color:  myColor("main1"),),
                     onTap: () async {
                       await Navigator.of(context).push(
                         MaterialPageRoute(
@@ -121,7 +123,7 @@ class _AnswerMyEventState extends State<AnswerMyEvent> {
 //         title: const Text('質問回答者'),
 //       ),
 //       body: Container(
-//         height: screenSize.height * 0.99,
+//         height: myHeight(context) * 0.99,
 //         color: const Color.fromARGB(255, 214, 214, 214),
 //         margin: const EdgeInsets.all(10),
 //         padding: const EdgeInsets.all(10),

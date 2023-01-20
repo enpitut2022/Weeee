@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         Locale('ja', ''),
       ],
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'NotoSansJP'),
+      theme: ThemeData(fontFamily: 'NotoSansJP'),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );

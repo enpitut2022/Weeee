@@ -27,28 +27,22 @@ class _MyEventMenuState extends State<MyEventMenu> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    var yoko = screenSize.width * 0.7;
-    var tate = screenSize.height * 0.15;
+    var yoko = myWidth(context) * 0.7;
+    var tate = myHeight(context) * 0.15;
     return Scaffold(
       appBar: myAppBar('イベント情報'),
       body: Container(
-        height: screenSize.height * 0.99,
-        color: const Color.fromARGB(255, 214, 214, 214),
-        margin: const EdgeInsets.all(10),
+        height: myHeight(context),
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
             Container(
-              alignment: const Alignment(0.0, 0),
-              height: 80,
-              width: 500,
               margin: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: Colors.black,
-                    width: 5,
+                    color: myColor("other"),
+                    width: 1,
                   ),
                 ),
               ),
@@ -56,13 +50,13 @@ class _MyEventMenuState extends State<MyEventMenu> {
                 widget.event.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 50,
+                  fontSize: 40,
                 ),
               ),
             ),
             SizedBox(
-              width: screenSize.width,
-              height: screenSize.height * 0.7,
+              width: myWidth(context),
+              height: myHeight(context) * 0.7,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +66,7 @@ class _MyEventMenuState extends State<MyEventMenu> {
                     width: yoko,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: myColor("main1"),
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)))),
@@ -95,7 +89,7 @@ class _MyEventMenuState extends State<MyEventMenu> {
                     width: yoko,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: myColor("main1"),
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)))),
@@ -103,7 +97,8 @@ class _MyEventMenuState extends State<MyEventMenu> {
                         // チャットページへ画面遷移
                         await Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return ChatRoom(widget.event.documentID, widget.loggedUser);
+                          return ChatRoom(
+                              widget.event.documentID, widget.loggedUser);
                         }));
                       }),
                       child: const Text("チャット",
@@ -118,7 +113,7 @@ class _MyEventMenuState extends State<MyEventMenu> {
                     width: yoko,
                     child: TextButton(
                         style: TextButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor:  myColor("main1"),
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)))),
@@ -126,8 +121,10 @@ class _MyEventMenuState extends State<MyEventMenu> {
                           if (widget.event.createUserID ==
                               widget.loggedUser.uid) {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    AnswerMyEvent(event: widget.event, loggedUser: widget.loggedUser,)));
+                                builder: (context) => AnswerMyEvent(
+                                      event: widget.event,
+                                      loggedUser: widget.loggedUser,
+                                    )));
                           }
                         }),
                         child: (widget.event.createUserID ==

@@ -18,9 +18,9 @@ class Event {
   final String question1;
   final String question2;
   final String question3;
-  final String ans1;
-  final String ans2;
-  final String ans3;
+  // final String ans1;
+  // final String ans2;
+  // final String ans3;
   final List participant;
 
   Event._({
@@ -41,9 +41,9 @@ class Event {
     required this.question1,
     required this.question2,
     required this.question3,
-    required this.ans1,
-    required this.ans2,
-    required this.ans3,
+    // required this.ans1,
+    // required this.ans2,
+    // required this.ans3,
     required this.participant,
   });
 
@@ -68,9 +68,9 @@ class Event {
         question1: data["question1"],
         question2: data["question2"],
         question3: data["question3"],
-        ans1: data["ans1"],
-        ans2: data["ans2"],
-        ans3: data["ans3"],
+        // ans1: data["ans1"],
+        // ans2: data["ans2"],
+        // ans3: data["ans3"],
         participant: data["participant"]);
   }
 }
