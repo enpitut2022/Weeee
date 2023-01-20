@@ -19,6 +19,7 @@ class _EventIndexState extends State<EventIndex> {
   final EventProvider _eventProvider = EventProvider();
   UserModels loggedUser = UserModels();
   var _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _searchBoolean = false;
 
   @override
   void initState() {
@@ -41,7 +42,49 @@ class _EventIndexState extends State<EventIndex> {
       length: 3,
       child: Scaffold(
         key: _scaffoldKey,
-        appBar: myAppBarWithDrawer('イベント一覧画面', _scaffoldKey),
+        appBar: AppBar(
+          title: !_searchBoolean
+              ? Text(
+                  'イベント一覧画面',
+                  style: TextStyle(color: myColor("other")),
+                )
+              : _searchTextField(),
+          backgroundColor: myColor("base"),
+          iconTheme: IconThemeData(color: myColor("other")),
+          elevation: 5,
+          leading: IconButton(
+            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+            icon: Icon(
+              Icons.account_circle,
+              color: myColor("main1"),
+            ),
+          ),
+          actions: !_searchBoolean
+              ? [
+                  IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: myColor("main1"),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _searchBoolean = true;
+                        });
+                      })
+                ]
+              : [
+                  IconButton(
+                      icon: Icon(
+                        Icons.clear,
+                        color: myColor("main1"),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _searchBoolean = false;
+                        });
+                      })
+                ],
+        ),
         // drawer: loggedUser.name == null
         //   ? const Center(
         //       // データを取得できていない時
@@ -99,11 +142,51 @@ class _EventIndexState extends State<EventIndex> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EventAddPage(loggedUser: loggedUser,),
+                builder: (context) => EventAddPage(
+                  loggedUser: loggedUser,
+                ),
                 fullscreenDialog: true,
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _searchTextField() {
+    //追加
+    return TextField(
+      onChanged: (String s) {
+        setState(() {
+          _eventProvider.loadEventsWithArtist(s);
+        });
+      },
+      autofocus: true, //TextFieldが表示されるときにフォーカスする（キーボードを表示する）
+      cursorColor: myColor("other"), //カーソルの色
+      style: TextStyle(
+        //テキストのスタイル
+        color: myColor("other"),
+        fontSize: 20,
+      ),
+      textInputAction: TextInputAction.search, //キーボードのアクションボタンを指定
+      decoration: InputDecoration(
+        //TextFiledのスタイル
+        enabledBorder: UnderlineInputBorder(
+            //デフォルトのTextFieldの枠線
+            borderSide: BorderSide(
+          color: myColor("other"),
+        )),
+        focusedBorder: UnderlineInputBorder(
+            //TextFieldにフォーカス時の枠線
+            borderSide: BorderSide(
+          color: myColor("other"),
+        )),
+        hintText: 'アーティスト名', //何も入力してないときに表示されるテキスト
+        hintStyle: TextStyle(
+          //hintTextのスタイル
+          color: myColor("other"),
+          fontSize: 20,
         ),
       ),
     );

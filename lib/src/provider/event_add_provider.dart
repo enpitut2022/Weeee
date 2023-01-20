@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class AddEventProvider extends ChangeNotifier {
   String? name;
+  String? artist;
   String? createUserName;
   String? createUserId;
   String? eventID;
@@ -27,6 +28,9 @@ class AddEventProvider extends ChangeNotifier {
   Future addEvent() async {
     if (name == null || name == "") {
       throw "イベント名が入力されていません";
+    }
+    if (artist == null || artist == "") {
+      throw "アーティスト名が入力されていません";
     }
     if (genre == null || genre == "-") {
       throw "ジャンルは -以外を選択してください";
@@ -72,6 +76,7 @@ class AddEventProvider extends ChangeNotifier {
       "createUserId": createUserId,
       "createUserName": createUserName,
       "name": name,
+      "artist":artist,
       "date": date, //datetime型は、自動でtimestamp型へ
       "place": place,
       "prefec": prefec,

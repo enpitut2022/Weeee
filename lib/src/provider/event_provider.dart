@@ -142,6 +142,26 @@ class EventProvider {
     );
   }
 
+  // アーティスト名検索
+  void loadEventsWithArtist(String s) {
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('event')
+        .where('artist', isEqualTo: s)
+        .orderBy('date', descending: true)
+        .snapshots();
+
+    querySnapshot.listen(
+      (event) {
+        final events = event.docs.map((DocumentSnapshot doc) {
+          //イベントの情報をここでfirebaseから取得している。
+          return Event.fromSnapshot(doc);
+        }).toList();
+
+        _allEventsController.add(events);
+      },
+    );
+  }
+
   // イベントを追加するときのプロバイダー.
   // ChangeNotifierを使っていないやつ
   // 今後（11/21）event_add_providerをこのファイルに取り入れたい

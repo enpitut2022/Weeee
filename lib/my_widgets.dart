@@ -25,10 +25,12 @@ AppBar myAppBarWithDrawer(
     elevation: 5,
     leading: IconButton(
       onPressed: () => scaffoldKey.currentState!.openDrawer(),
-      icon: const Icon(Icons.account_circle),
+      icon: Icon(Icons.account_circle, color: myColor("main1"),),
     ),
   );
 }
+
+
 
 Drawer myDrawer(UserModels user) {
   return Drawer(
