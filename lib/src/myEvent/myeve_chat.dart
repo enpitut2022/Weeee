@@ -10,8 +10,10 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:uuid/uuid.dart';
 
 class ChatRoom extends StatefulWidget {
-  const ChatRoom(this.roomName, {Key? key}) : super(key: key);
+  const ChatRoom(this.roomName, this.loggedUser, {Key? key}) : super(key: key);
   final String roomName;
+  final UserModels loggedUser;
+
   @override
   State<ChatRoom> createState() => _ChatRoomState();
 }
@@ -20,26 +22,14 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   void initState() {
     _getMessages();
-    _getUser();
     super.initState();
   }
 
-  // ユーザーを取得する変数
-  UserModels loggedUser = UserModels();
   // メッセージを取得するリスト
   List<types.Message> _messages = [];
   String randomId = const Uuid().v4();
 
-  void _getUser() async {
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
-  }
+
 
   // firestoreからメッセージの内容をとってきて_messageにセット
   // getメソッドを使った方法
@@ -139,7 +129,7 @@ class _ChatRoomState extends State<ChatRoom> {
   void _handleSendPressed(types.PartialText message) {
     final textMessage = types.TextMessage(
       author:
-          types.User(id: "${loggedUser.uid}", firstName: "${loggedUser.name}"),
+          types.User(id: "${widget.loggedUser.uid}", firstName: "${widget.loggedUser.name}"),
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: randomId,
       text: message.text,
@@ -170,7 +160,7 @@ class _ChatRoomState extends State<ChatRoom> {
         onSendPressed: _handleSendPressed,
         showUserAvatars: true,
         user: types.User(
-            id: "${loggedUser.uid}", firstName: "${loggedUser.name}"),
+            id: "${widget.loggedUser.uid}", firstName: "${widget.loggedUser.name}"),
       ),
     );
   }

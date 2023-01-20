@@ -6,31 +6,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyEventCard extends StatefulWidget {
-  MyEventCard({required this.event, super.key});
-  //event モデルの宣言
+  MyEventCard({
+    required this.event,
+    required this.loggedUser,
+    super.key,
+  });
   Event event;
+  UserModels loggedUser;
 
   @override
   State<MyEventCard> createState() => _MyEventCardState();
 }
 
 class _MyEventCardState extends State<MyEventCard> {
-  // user modelsの宣言
-  User? user = FirebaseAuth.instance.currentUser;
-
-  UserModels loggedUser = UserModels();
-
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedUser = UserModels.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   @override
@@ -41,7 +32,10 @@ class _MyEventCardState extends State<MyEventCard> {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => MyEventMenu(event: widget.event),
+              builder: (context) => MyEventMenu(
+                event: widget.event,
+                loggedUser: widget.loggedUser,
+              ),
             ),
           );
         },

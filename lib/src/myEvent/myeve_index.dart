@@ -36,7 +36,7 @@ class _MyEventIndexState extends State<MyEventIndex> {
                 ? _eventProvider.loadHostEvents()
                 : _eventProvider.loadHostFurureEvents()
           };
-          FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
@@ -84,7 +84,8 @@ class _MyEventIndexState extends State<MyEventIndex> {
                               : {
                                   (btn2 == false)
                                       ? _eventProvider.loadHostEvents()
-                                      : btn2=false/*_eventProvider.loadHostFurureEvents()*/
+                                      : btn2 =
+                                          false /*_eventProvider.loadHostFurureEvents()*/
                                 };
                         });
                       }
@@ -109,7 +110,8 @@ class _MyEventIndexState extends State<MyEventIndex> {
                               : {
                                   (btn2 == false)
                                       ? _eventProvider.loadHostEvents()
-                                      : btn1=false/* _eventProvider.loadHostFurureEvents()*/
+                                      : btn1 =
+                                          false /* _eventProvider.loadHostFurureEvents()*/
                                 };
                         });
                       }
@@ -142,7 +144,10 @@ class _MyEventIndexState extends State<MyEventIndex> {
                           child: Column(
                             children: [
                               for (final event in events)
-                                MyEventCard(event: event),
+                                MyEventCard(
+                                  event: event,
+                                  loggedUser: loggedUser,
+                                ),
                             ],
                           ),
                         ),

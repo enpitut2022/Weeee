@@ -1,6 +1,5 @@
 import 'package:enpit_weee/src/event/event_index.dart';
 import 'package:enpit_weee/src/myEvent/myeve_index.dart';
-import 'package:enpit_weee/src/profile/prof_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
