@@ -75,8 +75,9 @@ class _EventAddPageState extends State<EventAddPage> {
                   children: [
                     categoryText("イベントについて"),
                     myBoxHeight(5),
-                    eventName(model, "イベント名*", "○○の全国ツアー"),
+                    eventName(model, "イベント名*", "星野源の全国ツアー"),
                     myBoxHeight(16),
+                    eventArtist(model, "アーティスト名*", "星野源"),
                     // Row(
                     //   children: [
                     //     const Text(
@@ -267,6 +268,20 @@ class _EventAddPageState extends State<EventAddPage> {
       ),
       onChanged: (text) {
         model.name = text;
+      },
+    );
+  }
+
+  Widget eventArtist(AddEventProvider model, String label, String hint) {
+    return TextField(
+      maxLength: 20,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        border: const OutlineInputBorder(),
+      ),
+      onChanged: (text) {
+        model.artist = text;
       },
     );
   }

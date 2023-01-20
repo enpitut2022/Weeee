@@ -5,6 +5,7 @@ class Event {
   final String createUserID; // イベント作成者uid
   final String createUserName;
   final String name; // イベント名
+  final String artist;
   final DateTime date;
   final String prefec;
   final String place;
@@ -28,6 +29,7 @@ class Event {
     required this.createUserID,
     required this.createUserName,
     required this.name,
+    required this.artist,
     required this.date,
     required this.prefec,
     required this.place,
@@ -55,6 +57,7 @@ class Event {
         createUserID: data["createUserId"],
         createUserName: data["createUserName"],
         name: data["name"],
+        artist: data["artist"],
         date: data["date"].toDate(), // timestamp型からdatetime型へ
         prefec: data["prefec"],
         place: data["place"],

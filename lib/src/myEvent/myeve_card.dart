@@ -107,20 +107,12 @@ class _MyEventCardState extends State<MyEventCard> {
   }
 
   Widget imageWidget() {
-    if (widget.event.genre.toString() == 'ライブ/フェス') {
-      return ClipRect(
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(20),
         child: FittedBox(
           fit: BoxFit.fill,
-          child: Image.asset('assets/images/festival.png'),
+          child: Image.asset('assets/images/live.png'),
         ),
       );
-    } else {
-      return ClipRect(
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Image.asset('assets/images/sport.png'),
-        ),
-      );
-    }
   }
 }
