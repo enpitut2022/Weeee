@@ -22,8 +22,6 @@ class _EventAddPageState extends State<EventAddPage> {
     super.initState();
   }
 
-  String? genderDefo = '-';
-  String? genreDefo = 'ライブ/フェス';
   String? prefecDefo = '-';
   String? howmanyDefo = '半年前';
   String? howManyLiveDefo = "初めて";
@@ -78,41 +76,6 @@ class _EventAddPageState extends State<EventAddPage> {
                     eventName(model, "イベント名*", "星野源の全国ツアー"),
                     myBoxHeight(16),
                     eventArtist(model, "アーティスト名*", "星野源"),
-                    // Row(
-                    //   children: [
-                    //     const Text(
-                    //       "ジャンル",
-                    //       style: TextStyle(fontSize: 20),
-                    //     ),
-                    //     const SizedBox(
-                    //       width: 30,
-                    //     ),
-                    //     DropdownButton(
-                    //       value: genreDefo,
-                    //       elevation: 50,
-                    //       items: const [
-                    //         DropdownMenuItem(
-                    //           value: '-',
-                    //           child: Text('-'),
-                    //         ),
-                    //         DropdownMenuItem(
-                    //           value: 'スポーツ',
-                    //           child: Text('スポーツ'),
-                    //         ),
-                    //         DropdownMenuItem(
-                    //           value: 'ライブ/フェス',
-                    //           child: Text('ライブ/フェス'),
-                    //         ),
-                    //       ],
-                    //       onChanged: (String? value) {
-                    //         setState(() {
-                    //           genreDefo = value;
-                    //         });
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
-                    //myBoxHeight(16),
                     SizedBox(
                       height: myHeight(context) * 0.1,
                       child: FittedBox(
@@ -203,6 +166,8 @@ class _EventAddPageState extends State<EventAddPage> {
                     myBoxHeight(16),
                     ElevatedButton(
                       onPressed: () async {
+                                    print("============================ event作成ボタンを押した\n- - -================================- - - - - - -- - - ");
+
                         try {
                           model.date = DateTime(
                             inputDate.year,
@@ -217,17 +182,14 @@ class _EventAddPageState extends State<EventAddPage> {
                           model.age = widget.loggedUser.old;
                           model.prefec = prefecDefo;
                           model.fanhistory = howmanyDefo;
-                          model.genre = genreDefo;
                           model.people = memberDefo;
                           model.participation = howManyLiveDefo;
-                          // model.ans1 = "";
-                          // model.ans2 = "";
-                          // model.ans3 = "";
-                          print(model.name);
+                          //print("- - - -- - -eventID - - -\n ${model.eventID} \n = = = == = = = = =");
                           await model.addEvent();
 
                           Navigator.of(context).pop(true);
                         } catch (e) {
+                          print("= = = = = = = == == = = == =  $e - - -===============================- - - - -  - - - - -- ");
                           final snackBar = SnackBar(
                             backgroundColor: myColor("red"),
                             content: Text(e.toString()),

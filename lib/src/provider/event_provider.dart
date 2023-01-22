@@ -170,9 +170,6 @@ class EventProvider {
   //   if (event.name == "") {
   //     throw "名前が入力されていません";
   //   }
-  //   if (event.genre == "-") {
-  //     throw "ジャンルは、-以外を選択してください";
-  //   }
   //   if (event.prefec == "-") {
   //     throw "県は、-以外を選択してください";
   //   }
@@ -201,7 +198,6 @@ class EventProvider {
   //     "gender": event.gender,
   //     "age": event.age,
   //     "num": event.people,
-  //     "genre": event.genre,
   //     "background": event.background,
   //     "startPlace": event.startplace,
   //     "startTime": event.starttime,
