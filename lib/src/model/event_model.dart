@@ -12,7 +12,6 @@ class Event {
   final String gender;
   final int age;
   final int people;
-  final String genre;
   final String background; // 募集した理由
   final String fanhistory;
   final String participation;
@@ -36,7 +35,6 @@ class Event {
     required this.gender,
     required this.age,
     required this.people,
-    required this.genre,
     required this.background,
     required this.fanhistory,
     required this.participation,
@@ -64,7 +62,6 @@ class Event {
         gender: data["gender"],
         age: data["age"],
         people: data["num"],
-        genre: data["genre"],
         background: data["background"],
         fanhistory: data["fanhistory"],
         participation: data["participation"],
