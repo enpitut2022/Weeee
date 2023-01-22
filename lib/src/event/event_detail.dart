@@ -30,25 +30,24 @@ class _EventDetailState extends State<EventDetail> {
       appBar: myAppBar('イベント詳細'),
       body: Container(
         padding: const EdgeInsets.all(10),
+        // child: Container(),
         child: ListView(
           children: [
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: myColor("other"),
-                    width: 1,
-                  ),
+            Container(
+              margin: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: myColor("other"),
+                  width: 1,
                 ),
               ),
-                child: Text(
-                  widget.event.name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
-                  ),
+            ),
+              child: Text(
+                widget.event.name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40,
                 ),
               ),
             ),
@@ -70,20 +69,18 @@ class _EventDetailState extends State<EventDetail> {
                   ],
                 ),
                 myBoxWidth(myWidth(context) * 0.1),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      infoText(widget.event.prefec),
-                      myBoxHeight(myHeight(context) * 0.01),
-                      infoText(widget.event.place),
-                      myBoxHeight(myHeight(context) * 0.01),
-                      infoText(
-                          "${widget.event.date.year}年${widget.event.date.month}月${widget.event.date.day}日"),
-                      myBoxHeight(myHeight(context) * 0.01),
-                      infoText("${widget.event.people.toString()} 人"),
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    infoText(widget.event.prefec),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText(widget.event.place),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText(
+                        "${widget.event.date.year}年${widget.event.date.month}月${widget.event.date.day}日"),
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("${widget.event.people.toString()} 人"),
+                  ],
                 ),
               ],
             ),

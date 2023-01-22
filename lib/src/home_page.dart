@@ -1,7 +1,6 @@
 import 'package:enpit_weee/src/event/event_index.dart';
 import 'package:enpit_weee/src/myEvent/myeve_index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,15 +8,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: const [
-        // 多言語対応処理の追加
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        // 対応する言語の宣言
-        Locale('ja', ''),
-      ],
       title: 'Flutter Demo',
       theme: ThemeData(fontFamily: 'NotoSansJP'),
       home: MyHomePage(),
