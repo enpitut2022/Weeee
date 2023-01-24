@@ -37,8 +37,7 @@ class _EventDetailQuestionState extends State<EventDetailQuestion> {
     return Scaffold(
       appBar: myAppBar('募集者の質問'),
       body: Container(
-        height: myHeight(context) * 0.99,
-        color: const Color.fromARGB(255, 214, 214, 214),
+        color: myColor("base"),
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
         child: ListView(
