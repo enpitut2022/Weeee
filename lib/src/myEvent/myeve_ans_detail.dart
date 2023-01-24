@@ -113,8 +113,12 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   height: myHeight(context) * 0.03,
                 ),
                 Container(
-                  width: double.infinity,
-                  color: Color.fromARGB(255, 200, 223, 242),
+                  width: double.infinity,              
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: myColor("main1"),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -138,8 +142,12 @@ class _AnswerDetailState extends State<AnswerDetail> {
                   height: myHeight(context) * 0.03,
                 ),
                 Container(
-                  width: double.infinity,
-                  color: Color.fromARGB(255, 200, 223, 242),
+                  width: double.infinity,              
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: myColor("main1"),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -164,7 +172,11 @@ class _AnswerDetailState extends State<AnswerDetail> {
                 ),
                 Container(
                   width: double.infinity,
-                  color: Color.fromARGB(255, 200, 223, 242),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: myColor("main1"),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
