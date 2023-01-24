@@ -42,13 +42,18 @@ class _EventIndexState extends State<EventIndex> {
       length: 3,
       child: Scaffold(
         key: _scaffoldKey,
+        // appBar: AppBar(
+        //   title: !_searchBoolean
+        //       ? Text(
+        //           'イベント一覧画面',
+        //           style: TextStyle(color: myColor("other")),
+        //         )
+        //       : _searchTextField(),
         appBar: AppBar(
-          title: !_searchBoolean
-              ? Text(
-                  'イベント一覧画面',
-                  style: TextStyle(color: myColor("other")),
-                )
-              : _searchTextField(),
+          title: Text(
+            'イベント一覧画面',
+            style: TextStyle(color: myColor("other")),
+          ),
           backgroundColor: myColor("base"),
           iconTheme: IconThemeData(color: myColor("other")),
           elevation: 5,
@@ -59,31 +64,31 @@ class _EventIndexState extends State<EventIndex> {
               color: myColor("main1"),
             ),
           ),
-          actions: !_searchBoolean
-              ? [
-                  IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: myColor("main1"),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _searchBoolean = true;
-                        });
-                      })
-                ]
-              : [
-                  IconButton(
-                      icon: Icon(
-                        Icons.clear,
-                        color: myColor("main1"),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _searchBoolean = false;
-                        });
-                      })
-                ],
+          // actions: !_searchBoolean
+          //     ? [
+          //         IconButton(
+          //             icon: Icon(
+          //               Icons.search,
+          //               color: myColor("main1"),
+          //             ),
+          //             onPressed: () {
+          //               setState(() {
+          //                 _searchBoolean = true;
+          //               });
+          //             })
+          //       ]
+          //     : [
+          //         IconButton(
+          //             icon: Icon(
+          //               Icons.clear,
+          //               color: myColor("main1"),
+          //             ),
+          //             onPressed: () {
+          //               setState(() {
+          //                 _searchBoolean = false;
+          //               });
+          //             })
+          //       ],
         ),
         // drawer: loggedUser.name == null
         //   ? const Center(
