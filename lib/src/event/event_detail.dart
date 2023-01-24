@@ -35,13 +35,13 @@ class _EventDetailState extends State<EventDetail> {
             Container(
               margin: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: myColor("other"),
-                  width: 1,
+                border: Border(
+                  bottom: BorderSide(
+                    color: myColor("other"),
+                    width: 1,
+                  ),
                 ),
               ),
-            ),
               child: Text(
                 widget.event.name,
                 style: const TextStyle(
@@ -51,66 +51,6 @@ class _EventDetailState extends State<EventDetail> {
               ),
             ),
             myBoxHeight(myHeight(context) * 0.05),
-
-            // ここから
-            categoryText("募集者について"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    infoText("性別"),
-                    myBoxHeight(myHeight(context) * 0.02),
-                    infoText("年齢"),
-                    myBoxHeight(myHeight(context) * 0.02),
-                    infoText("聴いている期間"),
-                    myBoxHeight(myHeight(context) * 0.02),
-                    infoText("ライブへの参加回数"),
-                  ],
-                ),
-                myBoxWidth(myWidth(context) * 0.1),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    infoText(widget.event.gender),
-                    myBoxHeight(myHeight(context) * 0.02),
-                    infoText(widget.event.age.toString()),
-                    myBoxHeight(myHeight(context) * 0.02),
-                    infoText(widget.event.fanhistory),
-                    myBoxHeight(myHeight(context) * 0.02),
-                    infoText(widget.event.participation),
-                  ],
-                ),
-              ],
-            ),
-            myBoxHeight(myHeight(context) * 0.01),
-            infoText("募集した理由"),
-            Row(
-              children: [
-                Icon(
-                  Icons.person,
-                  color: myColor("other"),
-                  size: myWidth(context)*0.18,
-                ),
-                Flexible(
-                  child: SizedBox(
-                    width: myWidth(context)*0.8,
-                    child: Bubble(
-                      margin: const BubbleEdges.only(top: 10),
-                      color: myColor("main1"),
-                      nip: BubbleNip.leftCenter,
-                      child: Text(
-                        widget.event.background,
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            myBoxHeight(myHeight(context)*0.1),
-            // ここまで
             categoryText("イベントについて"),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -150,63 +90,64 @@ class _EventDetailState extends State<EventDetail> {
               ],
             ),
             myBoxHeight(myHeight(context) * 0.05),
-            // categoryText("募集者について"),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.start,
-            //   children: [
-            //     Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         infoText("性別"),
-            //         myBoxHeight(myHeight(context) * 0.02),
-            //         infoText("年齢"),
-            //         myBoxHeight(myHeight(context) * 0.02),
-            //         infoText("聴いている期間"),
-            //         myBoxHeight(myHeight(context) * 0.02),
-            //         infoText("ライブへの参加回数"),
-            //       ],
-            //     ),
-            //     myBoxWidth(myWidth(context) * 0.1),
-            //     Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         infoText(widget.event.gender),
-            //         myBoxHeight(myHeight(context) * 0.02),
-            //         infoText(widget.event.age.toString()),
-            //         myBoxHeight(myHeight(context) * 0.02),
-            //         infoText(widget.event.fanhistory),
-            //         myBoxHeight(myHeight(context) * 0.02),
-            //         infoText(widget.event.participation),
-            //       ],
-            //     ),
-            //   ],
-            // ),
-            // myBoxHeight(myHeight(context) * 0.01),
-            // infoText("募集した理由"),
-            // Row(
-            //   children: [
-            //     Icon(
-            //       Icons.person,
-            //       color: myColor("other"),
-            //       size: myWidth(context)*0.18,
-            //     ),
-            //     Flexible(
-            //       child: SizedBox(
-            //         width: myWidth(context)*0.8,
-            //         child: Bubble(
-            //           margin: const BubbleEdges.only(top: 10),
-            //           color: myColor("main1"),
-            //           nip: BubbleNip.leftCenter,
-            //           child: Text(
-            //             widget.event.background,
-            //             style: const TextStyle(fontSize: 20),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // myBoxHeight(myHeight(context)*0.1)
+            categoryText("募集者について"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    infoText("性別"),
+                    myBoxHeight(myHeight(context) * 0.02),
+                    infoText("年齢"),
+                    myBoxHeight(myHeight(context) * 0.02),
+                    infoText("聴いている期間"),
+                    myBoxHeight(myHeight(context) * 0.02),
+                    infoText("ライブへの参加回数"),
+                  ],
+                ),
+                myBoxWidth(myWidth(context) * 0.1),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    infoText(widget.event.gender),
+                    myBoxHeight(myHeight(context) * 0.02),
+                    infoText(widget.event.age.toString()),
+                    myBoxHeight(myHeight(context) * 0.02),
+                    infoText(widget.event.fanhistory),
+                    myBoxHeight(myHeight(context) * 0.02),
+                    infoText(widget.event.participation),
+                  ],
+                ),
+              ],
+            ),
+            myBoxHeight(myHeight(context) * 0.01),
+            infoText("募集した理由"),
+            myBoxHeight(myHeight(context) * 0.01),
+            Row(
+              children: [
+                Icon(
+                  Icons.person,
+                  color: myColor("other"),
+                  size: myWidth(context) * 0.18,
+                ),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: myColor("main1"),
+                    ),
+                    width: myWidth(context) * 0.8,
+                    child: Text(
+                      widget.event.background,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            myBoxHeight(myHeight(context) * 0.1)
           ],
         ),
       ),
