@@ -58,6 +58,8 @@ class _EventDetailState extends State<EventDetail> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    myBoxHeight(myHeight(context) * 0.01),
+                    infoText("アーティスト名"),
                     infoText("都道府県"),
                     myBoxHeight(myHeight(context) * 0.01),
                     infoText("場所"),
@@ -72,6 +74,8 @@ class _EventDetailState extends State<EventDetail> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      infoText(widget.event.artist),
+                      myBoxHeight(myHeight(context) * 0.01),
                       infoText(widget.event.prefec),
                       myBoxHeight(myHeight(context) * 0.01),
                       infoText(widget.event.place),
@@ -126,7 +130,7 @@ class _EventDetailState extends State<EventDetail> {
                   color: myColor("other"),
                   size: myWidth(context)*0.18,
                 ),
-                Expanded(
+                Flexible(
                   child: SizedBox(
                     width: myWidth(context)*0.8,
                     child: Bubble(
