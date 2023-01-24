@@ -532,6 +532,10 @@ class _EventAddPageState extends State<EventAddPage> {
               child: Text('石川県'),
             ),
             DropdownMenuItem(
+              value: '岐阜県',
+              child: Text('岐阜県'),
+            ),
+            DropdownMenuItem(
               value: '福井県',
               child: Text('福井県'),
             ),
@@ -542,6 +546,10 @@ class _EventAddPageState extends State<EventAddPage> {
             DropdownMenuItem(
               value: '長野県',
               child: Text('長野県'),
+            ),
+            DropdownMenuItem(
+              value: '静岡県',
+              child: Text('静岡県'),
             ),
             DropdownMenuItem(
               value: '愛知県',
