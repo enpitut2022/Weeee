@@ -109,19 +109,19 @@ class LoginState extends State<Login> {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/forgetpassword");
-                },
-                child: const Text(
-                  'パスワードを忘れた方はこちら',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ),
-            ),
+            // Container(
+            //   margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+            //   alignment: Alignment.centerRight,
+            //   child: TextButton(
+            //     onPressed: () {
+            //       Navigator.pushNamed(context, "/forgetpassword");
+            //     },
+            //     child: const Text(
+            //       'パスワードを忘れた方はこちら',
+            //       style: TextStyle(fontSize: 15),
+            //     ),
+            //   ),
+            // ),
             Center(
               child: Material(
                 elevation: 5,
@@ -161,30 +161,30 @@ class LoginState extends State<Login> {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(10, 40, 10, 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('デバッグ用　===>'),
-                  TextButton(
-                    onPressed: () async {
-                      await _auth
-                          .signInWithEmailAndPassword(
-                              email: "monkey@d.com", password: "monkeyd")
-                          .then((uid) => {
-                                Fluttertoast.showToast(msg: 'ログインしました！'),
-                                Navigator.pushNamed(context, "/home"),
-                              });
-                    },
-                    child: const Text(
-                      'ログインするよ',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                ],
-              ),
-            )
+            // Container(
+            //   margin: const EdgeInsets.fromLTRB(10, 40, 10, 10),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       const Text('デバッグ用　===>'),
+            //       TextButton(
+            //         onPressed: () async {
+            //           await _auth
+            //               .signInWithEmailAndPassword(
+            //                   email: "monkey@d.com", password: "monkeyd")
+            //               .then((uid) => {
+            //                     Fluttertoast.showToast(msg: 'ログインしました！'),
+            //                     Navigator.pushNamed(context, "/home"),
+            //                   });
+            //         },
+            //         child: const Text(
+            //           'ログインするよ',
+            //           style: TextStyle(fontSize: 15),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),

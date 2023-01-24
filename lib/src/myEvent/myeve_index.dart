@@ -68,6 +68,7 @@ class _MyEventIndexState extends State<MyEventIndex> {
             children: [
               Row(
                 children: [
+                  myBoxWidth(myWidth(context) * 0.01),
                   const Text("募集したイベント"),
                   Switch(
                     value: btn1,
