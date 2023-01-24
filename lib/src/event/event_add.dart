@@ -73,7 +73,7 @@ class _EventAddPageState extends State<EventAddPage> {
                   children: [
                     categoryText("イベントについて"),
                     myBoxHeight(5),
-                    eventName(model, "イベント名*", "星野源の全国ツアー"),
+                    eventName(model, "イベント名*", "イベント名"),
                     myBoxHeight(16),
                     eventArtist(model, "アーティスト名*", "星野源"),
                     SizedBox(

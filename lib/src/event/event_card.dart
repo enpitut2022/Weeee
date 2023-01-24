@@ -64,7 +64,7 @@ class _EventCardState extends State<EventCard> {
                 child: Column(
                   children: [
                     Text(
-                      widget.event.name,
+                      widget.event.artist,
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,

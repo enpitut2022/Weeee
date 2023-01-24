@@ -124,16 +124,19 @@ class _EventDetailState extends State<EventDetail> {
                 Icon(
                   Icons.person,
                   color: myColor("other"),
-                  size: 100,
+                  size: myWidth(context)*0.18,
                 ),
                 Expanded(
-                  child: Bubble(
-                    margin: const BubbleEdges.only(top: 10),
-                    color: myColor("main1"),
-                    nip: BubbleNip.leftCenter,
-                    child: Text(
-                      widget.event.background,
-                      style: const TextStyle(fontSize: 20),
+                  child: SizedBox(
+                    width: myWidth(context)*0.8,
+                    child: Bubble(
+                      margin: const BubbleEdges.only(top: 10),
+                      color: myColor("main1"),
+                      nip: BubbleNip.leftCenter,
+                      child: Text(
+                        widget.event.background,
+                        style: const TextStyle(fontSize: 20),
+                      ),
                     ),
                   ),
                 ),
